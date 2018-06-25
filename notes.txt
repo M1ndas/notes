@@ -2815,31 +2815,35 @@ LINUX {
 				- bittwiste -I es.pcap -O fake-es.pcap -T ip -s 193.219.39.1 -d 207.244.92.137 	===>
 				- bittwist -i eth1 fake-es.pcap 
 			}
-
+			
 			NETSTAT {
-				- (sudo) netstat -ant 		===> -a {all interfaces}, -n {numeric addresses, no names}, -t {tcp};
+			    - (sudo) netstat -ant 	===> -a {all interfaces}, -n {numeric addresses, no names}, -t {tcp};
 
-						Proto Recv-Q Send-Q Local Address           Foreign Address         State
-						tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN
-						tcp        0      0 0.0.0.0:25              0.0.0.0:*               LISTEN
+			      Proto Recv-Q Send-Q Local Address           Foreign Address         State
+				tcp        0      0 0.0.0.0:22              0.0.0.0:*             LISTEN
+				tcp        0      0 0.0.0.0:25              0.0.0.0:*             LISTEN
 
-				- (sudo) netstat -tulpn 	===> -t {tcp}, -u {udp}, -l {}, -p{}, -n {numeric addresses, no names};
+			    - (sudo) netstat -tulpn 	===> -t {tcp}, -u {udp}, -l {}, -p{}, -n {numeric addresses, no names};
 
-						Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-						tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -
-						tcp        0      0 0.0.0.0:8443            0.0.0.0:*               LISTEN      21318/nginx: worker
+				Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+				tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -
+				tcp        0      0 0.0.0.0:8443            0.0.0.0:*               LISTEN      21318/nginx: worker
 
-					When sudo is used, way more information is displayed:
-						Active Internet connections (only servers)
-						Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-						tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      4006/sshd
-						tcp        0      0 0.0.0.0:8443            0.0.0.0:*               LISTEN      9589/nginx.conf
-			}
-
-			- arp -a 																								===> display (all) hosts in alternative (BSD) style
-			- ping -f -l 1472 www.dslreports.com 																	===> fid the MTU to the internet by experiment (windows), mine is 1272+28 bytes in VAIO win7 (+28 for the ping header);
-			- ping -s 1472 www.dslreports.com 																		===> MTU (maximum transmission unit) for LINUX is ... ?
-			- ngrep -q -d eth1 -W byline host stackoverflow.com and port 80 										===> host = filter, -W=dump format (normal, byline, single, none),  -d=use specified device instead of the pcap default, -q=quiet (don't print packet reception hash marks)
+			      When sudo is used, way more information is displayed:
+				Active Internet connections (only servers)
+				Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+				tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      4006/sshd
+				tcp        0      0 0.0.0.0:8443            0.0.0.0:*               LISTEN      9589/nginx.conf
+		  	}
+			
+			  - arp -a 				===> display (all) hosts in alternative (BSD) style
+			  - ping -f -l 1472 www.dslreports.com  ===> find the MTU by experiment (windows), mine is 1272+28 bytes in VAIO win7 (+28 for the ping header);
+			  - ping -s 1472 www.dslreports.com     ===> MTU (maximum transmission unit) for LINUX is ... ?
+			  - ngrep -q -d eth1 -W byline host stackoverflow.com and port 80 ===> host = filter, 
+				      -W=dump format (normal, byline, single, none),  
+				      -d=use specified device instead of the pcap default, 
+				      -q=quiet (don't print packet reception hash marks)
+			
 		}
 
 		- echo "/a/b/c " | cut -d / -f 1-3 							===> prints "/a/b"
