@@ -8530,3 +8530,7 @@ UPnP {
 	- upnpc -m eth1 -a 192.168.1.39 9070 9071 tcp 		===>
 	- upnpc -m eth1 -d 9071 tcp
 }
+
+SVN {
+	- svn co --username 'mind...' --password '....' https://lt.c.com/svn/trunk
+}
