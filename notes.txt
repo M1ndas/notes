@@ -8215,7 +8215,6 @@ Cisco IOS {
 		- int loopback 0 					===> create 1 loopback interface, indexed 0;
 		- show ip protocols 				===> shows routing protocols configured and how they are configured;
 		- int s0/0/0 +> bandwidth 56  		===> specify beandwidth in kilobits, thus manipulating the ospf path;
-		- show vlan 						===> shows the vlans;			
 		- show mac address-table [dynamic] 	===> inspect the mac address table;
 		- interface range f0/1 - 24 		===> conigure multiple interfaces at once;
 		- show dtp int g0/0 				===> to see dtp information (mostly usefull to see if it is neabled or not);
@@ -8328,28 +8327,49 @@ Cisco IOS {
 		}
 
 		- SW: vlans {
-			- vlan 10 	===> specify the vlan to configure;
-			- name LEFT ===> specify the name of the vlan;
-			- int g0/0 
-				+> switchport mode access 
-				+> switchport access vlan 10 	===> add interface to an existing vlan;
-			- int g0/1
-				+> switchport mode trunk
-				+> switchport trunk allowed vlan 10,20 [10-20]
-			- switchport trunk allowed vlan add 30 	===> use this command to add additional vlans to a trunk port;
-			- switchport trunk native vlan 999 		===> configure native vlan to be vlan 999;
+			- show vlan 				===> shows the vlans;
+			- show interfaces trunk 		===> shows trunks;
+			- show int fa0/15 switchport  		===> ?
+			
+			Configuring {			
+				- dynamic auto				===> trunk if neigh is trunk or desirable;
+				- dynamic desirable			===> trunk if neigh trunk, desir, auto. Default mode;
+				- dynamic trunk				===> permanent trunk, negotiates neighb to trunk also;
+				- dynamic noneg				===> prevents DTP, configure manually the other end;
+				
+				Access Ports {
+					- vlan 10 				===> specify the vlan to configure;
+					- name LEFT 				===> specify the name of the vlan;
+					- int g0/0 / int range g0/0-2
+						+> switchport mode access 	===> configure ports as access ports (no DTP);
+						+> switchport access vlan 10 	===> add interface to an existing vlan;
+				}
+				Trunks {
+					- int g0/3 / int range g0/3-4
+						+> switchport trunk encapsulation dot1q 	===> config encapsulation;
+						+> switchport mode trunk 			===> configure ports as trunk ports;
+						+> switchport trunk allowed vlan 10,20 [10-20] 	===> VLANS to be trunked;
+						+> switchport trunk allowed vlan add 30		===> add more vlans to trunk;
+						+> switchport trunk allowed vlan remove 30	===> guess what this ones does;
+						+> switchport trunk allowed vlan all 		===> reset to default;
+					- switchport trunk native vlan 999 			===> configure native vlan to vlan 999;
+					- no switchport trunk native vlan			===> reset native VLAN to default;
+					- switchport mode access 				===> disable trunk on port;
+				}
+			}
 		}
 
 		- RT: router on a stick {
-			- int g0/0 +> no shut +> int g0/0.10 	===> configure a subinterface;
-			- encapsulation dot1Q {vlan_in}			===> configure encapsulation (on (config-subif) mode);
-			- ip addr 10.0.0.1 255.255.255.0 		===> after configuring the encapsulation, add the ip;
-			- no shut 								===> just to be sure; ... ;^)
+			- int g0/0 +> no shut +> int g0/0.10 	===> configure a subinterface (need 1 for each VLAN);
+			- encapsulation dot1Q {vlan_in}		===> configure encapsulation (on (config-subif) mode);
+			- ip addr 10.0.0.1 255.255.255.0 	===> after configuring the encapsulation, add the ip;
+			- no shut 				===> just to be sure; ... ;^)
 		}
 
 		- SW: L3 SW {
-			- ip routing 	===> turns on L3 functions on the 3*** series router;
-			- int vlan 10 +> ip address 10.0.0.1 255.255.255.0 +> no shut exit;
+			- ip routing 				===> turns on L3 functions on the 3*** series router;
+				+> int vlan 10 +> ip address 10.0.10.1 255.255.255.0 +> no shut exit;
+				+> int vlan 20 +> ip address 10.0.20.1 255.255.255.0 +> no shut exit;
 		}
 
 		- SW: turn off dtp {
