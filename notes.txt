@@ -8156,7 +8156,7 @@ Cisco IOS {
 			- en{able}						===> go from user to privileged mode;
 			- conf{igure} t{terminal} 		===> go from privileged to configuration mode;
 			- no ip domain-lookup 			===> tell the device not to automatically try to resolve unknown commands as hostnames;
-			- int line {con 0} +> logging sync{hronous}			===> per line enablement of non-intrusive logging;
+			- line {con 0} +> logging sync{hronous}			===> per line enablement of non-intrusive logging;
 			- hostname [name] 				===> set the hostname;
 			- ip domain-name [domain name] 	===> set the domain name;
 			- banner motd #Some banner!# 	===> set the MOTD banner;
@@ -8190,9 +8190,9 @@ Cisco IOS {
 
 			- SW: enabling ssh {
 				- ip default-gateway 192.168.101.1 	===> add GW (router or firewall);
-				- interface vlan 1					===> enter the configuration for SVI (switched virtual interface) (all ports are configured to access vlan 1)
-				- ip address 192.168.101.2 255.255.255.0 ===> assign ip address to that SVI;
-				- crypto key generate rsa 			===> generate RSA keys;
+				- interface vlan 1			===> enter the configuration for SVI (switched virtual interface) (all ports are configured to access vlan 1)
+				- ip address 192. 168.101.2 255.255.255.0 ===> assign ip address to that SVI;
+				- crypto key generate rsa 		===> generate RSA keys;
 				- line vty 0 4 +> transport input ssh +> login local +> password [your_password] +> exit 					
 			}
 		}
@@ -8327,9 +8327,9 @@ Cisco IOS {
 		}
 
 		- SW: vlans {
-			- show vlan 				===> shows the vlans;
+			- show vlan [br] 			===> shows the vlans;
 			- show interfaces trunk 		===> shows trunks;
-			- show int fa0/15 switchport  		===> ?
+			- show int f0/15 switchport  		===> ?
 			
 			Configuring {			
 				- dynamic auto				===> trunk if neigh is trunk or desirable;
@@ -8340,12 +8340,12 @@ Cisco IOS {
 				Access Ports {
 					- vlan 10 				===> specify the vlan to configure;
 					- name LEFT 				===> specify the name of the vlan;
-					- int g0/0 / int range g0/0-2
+					- int g0/0 [int range g0/0-2]
 						+> switchport mode access 	===> configure ports as access ports (no DTP);
 						+> switchport access vlan 10 	===> add interface to an existing vlan;
 				}
 				Trunks {
-					- int g0/3 / int range g0/3-4
+					- int g0/3 [int range g0/3-4]
 						+> switchport trunk encapsulation dot1q 	===> config encapsulation;
 						+> switchport mode trunk 			===> configure ports as trunk ports;
 						+> switchport trunk allowed vlan 10,20 [10-20] 	===> VLANS to be trunked;
