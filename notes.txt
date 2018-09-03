@@ -8335,7 +8335,7 @@ Cisco IOS {
 				- dynamic auto				===> trunk if neigh is trunk or desirable;
 				- dynamic desirable			===> trunk if neigh trunk, desir, auto. Default mode;
 				- dynamic trunk				===> permanent trunk, negotiates neighb to trunk also;
-				- dynamic noneg				===> prevents DTP, configure manually the other end;
+				- switchport noneg			===> prevents DTP, configure manually the other end;
 				
 				Access Ports {
 					- vlan 10 				===> specify the vlan to configure;
