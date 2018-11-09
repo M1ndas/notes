@@ -2171,6 +2171,7 @@ LINUX {
 			- iptables -A INPUT -s 172.31.64.149 -m statistic --mode random --probability 0.1 -j DROP 	===>
 			- iptables -nvL
 			- iptables -nvL -t nat 		===> -t table
+			- for table in filter nat mangle raw security; do iptables -vL -t $table; done
 		}
 
 		removing hard to remove files by their inode number {
@@ -8553,4 +8554,8 @@ UPnP {
 
 SVN {
 	- svn co --username 'mind...' --password '....' https://lt.c.com/svn/trunk
+}
+
+EBTABLES {
+	- for i in filter nat broute; do ebtables -t $i -L ; done
 }
