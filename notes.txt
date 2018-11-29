@@ -1083,6 +1083,9 @@ RoR {
 }
 
 Git {
+	Clone from another machine on the local network {
+		git clone ssh://mindaugas@1.1.1.11/home/mindaugas/GoProjects 	===> Only need the folder name where the .git folder exists. In this case the .git folder is /home/mindaugas/GoProjects/.git 
+	}
 	Types of repositories{
 		- Local repository 						===> no backuping to outside machines, no shared version control with a team;
 		- Cetralized repo 						===> version history lost if machine is caught on fire;
