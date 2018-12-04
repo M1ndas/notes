@@ -1,3 +1,22 @@
+
+Jenkins Script Console {
+	// println(Jenkins.instance.metaClass.methods*.name)
+	// Jenkins.instance.getJobProperty()
+	String executors = Jenkins.instance.getNumExecutors();
+	String jobNames;
+	String[] jobNamesArr;
+	// jobNames = Jenkins.instance.getJobNames().split('\\s+');
+	jobNames = Jenkins.instance.getJobNames()
+	jobNamesArr = jobNames.split(',')
+	println("Executor count: " + executors);
+
+	jobNamesArr.each{ val -> 
+	   println(val)
+	}
+
+	return 0;
+}
+
 for i in {1..100}; do echo 1; sleep 1 ; done | pv -l -r > /dev/null           /:: [0.998/s ]            --> using pv for counting lines per second added to the file
 
 SEO {
