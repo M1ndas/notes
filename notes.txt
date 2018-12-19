@@ -7409,25 +7409,36 @@ WAF TUNNING TOOLS {
 IT CERTIFICATION {
 
 	PATHS:
-		Networking: 		CCNA 		CCNP 		CCIE
+		Networking: 		CCNA 		CCNP 		CCIE		CCAr
+		
+		Windows:		MCSA Server	MCSE Server
+					MCSA Web Apps	MCSD Web Apps
+					MCSA Store Apps	MCSD Store Apps
+					
+		Vmware			VCA		VCP		VCE		VCDX
+		
 		Linux: 			
 			RedHat:		RHCSA		RHCSE		RHCSS
 			Linux Found.:	LFCS 		LCFE
+			
 		Programming:
-			Ruby:		Silver 		Gold 		Platinum
+			Ruby:		Silver 		Gold 		Platinum (BS)
+			Python:		??
+			Java		OCJA		OCDP		
 			C: 		CLA		CLP		CLS (available after december 2017)
 			Cpp:		CPA		CPP		CPS (available after december 2017)
 			C#: 		MCSA 		MCSE 		MCSM
+			
 		Security: 		CEH		GIAC GPEN 	GIAC GXPN	GIAC GSE 	CISSP
 		Testing: 		CTFL 		CTAL(tech)
-		Big Data: 		CCP:DS
-		ML: 			Coursera
-		SQL (DBA): 		Oracle
+		Big Data: 		CCP:DS (Others?)
+		ML: 			Coursera (Others?)
+		SQL (DBA): 		Oracle / Microsoft Data
 		PM: 			???
-		General:		CompTIA A+
+		General:		CompTIA A+ / Storage+ / Network+ / Security+
 
 	CCNA/P/E {
-		- https://learningnetwork.cisco.com/community/certifications/ccna 								===> main cisco page for ccna / a guide;
+		- https://learningnetwork.cisco.com/community/certifications/ccna 	===> main cisco page for ccna / a guide;
 		- http://www.cisco.com/web/partners/downloads/765/tools/quickreference/routerperformance.pdf  	===> to get this sheet, google "cisco router performance numbers" 
 		- CCIE - written + 8 hours lab !!! - this is the prep plan: https://www.youtube.com/watch?v=XiCi9P9rJME
 	}
