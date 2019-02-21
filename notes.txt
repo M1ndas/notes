@@ -2235,22 +2235,22 @@ LINUX {
 			- gawk '{ t = $1; $1 = $2; $2 = t; printf "%-40s %s\n",$1,$2 }' 			===> interchange collumns in the output and print them with prepended spaces;
 		}
 
-		- sudo netstat -tulpn								===> check what application listens to what port
-		- sudo cat /dev/null > file 	 					===> will elevate privileges > copy empty content into a file of your choise (meaning :: delete all contenst) > exit from root privilages;
+		- sudo netstat -tulpn					===> check what application listens to what port
+		- sudo cat /dev/null > file 	 			===> will elevate privileges > copy empty content into a file of your choise (meaning :: delete all contenst) > exit from root privilages;
 
 		- Users & Groups {
-			- [l|d|-|c|b]-rwx-rwx-rwx 				===> a symlink | directory | file | character device in /dev | block device in /dev - read write execute <owner> - read write execute <group> - read write execute <everyone else>;
-			- cut -d: -f1 /etc/passwd 				===> list all users in linux;
-			- echo 'GET aaa' | cut -d ' ' -f 1,2 			===> cut -d;
-			- adduser <user_name> 					===> create a user
-			- groups 						===> list all groups;
-			- groups <username> 					===> list all groups the user belongs to;
-			- chown -R <user_name> 					===> charnge owner of the file/directory;
-			- chgrp -R <group_name> <file/directory_name> 		===> change group of the file/directory, [-R] to change all the files and subdirs as well;
-			- chmod -R [u|g|o][+|-][r|w|x] <some_folder> 		===> change the permissions [add|subtract] of the folder for [user, group and others];
-			- useradd -G {group-name} {user-name}; 			===> assign new user to group;
-			- usermod -a -G {group-name} {user-name}; 		===> assign an existing user to a group;
-			- sudo chown -R {user-name} /home/{user-name}		===> make user own all the directories in his home dire
+			- [l|d|-|c|b]-rwx-rwx-rwx 			===> a symlink | directory | file | character device in /dev | block device in /dev - read write execute <owner> - read write execute <group> - read write execute <everyone else>;
+			- cut -d: -f1 /etc/passwd 			===> list all users in linux;
+			- echo 'GET aaa' | cut -d ' ' -f 1,2 		===> cut -d;
+			- adduser <user_name> 				===> create a user
+			- groups 					===> list all groups;
+			- groups <username> 				===> list all groups the user belongs to;
+			- chown -R <user_name> 				===> charnge owner of the file/directory;
+			- chgrp -R <group_name> <file/directory_name> 	===> change group of the file/directory, [-R] to change all the files and subdirs as well;
+			- chmod -R [u|g|o][+|-][r|w|x] <some_folder> 	===> change the permissions [add|subtract] of the folder for [user, group and others];
+			- useradd -G {group-name} {user-name}; 		===> assign new user to group;
+			- usermod -a -G {group-name} {user-name}; 	===> assign an existing user to a group;
+			- sudo chown -R {user-name} /home/{user-name}	===> make user own all the directories in his home dire
 		}
 
 		- Vim {
