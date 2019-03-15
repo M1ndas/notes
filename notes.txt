@@ -1,5 +1,24 @@
 - Making windows7 go to sleep after 10minutes 	===> timeout /T 360 & rundll32.exe powrprof.dll,SetSuspendState 0,1,0
 
+Salt {
+	Commands {
+		- curl -L https://bootstrap.saltstack.com -o install-salt.sh 	===> downloads the intall script;
+		- sudo sh install-salt.sh -M -A 127.0.0.1	===> install on master: -M master, -A minions master, -I minions id;
+		- sudo sh install-salt.sh -A 192.168.1.105	===> install on minion;
+		- sudo salt-key 				===> list keys;
+		- sudo salt-key -F <mažo_jono_id>		===> check the key fingerprint for specific minion on master;
+		- sudo salt-call --local key.finger 		===> check the key fingerprint on minion;
+		- 
+	}
+	
+	Concepts {
+	
+	}
+	
+	Kat
+
+}
+
 Jenkins Script Console {
 	// println(Jenkins.instance.metaClass.methods*.name)
 	// Jenkins.instance.getJobProperty()
