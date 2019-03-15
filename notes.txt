@@ -8,15 +8,26 @@ Salt {
 		- sudo salt-key 				===> list keys;
 		- sudo salt-key -F <mažo_jono_id>		===> check the key fingerprint for specific minion on master;
 		- sudo salt-call --local key.finger 		===> check the key fingerprint on minion;
-		- 
+		- sudo salt '*' test.ping 			===> check if minion is reachable;
+		----- minion targeting expressions ------
+		- sudo salt mast* test.ping 			===> run only on minions that start with mast;
+		- sudo salt mast? test.ping 			===> similar, but exactly one char;
+		- sudo salt -E '(master|web1)' test.ping 	===> target salt minions using regex;
+		- sudo salt -S 10.10.0.0/16 test.ping 		===> target salt minions using regex;
+		- sudo salt -C 'S@192.168.0.0/16 and E@(master|web1)' ===> combined minion targetting expression;
+		-----------------------------------------
 	}
 	
 	Concepts {
-	
+		- Default minion ports: 4505, 4506;
+		- Default communication protocol: TCP;
+		- ZeroMQ is the underlying queue mechanism - 4096 bit keys are used;
+		- cmd.run - cmd execution module executes the command with root account!
 	}
 	
-	Kat
-
+	Katas {
+	
+	}
 }
 
 Jenkins Script Console {
