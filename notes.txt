@@ -1,13 +1,12 @@
 Wordpress maintenance {
-	MySQL {
+	- define('FS_METHOD','direct'); ===> If WP asks for FTP credentials durring version upgrade it can't write to some directory. This is solvable by adding this directive.
+	Deactivate plugins {
 		- mysql -u <> -p
 		- show databases;
 		- use <>;
 		- show tables;
-		Deactivate plugins {
-			- SELECT option_name,option_value FROM wp_options WHERE option_name = 'active_plugins';
-			- UPDATE wp_options SET option_value = 'a:0:{}' WHERE option_name = 'active_plugins';
-		}
+		- SELECT option_name,option_value FROM wp_options WHERE option_name = 'active_plugins';
+		- UPDATE wp_options SET option_value = 'a:0:{}' WHERE option_name = 'active_plugins';
 	}
 }
 
@@ -2178,8 +2177,8 @@ LINUX {
 		- axel - command line download accelerator for windows. You can download files with it from the internet to the diretory you are at(e.g.: mindaugas@ubuntu:~/Downloads$ axel -n20 http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3059_x64.tar.bz2 :: download sublime text with maximum number of 20 connections)
 
 		TAR {
-			- tar -xvf <target-file.tar> 										===> extract conntents of an archive into a directory (xvf = extract all verboselly);
-			- tar -xzvf <target-file.tar.gz> -C <target-dir> 					===> z flag for a tarball that is also gziped;
+			- tar -xvf <target-file.tar> 					===> extract conntents of an archive into a directory (xvf = extract all verboselly);
+			- tar -xzvf <target-file.tar.gz> -C <target-dir> 		===> z flag for a tarball that is also gziped;
 			- tar -czvf <name_of_archive_$(date +%Y%m%d-%H%M%S).tar.gz> <dir>	===> tar a directory
 			- tar -czvf <name_of_archive_$(date +%Y%m%d-%H%M%S).tar.gz> <file> 	===> tar a file
 		}
