@@ -1,6 +1,13 @@
 Wordpress maintenance {
 	MySQL {
-
+		- mysql -u <> -p
+		- show databases;
+		- use <>;
+		- show tables;
+		Deactivate plugins {
+			- SELECT option_name,option_value FROM wp_options WHERE option_name = 'active_plugins';
+			- UPDATE wp_options SET option_value = 'a:0:{}' WHERE option_name = 'active_plugins';
+		}
 	}
 }
 
