@@ -1,5 +1,5 @@
 Wordpress maintenance {
-	- define('FS_METHOD','direct'); ===> If WP asks for FTP credentials durring version upgrade it can't write to some directory. This is solvable by adding this directive.
+	- define('FS_METHOD','direct'); 	===> If WP asks for FTP credentials durring version upgrade it can't write to some directory. This is solvable by adding this directive.
 	Deactivate plugins {
 		- mysql -u <> -p
 		- show databases;
@@ -8,6 +8,12 @@ Wordpress maintenance {
 		- SELECT option_name,option_value FROM wp_options WHERE option_name = 'active_plugins';
 		- UPDATE wp_options SET option_value = 'a:0:{}' WHERE option_name = 'active_plugins';
 	}
+	- cd /var/www/html/wordpress/
+	- sudo rm -rf /var/www/html/wordpress/wp-admin
+	- sudo rm -rf /var/www/html/wordpress/wp-includes
+	- sudo mv /home/mindaugas/wp_5.2/wordpress/* /var/www/html/wordpress/
+	- http://blog.mindaugas.cf/wp-admin/upgrade.php
+	- reenable plugins from the UI;
 }
 
 - Making windows7 go to sleep after 10minutes 	===> timeout /T 360 & rundll32.exe powrprof.dll,SetSuspendState 0,1,0
