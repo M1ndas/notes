@@ -14,6 +14,11 @@ Wordpress maintenance {
 	- sudo mv /home/mindaugas/wp_5.2/wordpress/* /var/www/html/wordpress/
 	- http://blog.mindaugas.cf/wp-admin/upgrade.php
 	- reenable plugins from the UI;
+	
+	Iptable rules to allow all outbound traffic {
+		- sudo iptables -I OUTPUT -o venet0 -d 0.0.0.0/0 -j ACCEPT
+		- sudo iptables -I INPUT -i venet0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+	}
 }
 
 - Making windows7 go to sleep after 10minutes 	===> timeout /T 360 & rundll32.exe powrprof.dll,SetSuspendState 0,1,0
