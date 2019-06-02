@@ -15,7 +15,7 @@ Wordpress maintenance {
 	- http://blog.mindaugas.cf/wp-admin/upgrade.php
 	- reenable plugins from the UI;
 	
-	Iptable rules to allow all outbound traffic {
+	iptables rules to allow all outbound traffic (not tested as of 2019-06-02) {
 		- sudo iptables -I OUTPUT -o venet0 -d 0.0.0.0/0 -j ACCEPT
 		- sudo iptables -I INPUT -i venet0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 	}
