@@ -21,6 +21,12 @@ Wordpress maintenance {
 	}
 }
 
+Go / Golang {
+	- https://golang.org/doc/code.html 	===> for testing conventions
+	- go test -v 				===> log all tests as run. Print all text from Log, Logf calls even if test succeeds;
+	-  
+}
+
 - Making windows7 go to sleep after 10minutes 	===> timeout /T 360 & rundll32.exe powrprof.dll,SetSuspendState 0,1,0
 
 Salt {
