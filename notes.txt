@@ -24,7 +24,12 @@ Wordpress maintenance {
 Go / Golang {
 	- https://golang.org/doc/code.html 	===> for testing conventions
 	- go test -v 				===> log all tests as run. Print all text from Log, Logf calls even if test succeeds;
-	-  
+	- fmt.Println(reflect.TypeOf(a)) 	===> getting the type of variable (import reflect needed)
+	- os.Getwd()				===> getting the executable directory (import os)
+	- go build -i -o binary packagename 	===> building an executable with custom name (go install does not support that @ 1.12)
+	- for index, element := range someStructuArr {
+        	fmt.Println("Index :", index," Element :", element)        
+    	  }					===> go iterate over an array of structs
 }
 
 - Making windows7 go to sleep after 10minutes 	===> timeout /T 360 & rundll32.exe powrprof.dll,SetSuspendState 0,1,0
