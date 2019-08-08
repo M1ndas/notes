@@ -11,6 +11,39 @@ Splunk {
 
 }
 
+PowerShell {
+	Commands {
+		- Get-PSSnapin 	===> extend using commandlets or snapins. Both are extension packages. Check availability of snapins.
+		- Get-PSSnapin -Registered ===> same as above
+		- Get-Module -ListAvailable ===> find modules
+		- $PSversiontable ===> 
+		- get-date | select dayofweek
+		- Get-PSSnapin -Registered
+		- Get-Module -ListAvailable
+		- for ($i=0; $i -le 10; $i++){echo $i};		===> simple for loop;
+		- Get-WmiObject Win32_Service | Where-Object {$_.Name -Like '*Splunk*'} | Select-Object Name,Path,CommandLine ===> get the command line arguments passed to a service that is already running.
+	}
+
+	Dojo {
+		- Illustrate why you want the screen buffer size to the same as the window size;
+		- Load a module into memory and prove that module loading is a per-process thing (once you start a new PS process you have to load the modules again);
+		- Script the whole SQL server installation (custom install and sharedcomponents directory, creation of users for the SQLAgent, SSIS and so on);
+	}
+
+	Q {
+		- Explain the difference between the console and the ISE. --> Ise is the INTEGRATED SCRIPTING ENVIRONEMENT and provides you some of the capabilities of comfortable scripting; You would use console orientation for calling commands and ISE for writing advanced scripts or commandlets;
+		- What is a commandlet? --> a pre-made script / command that can be user in powershell;
+		- Why is a profile script usefull? --> It will load modules and snapins on powershell load and othervise you would have to do it in every new powershell window;
+	}
+
+	Set Up A Domain {
+		- the lab domain would help when doing powershell remoting - issuing commands to other forest and especially untrusting forests is where things get interesting!
+		- You can do it with CloudShare.com - which is an inexpensive and lets you spin up DC's and other types of windows VM's from templatesl;
+		- VHD test drive - some pre-made virtual mashines in a form of HyperV runnable virtual hard drives (VHD's);
+	}
+}
+
+
 Wordpress maintenance {
 	- define('FS_METHOD','direct'); 	===> If WP asks for FTP credentials durring version upgrade it can't write to some directory. This is solvable by adding this directive.
 	Deactivate plugins {
@@ -141,43 +174,6 @@ Web Services {
 	}
 	- Rest is by definition stateless. It started to gain traction due to advances in mobile computing - mobile devices have less storage and have internet connectivity chargable by the megabytes, so it is better to have a JSON complient webservice (more like architecture) - REST;
 	- developing a SOAP web service you are freed from any serialization or deserialization issues - this is handled for you by the library the you and your server use to communicate with each other; 
-}
-
-PowerShell {
-
-	General { 
-		- The capabilities of waht you can do with powershell are a function of the version of powershell + the version of OS + the version of application that you try and command with the powershell. You will not get the same functionality from the PSv3 on WIN7 as you will from PSv3 on WIN8.1. So get the lattest!
-		- There are two ways to extend PS - commandlets and snapins. Both of these are extension packages. To check the availability of the snapins by running command: > Get-PSSnapin ; or > Get-PSSnapin -Registered
-		- Modules can be found by running command: > Get-Module -ListAvailable
-	}
-
-	Dojo {
-		- Illustrate why you want the screen buffer size to the same as the window size;
-		- Load a module into memory and prove that module loading is a per-process thing (once you start a new PS process you have to load the modules again);
-		- Script the whole SQL server installation (custom install and sharedcomponents directory, creation of users for the SQLAgent, SSIS and so on);
-	}
-
-	Q {
-		- Explain the difference between the console and the ISE. --> Ise is the INTEGRATED SCRIPTING ENVIRONEMENT and provides you some of the capabilities of comfortable scripting; You would use console orientation for calling commands and ISE for writing advanced scripts or commandlets;
-		- What is a commandlet? --> a pre-made script / command that can be user in powershell;
-		- Why is a profile script usefull? --> It will load modules and snapins on powershell load and othervise you would have to do it in every new powershell window;
-	}
-
-	Commands {
-		- $PSversiontable;
-		- get-date | select dayofweek
-		- Get-PSSnapin -Registered
-		- Get-Module -ListAvailable
-		- for ($i=0; $i -le 10; $i++){echo $i};		===> simple for loop;
-		-
-
-	}
-
-	Set Up A Domain {
-		- the lab domain would help when doing powershell remoting - issuing commands to other forest and especially untrusting forests is where things get interesting!
-		- You can do it with CloudShare.com - which is an inexpensive and lets you spin up DC's and other types of windows VM's from templatesl;
-		- VHD test drive - some pre-made virtual mashines in a form of HyperV runnable virtual hard drives (VHD's);
-	}
 }
 
 Matrices {
