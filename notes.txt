@@ -9,6 +9,7 @@ jQuery {
 
 Splunk {
 	- cat metrics.log | grep -Po "name=(.+?), blocked=true, max_size.+?(?=,)" | sort | uniq -c 	===> get the status and the size of queues from the logs
+	- https://docs.splunk.com/Documentation/Forwarder/7.3.1/Forwarder/HowtoforwarddatatoSplunkEnterprise 
 	- config example C:\Program Files\SplunkUniversalForwarder\etc\system\local:
 		[default]
 		host = IVV-win2016
