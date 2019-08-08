@@ -125,6 +125,43 @@ Salt {
 	}
 }
 
+Jenkins {
+	Pipeline sprint {
+	--------------------------------
+		pipeline {
+		    agent { label 'VDOS_windows' }
+		    // agent any
+
+		    stages {
+			stage('Build') {
+			    steps {
+				echo 'Building..'
+			    }
+			}
+			stage('Test') {
+			    steps {
+				echo 'Testing..'
+			    }
+			}
+			stage('Deploy') {
+			    steps {
+				echo 'Deploying....'
+			    }
+			}
+			stage('Get hostname') {
+			    steps {
+				cmd_exec('wmic computersystem get name')
+			    }
+			}
+		    }
+		}
+
+		def cmd_exec(command) {
+		    return bat(returnStdout: true, script: "${command}").trim()
+		}
+	--------------------------------
+	}
+}
 Jenkins Script Console {
 	// println(Jenkins.instance.metaClass.methods*.name)
 	// Jenkins.instance.getJobProperty()
