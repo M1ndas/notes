@@ -7,6 +7,9 @@ jQuery {
 	- https://devhints.io/xpath
 }
 
+Splunk {
+
+}
 
 Wordpress maintenance {
 	- define('FS_METHOD','direct'); 	===> If WP asks for FTP credentials durring version upgrade it can't write to some directory. This is solvable by adding this directive.
