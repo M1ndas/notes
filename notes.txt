@@ -7,6 +7,13 @@ jQuery {
 	- https://devhints.io/xpath
 }
 
+Linux mail, postfix {
+	- netstat -ltnp | grep 25 				===> check if postfix is running;
+	- sudo dpkg-reconfigure postfix 			===> reconfigure postfix
+	- apt-get install --reinstall postfix 			===> reinstall postfix (helped on 2019.08.31 w/ Coin_Trade project)
+}
+
+
 Splunk {
 	- cat metrics.log | grep -Po "name=(.+?), blocked=true, max_size.+?(?=,)" | sort | uniq -c 	===> get the status and the size of queues from the logs
 	- https://docs.splunk.com/Documentation/Forwarder/7.3.1/Forwarder/HowtoforwarddatatoSplunkEnterprise 
