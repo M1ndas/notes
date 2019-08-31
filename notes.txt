@@ -21,6 +21,8 @@ Linux mail, postfix {
 		smtp_tls_security_level = may
 		smtpd_tls_security_level = may
 		# MINDAUGAS :: END
+		# Ref: https://askubuntu.com/questions/875986/how-to-set-up-tls-for-postfix-on-ubuntu
+		# Ref: https://serverfault.com/questions/931476/how-to-send-encrypted-message-using-postfix
 }
 
 
