@@ -11,6 +11,16 @@ Linux mail, postfix {
 	- netstat -ltnp | grep 25 				===> check if postfix is running;
 	- sudo dpkg-reconfigure postfix 			===> reconfigure postfix
 	- apt-get install --reinstall postfix 			===> reinstall postfix (helped on 2019.08.31 w/ Coin_Trade project)
+	
+	- Enabling SMTP over TLS on postfix
+		# TLS parameters
+		smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+		smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+		# MINDAUGAS :: START - configuring secure email sending (SMTP orver TLS, not SMIME)
+		# smtpd_use_tls=yes
+		smtp_tls_security_level = may
+		smtpd_tls_security_level = may
+		# MINDAUGAS :: END
 }
 
 
