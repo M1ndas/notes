@@ -7,6 +7,22 @@ jQuery {
 	- https://devhints.io/xpath
 }
 
+Lets encrypt {
+	- autorenew with email {
+		#!/bin/bash
+		. <({ cb_err=$({ cb_out=$(/usr/bin/certbot renew --post-hook "service apache2 restart"); } 2>&1; declare -p cb_out >&2); declare -p cb_err; } 2>&1)
+
+		# If certificate renewal issue if something other than "not up for renewal" - send the email
+		if [[ "${cb_err//$'\n'/ }" == "Saving debug log to /var/log/letsencrypt/letsencrypt.log Cert not yet due for renewal" ]]; then
+			printf "Hi,<br><br>Certbot renewal failed with:<h3>Stdout:</h3>%s<h3>Stderr:</h3>%s<br><br>Server time: %s" \
+				"${cb_out//$'\n'/<br/>}" "${cb_err//$'\n'/<br>}" "$(date)" \
+				| mail -s "Certbot Renewal Issue" -a "Content-type: text/html" darbas.mindaugas@gmail.com
+		fi
+
+	}
+
+}
+
 Linux mail, postfix {
 	- netstat -ltnp | grep 25 				===> check if postfix is running;
 	- sudo dpkg-reconfigure postfix 			===> reconfigure postfix
