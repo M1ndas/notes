@@ -10,6 +10,7 @@ jQuery {
 Lets encrypt {
 	- autorenew with email {
 		#!/bin/bash
+		# Ref: https://developerinsider.co/how-to-create-and-auto-renew-lets-encrypt-wildcard-certificate/
 		. <({ cb_err=$({ cb_out=$(/usr/bin/certbot renew --post-hook "service apache2 restart"); } 2>&1; declare -p cb_out >&2); declare -p cb_err; } 2>&1)
 
 		# If certificate renewal issue if something other than "not up for renewal" - send the email
