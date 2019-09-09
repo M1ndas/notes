@@ -2,6 +2,7 @@ jQuery {
 	- $('.table_class').rows.length 			===> get the number of rows in the table
 	- $('.list2_body > tr:nth-child(1) > td:nth-child(7)')	===> get the value of a table cell in the first row
 	- $x("//a[contains(text(), 'OS QC')]")			===> using xpath w/ contains text pattern 
+	- $x("//a[contains(string(), 'OS QC')]")		===> this is more robust and works better than text() (which is actually not an xpath function; 
 	- $x("//tbody[@class='list2_body']")			===> using xpath w/ class name
 	- $x("//tbody[@class='x']/tr[position()=$variable]")	===> 
 	- https://devhints.io/xpath
