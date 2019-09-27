@@ -7748,9 +7748,13 @@ sys_template_v9{
  	- rsync --help | grep -P "(-P\W|-r\W|-a\W)" 	===> using grep on the --help flag to figure out what is going on in these statments;	
 } rsync	
 
- BASH SCRIPTS {	
-		############################################################# - skip expected failures	
+ BASH SCRIPTS {
+ 		############################################################# - check host icmp reachability in a /28 subnet
+		 bernam@ivv-mindaugas-2019-09-23-jump:~$ for i in {33..47} ;do (ping 10.5.0.$i -c 1 -w 1  > /dev/null && printf "\n%s" "10.5.0.$i" &) ;done
+		10.5.0.44
+		10.5.0.45
 
+		############################################################# - skip expected failures	
  			#!/usr/bin/env bash	
 
  			# returns success error code - 0 if the execution output of an error matches the expected error pattern. 	
@@ -7769,7 +7773,6 @@ sys_template_v9{
 			echo "$?"	
 			ignore-error 'is already installed' ls test.sh	
 			echo "$?"	
-
  		############################################################# batch_create_many_webapps.sh	
 			#!/bin/bash	
 
