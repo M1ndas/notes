@@ -2380,6 +2380,7 @@ LINUX {
 		}
 
 		-awk {
+			- printf "%s\n%s\n%s\n%s\n%s\n" RANDOM START ABCD END RANDOM | awk '/START/,/END/' 	===> only prints START ABCD END
 			- awk '/start_pattern/,/end_pattern/' <file> {
 				- easiest way to output multiple lines that contain the start and end patterns in them. This will not print substrings. Proof: echo -e '[msg xz]\n[id: xx]' | awk '/\[m/,/z\]/'
 				- if you want to select only some substring you can combine perl / sed / with awk: 
