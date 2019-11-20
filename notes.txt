@@ -7574,7 +7574,8 @@ sys_template_v9{
  IT CERTIFICATION {	
 
  	PATHS:	
-		Networking: 		CCNA 		CCNP 		CCIE		CCAr	
+		Networking: 		CCNA 		CCNP 		CCIE		CCAr
+					JNCA (and other Juniper)
 
  		Windows:		MCSA Server	MCSE Server	
 					MCSA Web Apps	MCSD Web Apps	
