@@ -7576,32 +7576,26 @@ sys_template_v9{
  	PATHS:	
 		Networking: 		CCNA 		CCNP 		CCIE		CCAr
 					JNCA (and other Juniper)
-
- 		Windows:		MCSA Server	MCSE Server	
-					MCSA Web Apps	MCSD Web Apps	
-					MCSA Store Apps	MCSD Store Apps	
-
+ 		Windows:		MCSA Server					MCSE Server	
+					MCSA App Builder (70-483 C#, 486 ASP.NET MVC) 	MCSD App Builder (487 Azure Web Services)
  		Vmware			VCA		VCP		VCE		VCDX	
-
  		Linux: 				
 			RedHat:		RHCSA		RHCSE		RHCSS	
 			Linux Found.:	LFCS 		LCFE	
-
  		Programming:	
-			Ruby:		Silver 		Gold 		Platinum (BS)	
-			Python:		??	
-			Java		OCJA		OCDP			
+			Python:		PCEP 		PCAP 		PCPP I, II	
+			Java		OCA		OCP			
 			C: 		CLA		CLP		CLS (available after december 2017)	
 			Cpp:		CPA		CPP		CPS (available after december 2017)	
-			C#: 		MCSA 		MCSE 		MCSM	
-
+			C#: 		MCSA 		MCSE 		MCSM
+			Android: 	AAD Kotlin
  		Security: 		CEH		GIAC GPEN 	GIAC GXPN	GIAC GSE 	CISSP	
 		Testing: 		CTFL 		CTAL(tech)	
 		Big Data: 		CCP:DS (Others?)	
 		ML: 			Coursera (Others?)	
 		SQL (DBA): 		Oracle / Microsoft Data	
-		PM: 			???	
-		General:		CompTIA A+ / Storage+ / Network+ / Security+	
+		PM: 			PMP	
+		General:		CompTIA A+ / Storage+ / Network+ / Security+ / Project+
 
  	CCNA/P/E {	
 		- https://learningnetwork.cisco.com/community/certifications/ccna 	===> main cisco page for ccna / a guide;	
