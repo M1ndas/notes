@@ -1,3 +1,9 @@
+valgrind {
+	- valgrind ./prog.exe
+	- valgrind -v ./prog.exe
+	- valgrind --leak-check=full ./prog.exe
+}
+
 jQuery {
 	- $('.table_class').rows.length 			===> get the number of rows in the table
 	- $('.list2_body > tr:nth-child(1) > td:nth-child(7)')	===> get the value of a table cell in the first row
