@@ -87,8 +87,10 @@ python {
 
 
 pandas {
-	- import pandas as pd
 	- pd.read_csv("data.csv", index_col="Platform") 	===> read CSV data
+	- dataFrame.to_csv(r'C:\export_dataframe.csv', index=False)
+	- reviews['index_backwards'] = range(len(reviews), 0, -1)
+	- reviews.iloc[0]					===> first row
 	- ign_data.loc['PC',:].max()				===> get max value for a specific row w/ name 'PC' for the index_col
 	- ign_data.loc['PlayStation Vita',:].idxmin()		===> get the name of the label for a minimum value
 	- sns.heatmap(data=data_obj, annot=True)		===> heatmap
@@ -96,6 +98,14 @@ pandas {
 	- sns.lmplot(x="bmi", y="charges", hue="smoker", data=insurance_data)
 	- sns.swarmplot(x=candy_data['chocolate'], y=candy_data['winpercent']) 	===> categorical scatterplot
 	- _aj = candy_data[candy_data['competitorname'] == 'Almond Joy']['winpercent'].values[0]
+	- sns.distplot(a=iris_data['Petal Length (cm)'], kde=False) 		===> histogram
+	- sns.kdeplot(data=iris_data['Petal Length (cm)'], shade=True)	
+	- sns.jointplot(x=iris_data['Petal Length (cm)'], y=iris_data['Sepal Width (cm)'], kind="kde")
+	- sns.distplot(...), sns.distplot(...), plt.legend() 			===> histograms per species
+	- sns.lineplot(x="timepoint", y="signal", data=fmri)			===> 
+	- plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+	- pd.DataFrame({'Yes': [50, 21], 'No': [131, 2]}, index=['Product A', 'Product B'])
+	- pd.Series(['4 cups','1 cup','2 large','1 can'], index=['Flour', 'Milk', 'Eggs', 'Spam'], name='Dinner')
 }
 
 valgrind {
