@@ -1,3 +1,9 @@
+pandas {
+	- pd.read_csv(ign_filepath, index_col="Platform") 	===> read CSV data
+	- ign_data.loc['PC',:].max()				===> get max value for a specific row w/ name 'PC' for the index_col
+	- ign_data.loc['PlayStation Vita',:].idxmin()		===> get the name of the label for a minimum value
+}
+
 valgrind {
 	- valgrind ./prog.exe
 	- valgrind -v ./prog.exe
