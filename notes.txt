@@ -1,7 +1,101 @@
+python {
+	syntax tricks {
+		- 
+	}
+
+	one liners {
+		$ printf "{"\"a\"":{},"\"b"\":{}}" | python -m json.tool | python -c 'import sys, json; print json.load(sys.stdin)["a"]'  ===> parse json with python one liner
+		$ printf "{"\"a\"":{},"\"b"\":["\"abg\"","\"bg\"","\"yu\""]}" | python3 -m json.tool | python3 -c $"import sys, json;print(json.load(sys.stdin))"
+		$ printf "{"\"a\"":{},"\"b"\":["\"abg\"","\"bg\"","\"yu\""]}" | python3 -m json.tool | python3 -c 'import sys, json; [print(foo) for foo in json.load(sys.stdin)["b"]]'
+		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print(foo["_source"]["timestamp"]) for foo in json.load(sys.stdin)["hits"]["hits"]]' 
+		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{}".format(foo["_source"]["http_request"]["headers"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' 2>/dev/null | head -n 1
+		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{}".format(foo["_source"]["http_request"]["headers"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' | tail -n 1
+		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{} -- {}".format(foo["_source"]["http_request"]["headers"], foo["_source"]["@timestamp"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' | grep -Po "(?<=\"cookie\":)\".*?(?=\",)"  | perl -pne 's/\n/\n\n/g' | grep -Po "__ZEHIC=\w*(?=;)"
+		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{} -- {}".format(foo["_source"]["http_request"]["headers"], foo["_source"]["@timestamp"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' | perl -pne 's/(?:.*)(__ZEHIC=\w*(?=;));\s(__z_a=\w*(?=;));(?:.+)\"user-agent\":\"(.+")}\s--\s(.*)/\1\t\2\t\3\t\4/g'
+	}
+
+	################# TCP client #################
+	import socket
+	target_host = "www.google.com"
+	target_port = 80
+
+	# create a socket object The AF_INET parameter is saying 
+	# we are going to use a standard IPv4 address or hostname, 
+	# and SOCK_STREAM indicates that this will be a TCP client.
+	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	# connect the client
+	client.connect((target_host,target_port))
+
+	# send some data
+	client.send("GET / HTTP/1.1\r\nHost: google.com\r\n\r\n")
+
+	# receive some data
+	response = client.recv(4096)
+
+	print response
+
+
+	################# UDP client #################
+	import socket
+	target_host = "127.0.0.1"
+	target_port = 80
+
+	# create a socket object
+	client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+	# send some data. Because UDP is a connectionless protocol, 
+	# there is no call to connect() beforehand.
+	client.sendto("AAABBBCCC",(target_host,target_port))
+
+	# receive some data ===> yes, i Python you can return multiple values
+	data, addr = client.recvfrom(4096)
+	print data
+	print addr
+
+
+	################# TCP server #################
+	import socket
+	import threading
+
+	bind_ip   = "0.0.0.0"
+	bind_port = 9999
+
+	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	server.bind((bind_ip,bind_port))
+	server.listen(5) # maximum backlog of connections set to 5
+
+	print "[*] Listening on %s:%d" % (bind_ip,bind_port)
+
+	# this is our client-handling thread
+	def handle_client(client_socket):
+		# print out what the client sends
+		request = client_socket.recv(1024)
+		print "[*] Received: %s" % request
+
+	# send back a packet
+	client_socket.send("ACK!")
+	client_socket.close()
+
+	while True:
+		client,addr = server.accept()
+		print "[*] Accepted connection from: %s:%d" % (addr[0],addr[1])
+		# spin up our client thread to handle incoming data
+		client_handler = threading.Thread(target=handle_client,args=(client,))
+		client_handler.start()
+}
+
+
 pandas {
-	- pd.read_csv(ign_filepath, index_col="Platform") 	===> read CSV data
+	- import pandas as pd
+	- pd.read_csv("data.csv", index_col="Platform") 	===> read CSV data
 	- ign_data.loc['PC',:].max()				===> get max value for a specific row w/ name 'PC' for the index_col
 	- ign_data.loc['PlayStation Vita',:].idxmin()		===> get the name of the label for a minimum value
+	- sns.heatmap(data=data_obj, annot=True)		===> heatmap
+	- sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'], hue=insurance_data['smoker'])
+	- sns.lmplot(x="bmi", y="charges", hue="smoker", data=insurance_data)
+	- sns.swarmplot(x=candy_data['chocolate'], y=candy_data['winpercent']) 	===> categorical scatterplot
+	- _aj = candy_data[candy_data['competitorname'] == 'Almond Joy']['winpercent'].values[0]
 }
 
 valgrind {
@@ -7076,93 +7170,8 @@ UPWORK {
 	}
 }
 
-PYTHON {
-
-	ONE LINERS {
-		$ printf "{"\"a\"":{},"\"b"\":{}}" | python -m json.tool | python -c 'import sys, json; print json.load(sys.stdin)["a"]'  ===> parse json with python one liner
-		$ printf "{"\"a\"":{},"\"b"\":["\"abg\"","\"bg\"","\"yu\""]}" | python3 -m json.tool | python3 -c $"import sys, json;print(json.load(sys.stdin))"
-		$ printf "{"\"a\"":{},"\"b"\":["\"abg\"","\"bg\"","\"yu\""]}" | python3 -m json.tool | python3 -c 'import sys, json; [print(foo) for foo in json.load(sys.stdin)["b"]]'
-		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print(foo["_source"]["timestamp"]) for foo in json.load(sys.stdin)["hits"]["hits"]]' 
-		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{}".format(foo["_source"]["http_request"]["headers"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' 2>/dev/null | head -n 1
-		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{}".format(foo["_source"]["http_request"]["headers"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' | tail -n 1
-		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{} -- {}".format(foo["_source"]["http_request"]["headers"], foo["_source"]["@timestamp"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' | grep -Po "(?<=\"cookie\":)\".*?(?=\",)"  | perl -pne 's/\n/\n\n/g' | grep -Po "__ZEHIC=\w*(?=;)"
-		$ cat caching_yell | python3 -m json.tool | python3 -c 'import sys, json; [print("{} -- {}".format(foo["_source"]["http_request"]["headers"], foo["_source"]["@timestamp"])) for foo in json.load(sys.stdin)["hits"]["hits"]]' | perl -pne 's/(?:.*)(__ZEHIC=\w*(?=;));\s(__z_a=\w*(?=;));(?:.+)\"user-agent\":\"(.+")}\s--\s(.*)/\1\t\2\t\3\t\4/g'
-	}
-
-	################# TCP client #################
-	import socket
-	target_host = "www.google.com"
-	target_port = 80
-
-	# create a socket object The AF_INET parameter is saying 
-	# we are going to use a standard IPv4 address or hostname, 
-	# and SOCK_STREAM indicates that this will be a TCP client.
-	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-	# connect the client
-	client.connect((target_host,target_port))
-
-	# send some data
-	client.send("GET / HTTP/1.1\r\nHost: google.com\r\n\r\n")
-
-	# receive some data
-	response = client.recv(4096)
-
-	print response
-
-
-	################# UDP client #################
-	import socket
-	target_host = "127.0.0.1"
-	target_port = 80
-
-	# create a socket object
-	client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-	# send some data. Because UDP is a connectionless protocol, 
-	# there is no call to connect() beforehand.
-	client.sendto("AAABBBCCC",(target_host,target_port))
-
-	# receive some data ===> yes, i Python you can return multiple values
-	data, addr = client.recvfrom(4096)
-	print data
-	print addr
-
-
-	################# TCP server #################
-	import socket
-	import threading
-
-	bind_ip   = "0.0.0.0"
-	bind_port = 9999
-
-	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	server.bind((bind_ip,bind_port))
-	server.listen(5) # maximum backlog of connections set to 5
-
-	print "[*] Listening on %s:%d" % (bind_ip,bind_port)
-
-	# this is our client-handling thread
-	def handle_client(client_socket):
-		# print out what the client sends
-		request = client_socket.recv(1024)
-		print "[*] Received: %s" % request
-
-	# send back a packet
-	client_socket.send("ACK!")
-	client_socket.close()
-
-	while True:
-		client,addr = server.accept()
-		print "[*] Accepted connection from: %s:%d" % (addr[0],addr[1])
-		# spin up our client thread to handle incoming data
-		client_handler = threading.Thread(target=handle_client,args=(client,))
-		client_handler.start()
-}
-
-VIRTUAL BOX {
-
-	Resize the disk{
+virtual box {
+	- resize the disk {
 		- https://www.youtube.com/watch?v=r_UyKufXR3c
 		- take screenshots of the settings before starting
 		- detach the disk 
@@ -7174,19 +7183,15 @@ VIRTUAL BOX {
 		- Reattach, see if you have the same settings as in the screenshots ... and boot
 	}
 
-    - .\VBOXMANAGE.EXE internalcommands sethduuid "F:\..\.vmdk"  			===> to reattach a moved virtual box disk you need to regenerate the uuid;
-    - VBoxManage internalcommands sethduuid "/home/user/../drupal.vhd" 		===> On Linux
+	- .\VBOXMANAGE.EXE internalcommands sethduuid "F:\..\.vmdk"  	===> to reattach a moved vbox disk you need regenerate uuid;
+	- VBoxManage internalcommands sethduuid "/home/user/../drupal.vhd" 	===> On Linux
 
-    - PROBLEM :: SIGSEGV IN THE ORACLE EXTENSION PACK DUE TO UBUNTU SHUTTING DOWN AFTER SLEEP {
-    	- SOLUTION 1: REINSTALL EXTENSION PACK
-    		- VBoxManage list extpacks 										===> check the extension packs that currently exist;
-    		- sudo find / -name "*Oracle_VM_VirtualBox_Extension_Pack*"	 	===> find the extension pack;
-    		- 
+	- PROBLEM :: SIGSEGV IN THE ORACLE EXTENSION PACK DUE TO UBUNTU SHUTTING DOWN AFTER SLEEP {
+    		- SOLUTION 1: REINSTALL EXTENSION PACK
+    		- VBoxManage list extpacks 					===> check the extension packs that currently exist;
+    		- sudo find / -name "*Oracle_VM_VirtualBox_Extension_Pack*"	===> find the extension pack;
     	- SOLUTION 2: REINSTALL VIRTUALBOX
     }
-
-
-
 } Synonyms: virtualbox, virtual box, oracle virtual box;
 
 VMWARE PLAYER{
