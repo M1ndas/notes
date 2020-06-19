@@ -91,7 +91,11 @@ pandas {
 	- dataFrame.to_csv(r'C:\export_dataframe.csv', index=False)
 	- reviews['index_backwards'] = range(len(reviews), 0, -1)
 	- reviews.iloc[0]					===> first row
-	- ign_data.loc['PC',:].max()				===> get max value for a specific row w/ name 'PC' for the index_col
+	- reviews.iloc[:, 0]					===> first coll
+	- reviews.iloc[[1,2,3,5,8], :]				===> row w/ some specific values (1,2,3,5,8) as the first collumn
+	- reviews.loc[[0,1,10,100], ['country', 'province', 'region_1', 'region_2']] ===> specific rows and collumns
+	- loc[0:100, :] - returns 100th record included (so 101 recs); iloc[0:100, :] - excluded 
+ 	- ign_data.loc['PC',:].max()				===> get max value for a specific row w/ name 'PC' for the index_col
 	- ign_data.loc['PlayStation Vita',:].idxmin()		===> get the name of the label for a minimum value
 	- sns.heatmap(data=data_obj, annot=True)		===> heatmap
 	- sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'], hue=insurance_data['smoker'])
