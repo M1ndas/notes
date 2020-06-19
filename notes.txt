@@ -94,6 +94,7 @@ pandas {
 	- reviews.iloc[:, 0]					===> first coll
 	- reviews.iloc[[1,2,3,5,8], :]				===> row w/ some specific values (1,2,3,5,8) as the first collumn
 	- reviews.loc[[0,1,10,100], ['country', 'province', 'region_1', 'region_2']] ===> specific rows and collumns
+	- reviews.loc[((reviews.country == 'Australia') | (reviews.country == 'New Zealand')) & (reviews.points >= 95)]
 	- loc[0:100, :] - returns 100th record included (so 101 recs); iloc[0:100, :] - excluded 
  	- ign_data.loc['PC',:].max()				===> get max value for a specific row w/ name 'PC' for the index_col
 	- ign_data.loc['PlayStation Vita',:].idxmin()		===> get the name of the label for a minimum value
@@ -110,6 +111,11 @@ pandas {
 	- plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 	- pd.DataFrame({'Yes': [50, 21], 'No': [131, 2]}, index=['Product A', 'Product B'])
 	- pd.Series(['4 cups','1 cup','2 large','1 can'], index=['Flour', 'Milk', 'Eggs', 'Spam'], name='Dinner')
+	- reviews.points.map(lambda p: p - review_points_mean)
+	- reviews.apply(remean_points, axis='columns')
+	- L = [1, 2, 3, 4] ;; list(map(lambda x: x**2, L))
+	- pd.coll.value_counts() 						===> get counts for occurences of each value
+	- 
 }
 
 valgrind {
