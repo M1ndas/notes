@@ -115,7 +115,7 @@ pandas {
 	- reviews.apply(remean_points, axis='columns')
 	- L = [1, 2, 3, 4] ;; list(map(lambda x: x**2, L))
 	- pd.coll.value_counts() 						===> get counts for occurences of each value
-	- 
+	- max_idx = (reviews.points / reviews.price).idxmax() ;; bargain_wine = reviews.loc[max_idx, 'title'] ===> wine with higest point to price ration
 }
 
 valgrind {
