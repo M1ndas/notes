@@ -102,6 +102,7 @@ pandas {
 	- sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'], hue=insurance_data['smoker'])
 	- sns.lmplot(x="bmi", y="charges", hue="smoker", data=insurance_data)
 	- sns.swarmplot(x=candy_data['chocolate'], y=candy_data['winpercent']) 	===> categorical scatterplot
+	- pd.Series([1, 2, 3]).values ===> returns values from pandas series array([1, 2, 3])
 	- _aj = candy_data[candy_data['competitorname'] == 'Almond Joy']['winpercent'].values[0]
 	- sns.distplot(a=iris_data['Petal Length (cm)'], kde=False) 		===> histogram
 	- sns.kdeplot(data=iris_data['Petal Length (cm)'], shade=True)	
@@ -111,11 +112,27 @@ pandas {
 	- plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 	- pd.DataFrame({'Yes': [50, 21], 'No': [131, 2]}, index=['Product A', 'Product B'])
 	- pd.Series(['4 cups','1 cup','2 large','1 can'], index=['Flour', 'Milk', 'Eggs', 'Spam'], name='Dinner')
+	- pd.Series([t, f], index=['tropical', 'fruity']) 			===> creating a pandas series from two numbers 
 	- reviews.points.map(lambda p: p - review_points_mean)
+	- reviews.points.map(lambda p: 3 if p >= 95 else 1) 			===> map from pd using lambda
 	- reviews.apply(remean_points, axis='columns')
 	- L = [1, 2, 3, 4] ;; list(map(lambda x: x**2, L))
 	- pd.coll.value_counts() 						===> get counts for occurences of each value
 	- max_idx = (reviews.points / reviews.price).idxmax() ;; bargain_wine = reviews.loc[max_idx, 'title'] ===> wine with higest point to price ration
+	- reviews.groupby('winery').apply(lambda df: df.title.iloc[0]) 		===> group wines by winery and then access first review
+	- reviews.groupby(['country', 'province']).apply(lambda df: df.loc[df.points.idxmax()]) ===> best wine by country and province
+	- reviews.groupby(['country']).price.agg([len, min, max]) 		===> run a bunch of functions on a df
+	- countries_reviewed.reset_index() 					===> from multi index to regular index
+	- countries_reviewed.sort_values(by='len', ascending=False) 		===> sort by value (default is by index)
+	- countries_reviewed.sort_index() 					===> sort by index
+	- countries_reviewed.sort_values(by=['country', 'len'])			===> sort by multiple collumns
+	- reviews.groupby('taster_twitter_handle').size() 			===> group by with count
+	- reviews.groupby('taster_twitter_handle').taster_twitter_handle.count() ===> another group by with count
+	
+	- reviews.dtypes							===> get datatype of a column in a dataframe or series (string is indeicated as object)
+	- reviews.points.astype('float64')					===> convert datatypes
+	- reviews[pd.isnull(reviews.country)]					===> select all reviews where country values missing
+	- reviews.region_2.fillna("Unknown")					===> replace missing values with word
 }
 
 valgrind {
