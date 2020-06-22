@@ -93,17 +93,17 @@ seaborn {
 }
 
 pandas {
-	- pd.read_csv("data.csv", index_col="Platform") 	===> read CSV data
+	- pd.read_csv("data.csv", index_col="Platform") 			===> read CSV data
 	- dataFrame.to_csv(r'C:\export_dataframe.csv', index=False)
 	- reviews['index_backwards'] = range(len(reviews), 0, -1)
-	- reviews.iloc[0]					===> first row
-	- reviews.iloc[:, 0]					===> first coll
-	- reviews.iloc[[1,2,3,5,8], :]				===> row w/ some specific values (1,2,3,5,8) as the first collumn
+	- reviews.iloc[0]							===> first row
+	- reviews.iloc[:, 0]							===> first coll
+	- reviews.iloc[[1,2,3,5,8], :]						===> row w/ some specific values (1,2,3,5,8) as the first collumn
 	- reviews.loc[[0,1,10,100], ['country', 'province', 'region_1', 'region_2']] ===> specific rows and collumns
 	- reviews.loc[((reviews.country == 'Australia') | (reviews.country == 'New Zealand')) & (reviews.points >= 95)]
 	- loc[0:100, :] - returns 100th record included (so 101 recs); iloc[0:100, :] - excluded 
- 	- ign_data.loc['PC',:].max()				===> get max value for a specific row w/ name 'PC' for the index_col
-	- ign_data.loc['PlayStation Vita',:].idxmin()		===> get the name of the label for a minimum value
+ 	- ign_data.loc['PC',:].max()						===> get max value for a specific row w/ name 'PC' for the index_col
+	- ign_data.loc['PlayStation Vita',:].idxmin()				===> get the name of the label for a minimum value
 	- pd.Series([1, 2, 3]).values ===> returns values from pandas series array([1, 2, 3])
 	- _aj = candy_data[candy_data['competitorname'] == 'Almond Joy']['winpercent'].values[0]
 	- sns.distplot(a=iris_data['Petal Length (cm)'], kde=False) 		===> histogram
@@ -129,9 +129,9 @@ pandas {
 	- countries_reviewed.sort_values(by='len', ascending=False) 		===> sort by value (default is by index)
 	- countries_reviewed.sort_index() 					===> sort by index
 	- countries_reviewed.sort_values(by=['country', 'len'])			===> sort by multiple collumns
-	- countries_reviewed.sort_values(by=['country', 'len'], ascending=False) ===> by multicol in ascending order	
+	- countries_reviewed.sort_values(by=['countr', 'len'], ascending=False) ===> by multicol in ascending order	
 	- reviews.groupby('taster_twitter_handle').size() 			===> group by with count
-	- reviews.groupby('taster_twitter_handle').taster_twitter_handle.count() ===> another group by with count
+	- reviews.groupby('taster_twitter_handl').taster_twitter_handle.count() ===> another group by with count
 	- reviews.groupby('price')['points'].max().sort_index() 		===> group by price selecting the max of collumn points while grouping. Then, sort by the price (which is the index collumn)
 	- reviewer_mean_ratings.describe()					===> mean, count and other stats about the series
 	- reviews.groupby(['country', 'variety']).size().sort_values(ascending=False) ===> group, count variety (last col grouped) and sort
