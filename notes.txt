@@ -95,6 +95,7 @@ seaborn {
 pandas {
 	- pd.read_csv("data.csv", index_col="Platform") 			===> read CSV data
 	- dataFrame.to_csv(r'C:\export_dataframe.csv', index=False)
+	- df.columns								===> get all the column names
 	- reviews['index_backwards'] = range(len(reviews), 0, -1)
 	- reviews.iloc[0]							===> first row
 	- reviews.iloc[:, 0]							===> first coll
