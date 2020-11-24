@@ -1,4 +1,51 @@
-python {
+Docker {
+	Dockerfile:
+		- RUN apt-get update -y && apt-get install -y openssl zip unzip git vim iputils-ping procps
+
+	Docker-compose:
+		- command: bash -c 'sleep 10'
+		- command: bash -c 'php artisan migrate:fresh --seed && php artisan serve --host 0.0.0.0'
+
+	Docker:
+		- docker-compose build
+		- docker-compose up -d
+		- docker ps
+		- docker-compose ps
+		- docker images
+		- docker stop $(docker ps -aq)
+		- docker stop ID ID2
+		- docker exec -it 58 bash
+		- docker run -d test_app
+		- docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 324
+		- docker inspect mysql | grep Address
+		- docker rm ID ID2
+		- docker top
+		- docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7
+		- docker run -d --name mysql ID
+
+	Rebiuld the container:
+		- docker stop $(docker ps -aq)
+		- docker ps -a
+		- docker rm ID
+		- docker-compose build
+		- docker-compose up -d
+		- docker run ID
+		- docker run ID && docker exec -it ID bash
+		- docker system prune -a
+
+	Run container with docker:
+		- docker images
+		- docker run -d IMAGE ID
+		- docker exec -it mysql bash
+
+	Tshoot docker mysql:
+		- You must delete the mapped volume if you change the password
+		- docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql:8
+		- docker exec -it mysql bash
+		- mysql -uroot -p123456 -h 127.0.0.1
+}
+
+Python {
 	syntax tricks {
 		- 
 	}
