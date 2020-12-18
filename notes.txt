@@ -381,6 +381,7 @@ Splunk {
 
 PowerShell {
 	Commands {
+		- Measure-Command { echo hi } 		===> benchmark a command
 		- (Get-ChildItem | Out-String) -split "`n" | Select-String app 	===> grep for a directory named "app" (more complicated as PS is Object oriented not text based)
 		- Get-PSSnapin 				===> extend using commandlets or snapins. Both are extension packages. Check availability of snapins.
 		- Get-PSSnapin -Registered 		===> same as above
