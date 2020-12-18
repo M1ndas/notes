@@ -1,3 +1,15 @@
+Angular {
+	- ng new app + robocopy app app2 /MIR /NFL /NDL /NJH /NJS /nc /ns /np
+	- Measure-Command { ng new appdelete }
+		Minutes           : 0
+		Seconds           : 37
+		Milliseconds      : 255
+	- Measure-Command { robocopy CourseNestUi2 CourseNestUi3 /MIR /NFL /NDL /NJH /NJS /nc /ns /np }
+		Minutes           : 0
+		Seconds           : 20
+		Milliseconds      : 646
+}
+
 Docker {
 	Dockerfile:
 		- RUN apt-get update -y && apt-get install -y openssl zip unzip git vim iputils-ping procps
@@ -369,10 +381,11 @@ Splunk {
 
 PowerShell {
 	Commands {
-		- Get-PSSnapin 	===> extend using commandlets or snapins. Both are extension packages. Check availability of snapins.
-		- Get-PSSnapin -Registered ===> same as above
-		- Get-Module -ListAvailable ===> find modules
-		- $PSversiontable ===> 
+		- (Get-ChildItem | Out-String) -split "`n" | Select-String app 	===> grep for a directory named "app" (more complicated as PS is Object oriented not text based)
+		- Get-PSSnapin 				===> extend using commandlets or snapins. Both are extension packages. Check availability of snapins.
+		- Get-PSSnapin -Registered 		===> same as above
+		- Get-Module -ListAvailable 		===> find modules
+		- $PSversiontable 			===> 
 		- get-date | select dayofweek
 		- Get-PSSnapin -Registered
 		- Get-Module -ListAvailable
