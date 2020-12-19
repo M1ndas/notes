@@ -18,7 +18,7 @@ Docker {
 		- Second approach use the shared network:
 			- 
 		- Third approach: using docker compose you should be able to connect using the hostname.
-			- This does not work when --hostname is provided in the command line
+			- This does not work when --hostname is provided in the command line from an individual container
 		
 	Dockerfile:
 		- RUN apt-get update -y && apt-get install -y openssl zip unzip git vim iputils-ping procps
