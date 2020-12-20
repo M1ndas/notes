@@ -16,7 +16,9 @@ Docker {
 			- 1. Check the ip of the container you want to connect to: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' b4 ==> 172.17.0.2
 			- 2. Connect from the other container used the obtained IP address (using telnet if the container has it).
 		- Second approach use the shared network:
-			- 
+			- $ docker network create pg
+			- $ docker run -d -e POSTGRES_PASSWORD=password --network=pg --name postgres postgres:9-alpine
+			- $ docker run -d -p 5050:5050 --name pgadmin --network=pg thajeztah/pgadmin4
 		- Third approach: using docker compose you should be able to connect using the hostname.
 			- This does not work when --hostname is provided in the command line from an individual container
 			- Example configuration to connect PG admin that is installed as a container and Postgress DB using hostname pg_db:
