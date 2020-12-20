@@ -19,6 +19,28 @@ Docker {
 			- 
 		- Third approach: using docker compose you should be able to connect using the hostname.
 			- This does not work when --hostname is provided in the command line from an individual container
+			- Example configuration to connect PG admin that is installed as a container and Postgress DB using hostname pg_db:
+			
+				version: '3.7'
+				services:
+				  pg_admin:
+				    image: dpage/pgadmin4
+				    ports:
+				      - 5050:80
+				    environment:
+				      PGADMIN_DEFAULT_EMAIL: 'a@b.com'
+				      PGADMIN_DEFAULT_PASSWORD: 'qwertyui'
+				  pg_db:
+				    image: postgres
+				    ports:
+				      - 5432:5432
+				    environment:
+				      POSTGRES_PASSWORD: 'pass'
+				      PGDATA: '/var/lib/postgresql/data/pgdata'
+				    volumes:
+				      - ./db:/var/lib/postgresql/data
+				      
+		      	- Just run: docker-compose up -d after that 
 		
 	Dockerfile:
 		- RUN apt-get update -y && apt-get install -y openssl zip unzip git vim iputils-ping procps
