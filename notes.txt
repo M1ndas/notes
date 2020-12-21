@@ -11,6 +11,14 @@ Angular {
 }
 
 Docker {
+	Networking:
+		- docker network 			===> list all the choises
+		- docker network ls 			===> list all the available networks
+		- docker network inspect <net-name> 	===> mode details on the network
+		- docker info 				===> see the docker network drivers available
+		- docker network create -d bridge --subnet 10.0.0.1/24 <net-name> 	===> create a named bridge network (bridge allow communication on a single host)
+		- docker0 				===> the default bridge with the name bridge
+		
 	Connecting from one container to another:
 		- First approach - use the hosts ip address to connect to it:
 			- 1. Check the ip of the container you want to connect to: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' b4 ==> 172.17.0.2
