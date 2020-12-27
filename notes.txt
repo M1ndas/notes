@@ -1,3 +1,41 @@
+logrotate {
+	- logrotate --force | -f 			===> will rotate file(s) even if they do not meet the specified criteria such as minsize, age, etc.
+	- cat /var/lib/logrotate/logrotate.status	===> check logrotate status
+		logrotate state -- version 2
+		"/var/opt/rh/rh-php70/log/php-fpm/error.log" 2019-11-3-2:39:7
+		"/var/log/yum.log" 2020-11-19-4:4:17
+		"/var/log/firewalld" 2020-11-14-2:0:0
+		
+	- logrotate -d /etc/logrotate.conf 2>&1 	===> for grepping when using debug (debug is also DRY RUN!)
+	- logrotate -d /etc/logrotate.d/httpd 		===> launch logrotate with debug output for a specific configuration (debug is also DRY RUN!), example output:
+		reading config file /etc/logrotate.d/httpd
+		Allocating hash table for state file, size 15360 B
+
+		Handling 1 logs
+
+		rotating pattern: /home/sos03/logs/*log  1048576 bytes (no old logs will be kept)
+		empty log files are not rotated, old logs are removed
+		considering log /home/sos03/logs/www.sos03.lt_access.log
+		  log needs rotating
+		considering log /home/sos03/logs/www.sos03.lt_error.log
+		  log needs rotating
+		rotating log /home/sos03/logs/www.sos03.lt_access.log, log->rotateCount is 0
+		dateext suffix '-20201227'
+		glob pattern '-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+		renaming /home/sos03/logs/www.sos03.lt_error.log.1 to /home/sos03/logs/www.sos03.lt_error.log.2 (rotatecount 1, logstart 1, i 1),
+		renaming /home/sos03/logs/www.sos03.lt_error.log.0 to /home/sos03/logs/www.sos03.lt_error.log.1 (rotatecount 1, logstart 1, i 0),
+		renaming /home/sos03/logs/www.sos03.lt_access.log to /home/sos03/logs/www.sos03.lt_access.log.1
+		disposeName will be /home/sos03/logs/www.sos03.lt_access.log.1
+		renaming /home/sos03/logs/www.sos03.lt_error.log to /home/sos03/logs/www.sos03.lt_error.log.1
+		disposeName will be /home/sos03/logs/www.sos03.lt_error.log.1
+		running postrotate script
+		running script with arg /home/sos03/logs/*log : "
+			/bin/systemctl reload httpd.service > /dev/null 2>/dev/null || true
+		"
+		removing old log /home/sos03/logs/www.sos03.lt_access.log.1
+		error: error opening /home/sos03/logs/www.sos03.lt_access.log.1: No such file or directory
+}
+
 Vim {
 	- :w !sudo tee % > /dev/null 				===> save contents in a write protected file while not root.
 	- dd 							===> delete the whole current line;
