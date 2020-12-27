@@ -1,3 +1,46 @@
+Vim {
+	- :w !sudo tee % > /dev/null 				===> save contents in a write protected file while not root.
+	- dd 							===> delete the whole current line;
+	- dG 							===> delete all lines in one blow;
+	- D or d$ 						===> to delete the [rest of the] line and continue in command mode;
+	- C or c$ 						===> to delete the [rest of the] line and continue in insert mode;
+	- :u 							===> undo the change;
+	- Ctrl-R 						===> redo the changes that were undone;
+	- :u1|u 						===> undo all changes remembered by vim for the current buffer;
+	- :set nu 						===> turns on line numbering in vi;
+	- :set nu! 						===> turns off the line numbering in vi;
+	- 42G 							===> go to line 42;
+	- :%s/foo/bar/g 					===> Vim substitute feature, this one says: "find each occurrence of 'foo' (in all lines), and replace it with 'bar'.""
+	- :%s/db\(\d\).example.com/db\1.zozole.com/g 		===> a more involved vi/vim substitute feature w/ regex pattern and capture groups 
+	- :set paste 						===> paste mode, gives a nice indentation;
+	- ctrl + v; arrow down ; shift + I ; # ; esc		===> commenting all the lines;
+	- ctrl + v; arrow down ; x ; esc			===> delete first symbol from multiple lines
+	- :g/^\s*$/d 						===> delete all lines that contain a pattern;
+	- :g!/^\s*"/d 						===> delete all lines that do not contain a pattern;
+	- :v/^\s*"/d 						===> --||--
+	- shift + g 						===> jump to EOF;
+	- 1G 							===> jump to the first line;
+	- gg 							===> --||--
+	- VG 							===> visual select to the end of the file
+	- :%y+ 							===> yank the lines from a file to a clipboard, will not work in ZU for some reason;
+	- :r some_test_file 					===> read in some text file and adds its contents starting at the current cursor possition;
+
+	searching {
+		- /<search_patern> + enter 			===> jump to the following occurance;
+		- /<search_patern> + enter + n 			===> jump to the next occurance;
+		- /<search_patern> + enter + N 			===> jump to the previous occurance;
+	}
+
+	~/.vimrc or /etc/vim/vimrc {
+		syntax on     		" Activate Syntax highlighting
+		set nu          	" Activate Line numbers
+		set expandtab  		" Set Tab Intent 
+		set shiftwidth=4 	" set shift width for tab  
+		set softtabstop=2 
+	}
+
+}
+
 Angular {
 	- ng new app + robocopy app app2 /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 	- Measure-Command { ng new appdelete }
@@ -2775,49 +2818,6 @@ LINUX {
 			- useradd -G {group-name} {user-name}; 		===> assign new user to group;
 			- usermod -a -G {group-name} {user-name}; 	===> assign an existing user to a group;
 			- sudo chown -R {user-name} /home/{user-name}	===> make user own all the directories in his home dire
-		}
-
-		- Vim {
-			- :w !sudo tee % > /dev/null 					===> if you want to save contents in a write protected file but forgot to open VIM in super user mode. Take note where the exclamation mark is!
-			- dd 								===> delete the whole current line;
-			- dG 								===> delete all lines in one blow;
-			- D or d$ 							===> to delete the [rest of the] line and continue in command mode;
-			- C or c$ 							===> to delete the [rest of the] line and continue in insert mode;
-			- :u 								===> undo the change;
-			- Ctrl-R 							===> redo the changes that were undone;
-			- :u1|u 							===> undo all changes remembered by vim for the current buffer;
-			- :set nu 							===> turns on line numbering in vi;
-			- :set nu! 							===> turns off the line numbering in vi;
-			- 42G 								===> go to line 42;
-			- :%s/foo/bar/g 						===> Vim substitute feature, this one says: "find each occurrence of 'foo' (in all lines), and replace it with 'bar'.""
-			- :%s/db\(\d\).example.com/db\1.zozole.com/g 			===> a more involved vi/vim substitute feature w/ regex pattern and capture groups 
-			- :set paste 							===> paste mode, gives a nice indentation;
-			- ctrl + v; arrow down ; shift + I ; # ; esc	
-													===> commenting all the lines;
-			- :g/^\s*$/d 							===> delete all lines that contain a pattern;
-			- :g!/^\s*"/d 							===> delete all lines that do not contain a pattern;
-			- :v/^\s*"/d 							===> --||--
-			- shift + g 							===> jump to EOF;
-			- 1G 									===> jump to the first line;
-			- gg 									===> --||--
-			- VG 									===> visual select to the end of the file
-			- :%y+ 									===> yank the lines from a file to a clipboard, will not work in ZU for some reason;
-			- :r some_test_file 					===> read in some text file and adds its contents starting at the current cursor possition;
-
-			searching {
-				- /<search_patern> + enter 			===> jump to the following occurance;
-				- /<search_patern> + enter + n 		===> jump to the next occurance;
-				- /<search_patern> + enter + N 		===> jump to the previous occurance;
-			}
-
-			~/.vimrc or /etc/vim/vimrc {
-				syntax on     		" Activate Syntax highlighting
-				set nu          	" Activate Line numbers
-				set expandtab  		" Set Tab Intent 
-				set shiftwidth=4 	" set shift width for tab  
-				set softtabstop=2 
-			}
-
 		}
 
 		- export PATH=$PATH:/path/to/dir1 --> add to path for current session (will be cleared when you change to root for example);
