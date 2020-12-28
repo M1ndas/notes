@@ -1,3 +1,79 @@
+cron {
+	problems {
+		#1 {
+			- given a cronjob:
+				* * * * * (time ruby /home/mindaugas/test1.tb $(date -d 'yesterday' '+\%Y-\%m-\%d')) >> /home/mindaugas/my.log 2>&1
+			- it produces the given output:
+				time: cannot run ruby: No such file or directory
+				Command exited with non-zero status 127
+				0.00user 0.00system 0:00.00elapsed ?%CPU (0avgtext+0avgdata 336maxresident)k
+				0inputs+8outputs (0major+72minor)pagefaults 0swaps
+
+			- Q: why can't it run ruby?	
+				- This has the answer: http://unix.stackexchange.com/questions/76862/running-time-command-with-cron
+
+			- Q: how to derive the answer by yourself
+				- a command that would show whether you are calling a shell built in or an executable ===> `type` 
+				- http://superuser.com/questions/351889/what-is-the-unix-command-to-find-out-what-executable-file-corresponds-to-a-given
+				- you can compare the output when `type` is run from the shell or from the cron
+
+					> mindaugas@Mindaugas-Lenovo-Y50-70:~/Ruby_Scripts/Crontab_Test$ type time
+					> time is a shell keyword
+
+					> mindaugas@Mindaugas-Lenovo-Y50-70:~/Ruby_Scripts/Crontab_Test$ cat my.log 
+					> time is /usr/bin/time
+		}
+
+		#2 {
+			* * * * * /bin/bash -c "(time ruby /home/mindaugas/test1.tb $(date -d 'yesterday' '+\%Y-\%m-\%d'))" >> /home/mindaugas/my.log 2>&1
+			* * * * * /bin/bash -c "(sleep 10; time (ruby -e "puts \"a\n\"";))" >> /home/mindaugas/my.log 2>&1 
+				"an";)): -c: line 1: syntax error: unexpected end of file
+				/bin/bash: ruby: command not found
+
+			* * * * * /bin/bash -c "(time ruby /home/mindaugas/test1.tb $(date -d 'yesterday' '+\%Y-\%m-\%d')) >> /home/mindaugas/my.log 2>&1"
+			* * * * * /bin/bash -c "(sleep 10; (time ruby -e \"puts \\\"a\\\n\\\"\") >> /home/mindaugas/my.log 2>&1"
+
+
+			0 1 * * * /bin/bash -c "(echo ""; echo $(date -d 'yesterday' '+\%Y-\%m-\%d'); \
+				time /home/zulu/.rvm/rubies/ruby-2.2.2/bin/ruby /home/WAF_report_automation_II_.rb $(date -d 'yesterday' '+\%Y-\%m-\%d')) >> /home/the.log 2>&1"
+		}
+
+		#3 {
+			sudo -u "mindaugas" /bin/bash -c "ruby --help" 					===> /bin/bash: ruby: command not found
+			sudo -u "mindaugas" /bin/bash -c "/home/mindaugas/.rbenv/shims/ruby --help" 	===> works OK.
+			The answer: http://askubuntu.com/questions/23009/reasons-why-crontab-does-not-work
+		}
+	}
+
+	- 0 * * * * - this means the cron will run always when the minutes are 0 (so hourly)
+	- 0 1 * * * - this means the cron will run always at 1 o'clock.
+	- * 1 * * * - this means the cron will run each minute when the hour is 1. So 1:00, 1:01, ...1:59.
+	- 0 0 * * * - every day at midnight
+
+	- Run cron every half a minute
+	  * * * * * /usr/bin/php /home/kaunas3/public_html/current/app/console pitaks:getTableAPI 1
+	  * * * * * (sleep 30; /usr/bin/php /home/kaunas3/public_html/current/app/console pitaks:getTableAPI 1)
+
+	 * * * * *  command to execute
+	 â”¬ â”¬ â”¬ â”¬ â”¬
+	 â”‚ â”‚ â”‚ â”‚ â”‚
+	 â”‚ â”‚ â”‚ â”‚ â”‚
+	 â”‚ â”‚ â”‚ â”‚ â””â”€â”€â”€â”€â”€ day of week (0 - 7) (0 to 6 are Sunday to Saturday, or use names; 7 is Sunday, the same as 0)
+	 â”‚ â”‚ â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ month (1 - 12)
+	 â”‚ â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ day of month (1 - 31)
+	 â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ hour (0 - 23)
+	 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ min (0 - 59)
+
+	- grep CRON /var/log/syslog 	===> cron logs
+	- grep run-parts /etc/crontab	===> check when the daily and other crons are running
+
+		01 * * * * root run-parts /etc/cron.hourly
+		02 4 * * * root run-parts /etc/cron.daily
+		22 4 * * 0 root run-parts /etc/cron.weekly
+		42 4 1 * * root run-parts /etc/cron.monthly
+}
+
+
 logrotate {
 	- logrotate --force | -f 			===> will rotate file(s) even if they do not meet the specified criteria such as minsize, age, etc.
 	- cat /var/lib/logrotate/logrotate.status	===> check logrotate status
@@ -48,7 +124,7 @@ Vim {
 	- :set nu 						===> turns on line numbering in vi;
 	- :set nu! 						===> turns off the line numbering in vi;
 	- 42G 							===> go to line 42;
-	- :%s/foo/bar/g 					===> Vim substitute feature, this one says: "find each occurrence of 'foo' (in all lines), and replace it with 'bar'.""
+	- :%s/foo/bar/g 					===> substitute feature: "find each occurrence of 'foo' (in all lines), and replace it with 'bar'.""
 	- :%s/db\(\d\).example.com/db\1.zozole.com/g 		===> a more involved vi/vim substitute feature w/ regex pattern and capture groups 
 	- :set paste 						===> paste mode, gives a nice indentation;
 	- ctrl + v; arrow down ; shift + I ; # ; esc		===> commenting all the lines;
@@ -2600,79 +2676,6 @@ LINUX {
 		ANDROID SHELL{
 			- adb shell ls -aR | grep jpg -- find all jpg's in the device
 			-
-		}
-
-		CRON {
-
-			PROBLEMS {
-
-				#1{
-					- given a cronjob:
-						* * * * * (time ruby /home/mindaugas/Ruby_Scripts/Crontab_Test/test1.tb $(date -d 'yesterday' '+\%Y-\%m-\%d')) >> /home/mindaugas/Ruby_Scripts/Crontab_Test/my.log 2>&1
-
-					- it produces the given output:
-						time: cannot run ruby: No such file or directory
-						Command exited with non-zero status 127
-						0.00user 0.00system 0:00.00elapsed ?%CPU (0avgtext+0avgdata 336maxresident)k
-						0inputs+8outputs (0major+72minor)pagefaults 0swaps
-
-					- Q: why can't it run ruby?	
-						- This has the answer: http://unix.stackexchange.com/questions/76862/running-time-command-with-cron
-
-					- Q: how to derive the answer by yourself
-						- a command that would show whether you are calling a shell built in or an executable ===> `type` 
-						- http://superuser.com/questions/351889/what-is-the-unix-command-to-find-out-what-executable-file-corresponds-to-a-given
-						- you can compare the output when `type` is run from the shell or from the cron
-						
-							> mindaugas@Mindaugas-Lenovo-Y50-70:~/Ruby_Scripts/Crontab_Test$ type time
-							> time is a shell keyword
-							
-							> mindaugas@Mindaugas-Lenovo-Y50-70:~/Ruby_Scripts/Crontab_Test$ cat my.log 
-							> time is /usr/bin/time
-				}
-
-				#2 {
-					* * * * * /bin/bash -c "(time ruby /home/mindaugas/Ruby_Scripts/Crontab_Test/test1.tb $(date -d 'yesterday' '+\%Y-\%m-\%d'))" >> /home/mindaugas/Ruby_Scripts/Crontab_Test/my.log 2>&1
-					* * * * * /bin/bash -c "(sleep 10; time (ruby -e "puts \"a\n\"";))" >> /home/mindaugas/Ruby_Scripts/Crontab_Test/my.log 2>&1 
-
-					"an";)): -c: line 1: syntax error: unexpected end of file
-					/bin/bash: ruby: command not found
-
-					* * * * * /bin/bash -c "(time ruby /home/mindaugas/Ruby_Scripts/Crontab_Test/test1.tb $(date -d 'yesterday' '+\%Y-\%m-\%d')) >> /home/mindaugas/Ruby_Scripts/Crontab_Test/my.log 2>&1"
-					* * * * * /bin/bash -c "(sleep 10; (time ruby -e \"puts \\\"a\\\n\\\"\") >> /home/mindaugas/Ruby_Scripts/Crontab_Test/my.log 2>&1"
-
-
-					0 1 * * * /bin/bash -c "(echo ""; echo $(date -d 'yesterday' '+\%Y-\%m-\%d'); time /home/zulu/.rvm/rubies/ruby-2.2.2/bin/ruby /home/zulu/Mindaugas_scripts/WAF_report_automation_II_.rb $(date -d 'yesterday' '+\%Y-\%m-\%d')) >> /home/zulu/Mindaugas_scripts/the.log 2>&1"
-
-				}
-
-				#3 {
-					sudo -u "mindaugas" /bin/bash -c "ruby --help" 								===> /bin/bash: ruby: command not found
-					sudo -u "mindaugas" /bin/bash -c "/home/mindaugas/.rbenv/shims/ruby --help" ===> works OK.
-					The answer: http://askubuntu.com/questions/23009/reasons-why-crontab-does-not-work
-				}
-			}
-
-			- 0 * * * * - this means the cron will run always when the minutes are 0 (so hourly)
-			- 0 1 * * * - this means the cron will run always at 1 o'clock.
-			- * 1 * * * - this means the cron will run each minute when the hour is 1. So 1:00, 1:01, ...1:59.
-			- 0 0 * * * - every day at midnight
-
-			- Run cron every half a minute
-			  * * * * * /usr/bin/php /home/kaunas3/public_html/current/app/console pitaks:getTableAPI 1
-			  * * * * * (sleep 30; /usr/bin/php /home/kaunas3/public_html/current/app/console pitaks:getTableAPI 1)
-
-			 * * * * *  command to execute
-			 â”¬ â”¬ â”¬ â”¬ â”¬
-			 â”‚ â”‚ â”‚ â”‚ â”‚
-			 â”‚ â”‚ â”‚ â”‚ â”‚
-			 â”‚ â”‚ â”‚ â”‚ â””â”€â”€â”€â”€â”€ day of week (0 - 7) (0 to 6 are Sunday to Saturday, or use names; 7 is Sunday, the same as 0)
-			 â”‚ â”‚ â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ month (1 - 12)
-			 â”‚ â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ day of month (1 - 31)
-			 â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ hour (0 - 23)
-			 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ min (0 - 59)
-
-			- grep CRON /var/log/syslog 											===> cron logs
 		}
 
 		- ctrl+r + ctrl+r 															===> reverse-search w/ cycling though bash history (I wonder if that works for other shells as well); 
