@@ -110,6 +110,18 @@ logrotate {
 		"
 		removing old log /home/sos03/logs/www.sos03.lt_access.log.1
 		error: error opening /home/sos03/logs/www.sos03.lt_access.log.1: No such file or directory
+		
+	- http logrotate configuration:
+		/home/sos03/logs/*.log {
+		    daily
+		    notifempty
+		    missingok
+		    sharedscripts
+		    delaycompress
+		    postrotate
+			/bin/systemctl reload httpd.service > /dev/null 2>/dev/null || true
+		    endscript
+		}
 }
 
 Vim {
