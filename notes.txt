@@ -2665,7 +2665,7 @@ LINUX {
 		}
 	}
 
-	LINUX CMD {
+	LINUX CMD / TERMINAL / CLI {
 
 		TROUBLESHOOTIG {
 			apt-get install does not work {
@@ -2690,28 +2690,28 @@ LINUX {
 			-
 		}
 
-		- ctrl+r + ctrl+r 															===> reverse-search w/ cycling though bash history (I wonder if that works for other shells as well); 
-		- command #usefull 															===> bashtags, to find the commands fast with reverse-search;
-		- tr -cd "[:print:]" < file1 												===> remove all non printable characters from a file;
-		- /bin/bash -c "ruby -e "puts \"a\n\n\""" >> some.log 2>&1 							===> produces and empty file, because the qoutes are incorrectly added;
+		- ctrl+r + ctrl+r 					===> reverse-search w/ cycling though bash history (I wonder if that works for other shells as well); 
+		- command #usefull 					===> bashtags, to find the commands fast with reverse-search;
+		- tr -cd "[:print:]" < file1 				===> remove all non printable characters from a file;
+		- /bin/bash -c "ruby -e "puts \"a\n\n\""" >> some.log 2>&1 				===> produces and empty file, because the qoutes are incorrectly added;
 		- /bin/bash -c "sleep 2; (time ruby -e \"puts \\\"a\\\n\\\"\") >> /my.log 2>&1" 	===> correctly escaped time + ruby command with internal statments;
-		- { time ; } 2> my.log 														===> redirect `time` commands output to a file (you have to obtain it from standard error);
-		- (time ruby -e "puts \"a\n\"") >> /home/my.log 2>&1 						===> redirect `time` commands output - you have to add parentheses;
+		- { time ; } 2> my.log 									===> redirect `time` commands output to a file (you have to obtain it from standard error);
+		- (time ruby -e "puts \"a\n\"") >> /home/my.log 2>&1 					===> redirect `time` commands output - you have to add parentheses;
 		- (time ruby /home/mindaugas/Ruby_Scripts/Crontab_Test/test1.tb $(date -d 'yesterday' '+\%Y-\%m-\%d')) >> \
-							/home/mindaugas/Ruby_Scripts/Crontab_Test/my.log 2>&1	===> redirect time + ruby command output to a file ... can place it to cron directly
+				/home/mindaugas/Ruby_Scripts/Crontab_Test/my.log 2>&1	===> redirect time + ruby command output to a file ... can place it to cron directly
 
 		- sudo sh -c "echo 'aaaa' > /usr/local/apache2/conf/httpd.conf" 			===> appdend something to a file belonging to root user (sudo echo will not work because the shell is 																					doing output redirection, not echo or sudo);
-		- stat, fstat, lstat <path> 												===> get file status;
-		- cat /proc/sys/fs/file-max 												===> see global max open files:
-		- cat /proc/sys/fs/file-nr 													===> see global current open files: 
-		- sysctl -w fs.file-max=1000000 or edit sysctl.conf 						===> change global max open files: 
-		- ulimit -Hn   (hard limit) 												===> limits for the current user
+		- stat, fstat, lstat <path> 					===> get file status;
+		- cat /proc/sys/fs/file-max 					===> see global max open files:
+		- cat /proc/sys/fs/file-nr 					===> see global current open files: 
+		- sysctl -w fs.file-max=1000000 or edit sysctl.conf 		===> change global max open files: 
+		- ulimit -Hn   (hard limit) 					===> limits for the current user
 		- ulimit -Sn   (soft limit)
-		- apache2 soft nofile 4096 													===> edit /etc/security/limit.conf to set limits for a webserver for example
+		- apache2 soft nofile 4096 					===> edit /etc/security/limit.conf to set limits for a webserver for example
 		- apache2 hard nofile 10000
-		- for pid in $(pgrep apache2); do ls /proc/$pid/fd | wc -l; done 			===> you can have a script go through /proc and gives you some statistics:
-		- dd if=/dev/urandom of=foo bs=14MB count=1 								===> create a file of precise size and with random data;
-		- truncate -s 10G foo 														===> create a file of precise size (empty, can be useless when trying to determine download speeds) 
+		- for pid in $(pgrep apache2); do ls /proc/$pid/fd | wc -l; done 	===> you can have a script go through /proc and gives you some statistics:
+		- dd if=/dev/urandom of=foo bs=14MB count=1 				===> create a file of precise size and with random data;
+		- truncate -s 10G foo 							===> create a file of precise size (empty, can be useless when trying to determine download speeds) 
 		- fallocate -l 5G bar 														===> create a file of precise size (empty, can be useless when trying to determine download speeds) 
 		- watch -n 0.5 'date ; date' 												===> continuous monitoring in place;
 		- watch -n 1 'echo $(date)';
@@ -2808,24 +2808,24 @@ LINUX {
 		- grep -aPo '\d{1,}' file.pcap 												===> grep from a binary file;
 
 		IPTABLES {
-			- iptables -P INPUT DROP 												===> Set the default policy of the INPUT chain to DROP
+			- iptables -P INPUT DROP 									===> Set the default policy of the INPUT chain to DROP
 			- iptables -A INPUT -s 172.31.64.149 -m statistic --mode random --probability 0.1 -j DROP 	===>
 			- iptables -nvL
-			- iptables -nvL -t nat 		===> -t table
+			- iptables -nvL -t nat 										===> -t table
 			- for table in filter nat mangle raw security; do iptables -vL -t $table; done
 		}
 
 		removing hard to remove files by their inode number {
-			- ls -i 																===> get the inode numbers;
-			- find -inum <#> -exec rm -i '{}' \; 									===> rm by inode number;
-			- find -inum <#> -delete 												===> delete by inode number;
+			- ls -i 											===> get the inode numbers;
+			- find -inum <#> -exec rm -i '{}' \; 								===> rm by inode number;
+			- find -inum <#> -delete 									===> delete by inode number;
 		}
 
 		- sed {
 			- sed -n -e 's/\[msg.\+\?\]//p' rc.zulu.com 							===> replacement with sed, note msg.\+\?
-			- SED IS ALWAYS GREEDY 													===> you can't perform a non-greedy match with sed
-			- sed -e '/start_pattern/,/end_pattern/!d' mindaugas2.com 				===> dot matches all does not work in grep, so use this to output multiple lines that beggin and end with some pattern
-			- sed -n 16224,16482p filename 											===> display only certain lines of a file
+			- SED IS ALWAYS GREEDY 										===> you can't perform a non-greedy match with sed
+			- sed -e '/start_pattern/,/end_pattern/!d' mindaugas2.com 					===> dot matches all does not work in grep, so use this to output multiple lines that beggin and end with some pattern
+			- sed -n 16224,16482p filename 									===> display only certain lines of a file
 		}
 
 		- perl {
@@ -2847,12 +2847,12 @@ LINUX {
 				- echo "Create" | awk '/^create/;'
 				- echo "Create" | awk 'IGNORECASE = 1;/^create/;'
 			}
-			- awk '{print $0}' 								===> print the entire line;
-			- awk '{print $1}'  							===> print the first collumn of tal lines (column is defined as 'space separated') ... $2, $3 and so on are for 2nd, 3rd collumns and so on;
+			- awk '{print $0}' 							===> print the entire line;
+			- awk '{print $1}'  							===> print the 1st col (col = 'space separated') $2, $3 are for 2nd, 3rd col;
 			- awk '{print NR}'  							===> print NR = number of variables;
-			- echo "a" | awk '{if ($1 == "a") print "c"; else print 'dd'}' 				===> conditional printing;
-			- echo "a" | awk '{if ($1 == "a") printf("%20s\n","c"); else print "d"}'	===> conditional printing with text pushed from the beggining of the line w/ printf();
-			- gawk '{ t = $1; $1 = $2; $2 = t; printf "%-40s %s\n",$1,$2 }' 			===> interchange collumns in the output and print them with prepended spaces;
+			- echo "a" | awk '{if ($1 == "a") print "c"; else print 'dd'}' 		===> conditional printing;
+			- echo "a" | awk '{if ($1 == "a") printf("%20s\n","c"); else print "d"}'===> conditional printing w/ text pushed from beggining of line w/ printf();
+			- gawk '{ t = $1; $1 = $2; $2 = t; printf "%-40s %s\n",$1,$2 }' 	===> interchange collumns in the output and print them with prepended spaces;
 		}
 
 		- sudo netstat -tulpn					===> check what application listens to what port
@@ -2880,18 +2880,22 @@ LINUX {
 			  export PATH
 			- . ~/.profile
 		}
-		- cd - 														===> return to the previous directory;
-		- watch -n 0.5 <your command> 								===> run the comman every 0.5 seconds
+		- ctrl + w 							===> delete 1 word before the cursor (space as a separator)
+		- alt + backspace 						===> delete 1 word before the cursor (any non word character as a separator)
+		- alt + d 							===> delete 1 word in front of the cursor (any non word character as a separator)
+		- ctrl + k 							===> delete 1 word in front of the cursor (space as a separator)
+		- cd - 								===> return to the previous directory;
+		- watch -n 0.5 <your command> 					===> run the comman every 0.5 seconds
 		- while true; do ls -alht | head -10; sleep 0.5; done 		===> this loop will not clear your screen;
-		- ls -l | grep -c ^d 										===> count of directories in the current directory;
-		- head\tail -10 											===> top\bottom 10 results of the command (if you pipe the ls -l output to | head -10 for example);
-		- top [-P|-M] 												===> machine resource usage by cpu and by memory;
-		- smem -pw 													===> system memory stats (free, kernel, ocupied);
-		- date '+%A %W %Y %X' 										===> check time in linux in the format: Tuesday 29 2014 12:20:47 PM;
-		- date 														===> displays date in default format;
-		- mv filename1 filename2 									===> rename a file;
-		- file <some_file>											===> see information about a file;
-		- ctrl + D or 'exit' 										===> get back to normal user privilages;
+		- ls -l | grep -c ^d 						===> count of directories in the current directory;
+		- head\tail -10 						===> top\bottom 10 results of the command (if you pipe the ls -l output to | head -10 for example);
+		- top [-P|-M] 							===> machine resource usage by cpu and by memory;
+		- smem -pw 							===> system memory stats (free, kernel, ocupied);
+		- date '+%A %W %Y %X' 						===> check time in linux in the format: Tuesday 29 2014 12:20:47 PM;
+		- date 								===> displays date in default format;
+		- mv filename1 filename2 					===> rename a file;
+		- file <some_file>						===> see information about a file;
+		- ctrl + D or 'exit' 						===> get back to normal user privilages;
 		- export PATH=$PATH:/someNewPAth/:some/other:and/another 	===> adding a folder to the path so that the command existing in it would be called (path variable separators are ':') - SCOPE: ONLY CURENT SESSION;
 		- cp -r 													===> moving the all the files from one dir to another;
 		- diff -r <dir1> <dir2> 									===> compare contents of two directories, shows which files are only in dir1 and those only in dir2;
