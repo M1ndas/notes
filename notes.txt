@@ -270,7 +270,8 @@ Docker {
 
 Python {
 	syntax tricks {
-		- 
+		- with open("testfile.txt", "r") as f: print([attr for attr in dir(f)]) 				===> all attributes
+		- with open("testfile.txt", "r") as f: print([attr for attr in dir(f) if not attr.startswith('_')])  	===> non dunder attributes
 	}
 
 	one liners {
