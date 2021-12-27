@@ -7903,6 +7903,10 @@ sys_template_v9{
  IT CERTIFICATION {	
 
  	PATHS:	
+		Cloud:			
+			Azure:
+			GCP:
+			AWS:
 		Networking: 		CCNA 		CCNP 		CCIE		CCAr
 					JNCA (and other Juniper)
  		Windows:		MCSA Server					MCSE Server	
