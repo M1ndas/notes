@@ -7906,6 +7906,7 @@ sys_template_v9{
 			Azure:
 			GCP:
 			AWS:
+		Docker: DCA: https://training.mirantis.com/dca-certification-exam/
 		Networking:
 			Cisco:		CCNA 		CCNP 		CCIE		CCAr
 			Jupiter Nets: 	JNCA (and on)
@@ -7948,8 +7949,6 @@ sys_template_v9{
 	}	
 }	
 
-
-
  Pass arguments to curl {	
 	- echo 'GET aaa' | cut -d ' ' -f 1,2 | xargs curl -X 		
 }	
@@ -7962,8 +7961,7 @@ sys_template_v9{
 		-w 64 = TCP window size.	
 		-p 21 = Destination port (21 being FTP port). You can use any port here.	
 		--flood = Sending packets as fast as possible, without taking care to show incoming replies. Flood mode.	
-		--rand-source = Using Random Source IP Addresses. You can also use -a or â€“spoof to hide hostnames. See MAN page below.	
-		www.hping3testsite.com = Destination IP address or target machines IP address. You can also use a website name here. In my case resolves to 127.0.0.1 (as entered in /etc/hosts file)	
+		--rand-source = Using Random Source IP Addresses. You can also use -a or â€“spoof to hide hostnames. See MAN page below.		
 }	
 
  BGP {	
