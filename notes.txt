@@ -236,7 +236,8 @@ Docker {
 		- docker images
 		- docker stop $(docker ps -aq)
 		- docker stop ID ID2
-		- docker exec -it 58 bash
+		- docker exec -it <contid> bash 	===> execute bash on a runnning image
+		- docker run -it <imgid> bash		===> run 
 		- docker run -d test_app
 		- docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 324
 		- docker inspect mysql | grep Address
