@@ -246,6 +246,9 @@ Docker {
 		- docker top
 		- docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7
 		- docker run -d --name mysql ID
+		- ctrl+z 							===> detach the shell and continue running the container
+		- docker attach <contid>					===> attach to the detached process
+		
 
 	Rebuild the container:
 		- docker stop $(docker ps -aq)
