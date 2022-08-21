@@ -229,6 +229,7 @@ Docker {
 		- command: bash -c 'php artisan migrate:fresh --seed && php artisan serve --host 0.0.0.0'
 
 	Docker:
+		- docker run -p 80:80 name_of_image				===> when mapping ports, the -p has to be before the name of the image, not after!
 		- docker-compose build
 		- docker-compose up -d
 		- docker ps
