@@ -185,12 +185,12 @@ Docker {
 		- docker network ls 			===> list all the available networks
 		- docker network inspect <net-name> 	===> mode details on the network
 		- docker info 				===> see the docker network drivers available
-		- docker network create -d bridge --subnet 10.0.0.1/24 <net-name> 	===> create a named bridge network (bridge allow communication on a single host)
+		- docker network create -d bridge --subnet 10.0.0.1/24 <net-name> 	===> create named bridge network (for single host communication)
 		- docker0 				===> the default bridge with the name bridge
 		
 	Connecting from one container to another:
 		- First approach - use the hosts ip address to connect to it:
-			- 1. Check the ip of the container you want to connect to: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' b4 ==> 172.17.0.2
+			- 1. Check ip of container you want to connect: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' b4 ==> 172.17.0.2
 			- 2. Connect from the other container used the obtained IP address (using telnet if the container has it).
 		- Second approach use the shared network:
 			- $ docker network create pg
@@ -230,23 +230,25 @@ Docker {
 
 	Docker:
 		- docker run -p 80:80 name_of_image				===> when mapping ports, the -p has to be before the name of the image, not after!
-		- docker-compose build
-		- docker-compose up -d
-		- docker ps
-		- docker-compose ps
-		- docker images
-		- docker stop $(docker ps -aq)
-		- docker stop ID ID2
+		- docker run -v //c/Users/X/.aws/credentials:/root/.aws/credentials:ro -p 80:80 test-api:dev 	===> for gitbash add additional leading slash //c
+		- docker-compose build						===> 
+		- docker-compose up -d						===> 
+		- docker ps							===>
+		- docker-compose ps						===>
+		- docker images							===>
+		- docker stop $(docker ps -aq)					===>
+		- docker stop ID ID2						===>
 		- docker exec -it <contid> bash 				===> execute bash on a runnning image
 		- docker run -it <imgid> bash					===> run 
 		- docker run -it openjdk:11 bash -c "cat /etc/os-release" 	===> run a bash command to figure out the version of OS currently running
-		- docker run -d test_app
+		- docker run -d test_app					===>
 		- docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 324
-		- docker inspect mysql | grep Address
-		- docker rm ID ID2
-		- docker top
+		- docker inspect mysql | grep Address				===>
+		- docker rm ID1 ID2						===>
+		- docker stop 20 && docker rm 20				===> stop and delete 
+		- docker top							===>
 		- docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7
-		- docker run -d --name mysql ID
+		- docker run -d --name mysql ID					===>
 		- ctrl+z 							===> detach the shell and continue running the container
 		- docker attach <contid>					===> attach to the detached process
 		
