@@ -1,4 +1,9 @@
-cron {
+Pyenv {
+	- shell > local > global > system 	===> hierarchy pyenv uses to determine which version of python to use
+	- pyenv shell --unset 			===> unset shell version of python being use (shell version trumps all other versions)
+}
+
+Cron {
 	problems {
 		#1 {
 			- given a cronjob:
@@ -74,7 +79,7 @@ cron {
 }
 
 
-logrotate {
+Logrotate {
 	- logrotate --force | -f 			===> will rotate file(s) even if they do not meet the specified criteria such as minsize, age, etc.
 	- cat /var/lib/logrotate/logrotate.status	===> check logrotate status
 		logrotate state -- version 2
@@ -8433,7 +8438,7 @@ sys_template_v9{
 }	
 
  tmux {	
-	- $ tmux 					===> launch a new tmux session, after which you will be able to run a process inside a newly opened shell	
+	- $ tmux 					===> launch a new tmux session, after which you will be able to run a process inside a newly opened shell
 	- ctrl+b -> d 					===> detach from tmux session	
 	- tmux attach 					===> attach to the latest tmux session	
 	- tmux attach-session -t {number|name} 		===> attach to a specific session when multiple are running	
@@ -8450,3 +8455,4 @@ sys_template_v9{
 	- + 						===> select based on a pattern (non-regex, * for wildcard);	
 	- \ 						===> unselect based on a pattern (non-regex, * for wildcard);	
 	- * 						===> reverse selection (files). If nothing was selected, all files will get selected. You can also use 
+}
