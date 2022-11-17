@@ -235,7 +235,10 @@ Docker {
 
 	Docker:
 		- docker run -p 80:80 name_of_image				===> when mapping ports, the -p has to be before the name of the image, not after!
-		- docker run -v //c/Users/X/.aws/credentials:/root/.aws/credentials:ro -p 80:80 test-api:dev 	===> for gitbash add additional leading slash //c
+		- docker run -v //c/.aws/cred:/root/.aws/cred:ro api:dev 	===> for [GITBASH] add additional leading slash //c
+		- docker run -v ${pwd}:root/app					===> [POWERSHELL] relative path volume mounting
+			- v %cd%:/root/app					===> [CMD]
+			- v $(pwd):/root/app					===> [SHELL]
 		- docker-compose build						===> 
 		- docker-compose up -d						===> 
 		- docker ps							===>
@@ -261,6 +264,7 @@ Docker {
 	Rebuild the container:
 		- docker stop $(docker ps -aq)
 		- docker rm $(docker ps -aq)
+		- docker stop $(docker ps -aq) && docker rm $(docker ps -aq)	===> does not work in CMD, need a loop
 		- docker ps -a
 		- docker rm ID
 		- docker-compose build
