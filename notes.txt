@@ -8287,12 +8287,16 @@ sys_template_v9{
 	 wget -r -p http://www.mindaugas.ml/ 2>&1 | grep -- "^--" 																	===> get all URLs reachable from the initial starting point http://www.mindaugas.ml. Choose another 																																	starting point if you know more URLs exist.	
 }	
 
- OPENSSL {	
-	openssl s_client -servername devtplsg.torontopubliclibrary.ca  -connect 205.189.188.80:443 									===> SNI example	
-	openssl s_client -servername securitycompass.com -connect 52.21.110.142:443	
-	openssl s_client -servername securitycompass.com -connect 205.147.88.100:443	
-	echo | openssl s_client -showcerts -servername blog.mindaugas.cf -connect 185.69.52.233:443 2>/dev/null | openssl x509 -inform pem -noout -text | grep -P DNS 		===> DNS:*.mindaugas.cf, DNS:mindaugas.cf	
-
+ OPENSSL {
+ 	- openssl s_client -servername devtplsg.torontopubliclibrary.ca  -connect 205.189.188.80:443 		===> SNI example
+	- openssl s_client -servername securitycompass.com -connect 52.21.110.142:443
+	- openssl s_client -servername securitycompass.com -connect 205.147.88.100:443
+	- echo \
+	| openssl s_client -showcerts -servername mindaugas.cf -connect 185.69.52.233:443 2>/dev/null \
+	| openssl x509 -inform pem -noout -text \
+	| grep -P DNS 												===> DNS:*.mindaugas.cf, DNS:mindaugas.cf	
+	- openssl s_client -connect mail.viezo.co:993 -crlf -quiet 
+		- LOGIN mbtest@viez.co password ;; . LIST "" "*" ;; CTRL + ] ;; QUIT 				===> test imaps connectivity for an email server, see: https://inthetechpit.com/2019/07/23/telnet-to-test-connection-to-pop3-imap/
  }	
 
 
