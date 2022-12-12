@@ -185,6 +185,17 @@ Angular {
 }
 
 Docker {
+
+	Parallel lib installation for python (this was abandoned as the results of simple installation were much better) {
+		# # Install the function's dependencies using file requirements.txt
+		# RUN python -m pip install -r ./requirements_docker.txt --target ${LAMBDA_TASK_ROOT}
+		
+		# remove BOM and NUL chars from docker file to be able to pass it to xargs, see: https://stackoverflow.com/a/30672884/1964707
+		RUN cat ./requirements_docker.txt | sed '1s/^\xFF\xFE//g' | sed 's/\x00//g' | xargs -t -n1 -P 10 pip download -q -d ./dist
+		RUN pip install --no-index --find-links=./dist -r ./requirements_docker.txt
+		RUN rm -rf ./dist
+	}
+	
 	Networking:
 		- docker network 			===> list all the choises
 		- docker network ls 			===> list all the available networks
@@ -226,8 +237,9 @@ Docker {
 				      
 		      	- Just run: docker-compose up -d after that 
 		
-	Dockerfile:
+	Dockerfile / .dockerignore:
 		- RUN apt-get update -y && apt-get install -y openssl zip unzip git vim iputils-ping procps
+		- **/*.pyc							===> ignore generated files recursivelly
 
 	Docker-compose:
 		- command: bash -c 'sleep 10'
