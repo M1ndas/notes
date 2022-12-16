@@ -3,6 +3,12 @@ Pyenv {
 	- pyenv shell --unset 			===> unset shell version of python being use (shell version trumps all other versions)
 }
 
+Pipdeptree {
+	- pipdeptree				===> get all transitive dependencies for all top level libraries
+	- pipdeptree -p pytest			===> "pytest requires", get all transitive dependencies for only pytest
+	- pipdeptree -p tomli -r		===> "tomli is required by", get all top level dependencies that require tomli
+}
+
 Cron {
 	problems {
 		#1 {
