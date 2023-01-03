@@ -593,7 +593,7 @@ Lets encrypt {
 
 		printf ":fast_forward::fast_forward:_*Certbot renewal was attempted!*_\n*Stdout*:%s\n*Stderr*: %s\n*Server time*: %s\n:spaghetti: :horse:" \
 			"${cb_out}" "${cb_err}" "$(date "+%F %H:%M:%S")" \
-			| curl https://hooks.slack.com/services/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 \
+			| curl https://hooks.slack.com/services/uuu/xxu/xxx \
 				-X POST -H "Content-Type: application/json" -d "{\"text\": \"$(</dev/stdin)\"}"
 	}
 }
