@@ -672,7 +672,15 @@ PowerShell {
 
 
 Wordpress maintenance {
-	- define('FS_METHOD','direct'); 	===> If WP asks for FTP credentials durring version upgrade it can't write to some directory. This is solvable by adding this directive.
+	- define('FS_METHOD','direct'); ===> If WP asks for FTP credentials durring version upgrade it can't write to some directory. Adding this solves it.
+	
+	Migrate from one server to another {
+		- copy the directory where all WP files are and scp them to the new server
+		- obtain a database dump
+		- restore the database
+		- profit
+	}
+	
 	Deactivate plugins {
 		- mysql -u <> -p
 		- show databases;
@@ -1109,7 +1117,7 @@ SQL SERVER {
 				- index analogy with book index (for nonclustered index - index that is stored outside the table) and telephone book (a clustered index - a part of the table, like ordering phone numbers by last names which are in alphabetical order) and full table scan;
 				- compare (where salary > 500 AND salary < 5500) clause - when index is added an not --> query optimizer does not use the index;
 				- indexes are ordered and they contain values in the table and address for the row that contains that value as one of its columns
-                 ___________________________ 
+                 		 ___________________________ 
 				|____salary___|_row address_|
 				|_____500_____|_x0855616666_|
 				|_____600_____|_0x55994545__|
@@ -1203,13 +1211,6 @@ TCP/IP networking for developers {
 		- compare traceroute and tcptraceroute output and explain the differences (why does one need tcptraceroute if traceroute -T does tcp SYN over 80 itself?):
 			- tcptraceroute :: http://p.defau.lt/?WBb8HPEUPfPObiqHQZu4pg
 			- traceroute http://p.defau.lt/?5pxA4irmlmZJnpWTelSdmA
-	}
-
-	CMD {
-		- ipconfig /displaydns
-		- ipconfig
-		- nslookup set type=MX google.com
-		- nslookup -type=PTR 209.85.102.36
 	}
 }
 
@@ -1609,7 +1610,7 @@ PHP & MySQL essential training {
 	}
 }
 
-Axure{
+Axure {
 	- adaptive views
 	- global / local guides + guide shemes
 	- home, ctrl + home / space for hand
@@ -1690,18 +1691,17 @@ RoR {
 		- variable_name = Hash.new(0);
 		- var_name.values.each {|var_name_2| var_name_3[var_name_2] += 1};
 		- Dir["/*.txt"]; 											===> prints all the files ending in .txt in root dir;
-		- FileUtils.cp('/comics.txt','/Home/comics.txt') 			===> copy file from one location to another;
-		- [3,2,6].sort 												===> creates a copy of the array and then sorts it [2,3,6];
-		- [3,2,6].reverse 											===> reverses the sorting to the original one;
-		- [3,2,6].sort! 											===> in-place sort;
+		- FileUtils.cp('/comics.txt','/Home/comics.txt') 	===> copy file from one location to another;
+		- [3,2,6].sort 						===> creates a copy of the array and then sorts it [2,3,6];
+		- [3,2,6].reverse 					===> reverses the sorting to the original one;
+		- [3,2,6].sort! 					===> in-place sort;
 		- variable_name_2['string_to_search']='string_to_replace';
 		- variable_name_2.lines.to_a.reverse;
 		- variable_name_2.downcase.include? 'some_string;
-		- variable_name_2['some_text']=:amazing 					===> the :amazing is a symbol,not a string;
+		- variable_name_2['some_text']=:amazing 		===> the :amazing is a symbol,not a string;
 		- hash_variable.keys // hash_variable.values;
-		- ruby -e 'p ("a".."z").to_a.shuffle[0..7].join' 			===> one liner;
-		- formatter = "%{first} %{second} %{third} %{fourth}"       ===> define a formater for a string and use it - when you want to apply the same format to multiple values. 
-            puts formatter % {first: 1, second: 2, third: 3, fourth: 4}
+		- ruby -e 'p ("a".."z").to_a.shuffle[0..7].join'	===> one liner;
+		- formatter = "%{first} %{second} %{third} %{fourth}"   ===> define a formater for a string and use it - when you want to apply the same format to multiple values. Puts formatter % {first: 1, second: 2, third: 3, fourth: 4}
         - first, second, third = ARGV                               ===> assigns 3 values passed to a script to 3 placeholders;
         - in_file = open(from_file); indata = in_file.read; puts #{indata.length} ===> print the size of the file in bytes;
         - File.exist?(to_file)
@@ -1997,20 +1997,21 @@ Git {
 }
 
 WINDOWS CMD {
-    - dir <Folder Name> /AD /s 				===> find a dir in all subdirs of a drive
-    											/A - Displays files with specified attributes. 
-    											/D - Attribute be Directories 
-    											/s - Displays files in specified directory and all subdirectories;
-    - curl -s -D - http://www.delfi.lt -o NUL:    						===> redirect output to NUL (like /dev/null);
-    - dir /s /b myfile.txt 												===> find a file in windows file system (very fast); you have to be at the root of the dir you search in;
-    - for /l %x in (1, 1, 10) do echo %x								===> for loop;
-    - for /l %x in (1, 1, 100) do (curl https://dojo-rc.zulu.com -L) ===> simple for loop onliner in windoes;
-    - for /l %x in (1, 1, 100) do (
-    	echo %x
-    	copy %x.txt z:\whatever\etc
-	)
-	- routes print 														===> check the routes table;
-	- 
+    	- dir <Folder Name> /AD /s 						===> find a dir in all subdirs of a drive
+											/A - Displays files with specified attributes. 
+											/D - Attribute be Directories 
+											/s - Displays files in specified directory and all subdirectories;
+    	- curl -s -D - http://www.delfi.lt -o NUL:  				===> redirect output to NUL (like /dev/null);
+    	- dir /s /b myfile.txt 							===> find file (very fast); you have to be at root directory;
+    	- for /l %x in (1, 1, 10) do echo %x					===> for loop;
+    	- for /l %x in (1, 1, 100) do (curl https://dojo-rc.zulu.com -L) 	===> simple for loop onliner in windoes;
+    	- for /l %x in (1, 1, 100) do (pytest viezo_ts\t1.py -s & timeout /t 5)	===> loop, perform, sleep
+	- routes print 								===> check the routes table;
+	- ipconfig /displaydns
+	- ipconfig /flushdns
+	- ipconfig
+	- nslookup set type=MX google.com
+	- nslookup -type=PTR 209.85.102.36
 }
 
 
@@ -7133,28 +7134,27 @@ sudo tshark -VR 'ssl.handshake.type == 1' 							===> works fine even when deseg
 	HTTP/1.1 200 OK
 	HTTP/1.1 200 OK
  
-	ansible all -l 52.29.53.241,52.29.15.88 --list-hosts 												===> print's back the hosts you listed if any of them matched;
-																											\ zulu@ansible:/etc/ansible$ ansible all -l 54.67.97.255 --list-hosts
-																											\ No hosts matched
+	ansible all -l 52.29.53.241,52.29.15.88 --list-hosts 	===> print's back the hosts you listed if any of them matched;													\ zulu@ansible:/etc/ansible$ ansible all -l 54.67.97.255 --list-hosts
+								\ No hosts matched
 
 
-ansible all -m shell -a 'tail -f /usr/local/openresty/nginx/logs/php2-mindaugasb.c9.io'
-ansible prod-node-ec2-us-east -m shell -a 'nc -v -z -w 2 38.115.1.28 443'`
-ansible all -m shell -a 'nc -v -z -w 2 38.115.1.28 443'`
+	ansible all -m shell -a 'tail -f /usr/local/openresty/nginx/logs/php2-mindaugasb.c9.io'
+	ansible prod-node-ec2-us-east -m shell -a 'nc -v -z -w 2 38.115.1.28 443'`
+	ansible all -m shell -a 'nc -v -z -w 2 38.115.1.28 443'`
 
-ansible all -m shell -a 'tail -f /usr/local/openresty/nginx/conf/websites/'
+	ansible all -m shell -a 'tail -f /usr/local/openresty/nginx/conf/websites/'
 
 	Using ansible in ZE {
-		- /etc/ansible 																									===> where ansible actually exists;
-		- ansible-playbook auth_keys_dev.yml -t auth_keys 																===> run a playbook > tag auth_keys with ansible. This tag can 																		exist in any of the roles files. And role is just a directory containing all sorts of configuration files.
-		- zulu@ansible:/etc/ansible/roles/base/files/home/zulu/.ssh/authorized_keys_dev 								===> where the authorized_keys are;
-		- ansible-playbook --limit '!hoost1' yourPlaybook.yml 															===> exclude one host;
-		- ansible-playbook --limit '!hoost1:!host2' yourPlaybook.yml 													===> exclude multiple hosts;
-		- ansible-playbook -l 52.2.14.223,52.20.153.254 openresty_node_rc.yml -t nginx_conf 							===> deploy nginx config to the specified nodes;
+		- /etc/ansible 										===> where ansible is installed;
+		- ansible-playbook auth_keys_dev.yml -t auth_keys 					===> run a playbook > tag auth_keys with ansible. This tag can exist in any of the roles files. And role is just a directory containing all sorts of configuration files.
+		- zulu@ansible:/etc/ansible/roles/base/files/home/zulu/.ssh/authorized_keys_dev 	===> where the authorized_keys are;
+		- ansible-playbook --limit '!hoost1' yourPlaybook.yml					===> exclude one host;
+		- ansible-playbook --limit '!hoost1:!host2' yourPlaybook.yml 				===> exclude multiple hosts;
+		- ansible-playbook -l 52.2.14.223,52.20.153.254 openresty_node_rc.yml -t nginx_conf 	===> deploy nginx config to the specified nodes;
 		- ansible-playbook playbooks/openresty_node_rc.yml -l 52.2.14.223 -t heka,nginx_conf,lua_json_logs,logstash
-		- ansible prod-nginx -m shell -a "grep keepalive /usr/local/openresty/nginx/conf/nginx.conf" 					===> grep keepalive from all production nodes;
-		- ansible-playbook playbooks/build_prod_node.yml -e "region=us-west-1 hostname=test-host1 count=1 redis_ip=172.31.13.117" ===> build a node in AWS with this command;
-	}		
+		- ansible prod-nginx -m shell -a "grep keepalive /usr/local/openresty/nginx/conf/nginx.conf" ===> grep keepalive from all production nodes;
+		- ansible-playbook playbooks/build_prod_node.yml -e "region=us-west-1 hostname=test-host1 count=1 redis_ip=172.31.13.117" ===> build a node in AWS;
+}		
 
 ////////// SSL certificates testing
 
@@ -7204,8 +7204,6 @@ ansible all -m shell -a 'tail -f /usr/local/openresty/nginx/conf/websites/'
 ////////// Tools 
 
 	- http://www.sysdig.org/install/
-
-
 
 
 /////////////// Collaborative rules example
@@ -7475,10 +7473,9 @@ C PROGRAMMING {
 
 Ruby task {
 	chef + ruby + redis + postfix
-	parasyti chef cookbook'a, kuris sudiegtu, ir susetupintu
-	redis, postfix
+	parasyti chef cookbook'a, kuris sudiegtu, ir susetupintu redis, postfix
 	ir visus gaunamus laiskus sukrautu i redis :)
-	ir galetum search'int redis'e laikus pagal to/from
+	ir galetum search'int redis'e laiskus pagal to/from
 }
 
 Programming task for facebook system engineer {
