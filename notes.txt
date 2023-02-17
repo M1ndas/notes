@@ -1,3 +1,7 @@
+Tree {
+	- tree "C:\Users\" /F /A > file.txt	===> get the directory tree of folder in regular ASCII format +filenames +redirect to a specific file.
+}
+
 Pyenv {
 	- shell > local > global > system 	===> hierarchy pyenv uses to determine which version of python to use
 	- pyenv shell --unset 			===> unset shell version of python being use (shell version trumps all other versions)
