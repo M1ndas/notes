@@ -1845,35 +1845,37 @@ RoR {
 }
 
 Git {
-	Clone from another machine on the local network {
-		git clone ssh://mindaugas@1.1.1.11/home/mindaugas/GoProjects 	===> Only need the folder name where the .git folder exists. In this case the .git folder is /home/mindaugas/GoProjects/.git 
-	}
+
+	git clone ssh://mindaugas@1.1.1.11/home/mindaugas/GoProjects 	===> Only need folder name where .git folder exists: /home/mindaugas/GoProjects/.git 
+
 	Types of repositories{
-		- Local repository 						===> no backuping to outside machines, no shared version control with a team;
-		- Cetralized repo 						===> version history lost if machine is caught on fire;
-		- Distributed repo 						===> all files stored in all nodes, alows team work;
+		- Local repository 					===> no backuping to outside machines, no shared version control with a team;
+		- Cetralized repo					===> version history lost if machine is caught on fire;
+		- Distributed repo 					===> all files stored in all nodes, alows team work;
 	}
 
 	Stages that files go through {
 		- Modified
-		- Staged 								===> marked "to be saved"
-		- Commited								===> have been saved
-		- You have 3 spaces corresponding to the file states: compressed database for the commited files, stage area for staged files, modified in the working directory.
+		- Staged 						===> marked "to be saved"
+		- Commited						===> have been saved
+		- 3 spaces corresponding to file states: compressed database for the commited files, stage area for staged files, modified in the working directory.
 	}
 
 	SETUP{
-		- sudo apt-get install git 					===> test ===> git -h
+		- sudo apt-get install git 			===> test ===> git -h
 		- git config --global user.name "a a" 		===> test ===> git config --global user.name
 		- git config --global user.email a@b.com 	===> test ===> git config --global user.email
 		- git config --global core.editor "vim" 	===> test ===> git config --list
 		- /usr/local/specific_directory$ git init 	===> initialize git in a specific_directory
-		- git add *.java 							===> track changes only in files that end with .java
-		- .gitignore 								===> specify which files to ignore {can be with patterns {can download a definitive one :: https://github.com/github/gitignore}}
-		- git diff 									===> show the chnages that are not commited
+		- git add *.java 				===> track changes only in files that end with .java
+		- .gitignore 					===> specify files to ignore {can be patterns {definitive one : https://github.com/github/gitignore }}
+		- git ls-files . -io --exclude-standard		===> list standard ignored files (good for testing if files from a specific dirs and subdirs were excluded by specifying them in the gitignore --ignored --exclude-standard --others)
+		- git ls-files . --exclude-standard --others	===> list untracked files
+		- git diff 					===> show the chnages that are not commited
 	}
 
 	- PROBLEM :: Permission denied (publickey) {
-		- ssh -vt git@github.com 					===> see the verbose output for the ssh connection establishment;
+		- ssh -vt git@github.com 			===> see the verbose output for the ssh connection establishment;
 		- The problem arises because there are two wys to authenticate to github from your local git installation - HTTPS and SSH. If you use HTTPS then you will be asked for password and username, if you use SSH you need KEYS.
 		- Instructions: https://help.github.com/articles/generating-ssh-keys/#platform-linux
 	}
@@ -1951,29 +1953,29 @@ Git {
 	- git revert HEAD 					===> In order to reverse changes and share those reversed changes with others, we need to use git revert;
 	
 	Cherry-pick{
-		- git cherry-pick --abort 			===> abort in case one file has thiers and ours modifications (conflict in one file);
+		- git cherry-pick --abort 		===> abort in case one file has thiers and ours modifications (conflict in one file);
 		- git cherry-pick --strategy=recursive -Xours {Imported_Commit}
 		- git cherry-pick <Comm1> <Comm2> 	===> add commits to the WORKING branch - meaning you have to checkout the branch you want the commit to be added! Not the one that contains the changes already!
 	}
 	
-	- git add <file> 					===> the file is not being tracked (meaning the changes are tracked) before you add it by using the add command. 
-	- git add . 						===> adds all current directory;
-	- git branch 						===> shows local branches;
-	- git branch -a 					===> shows both local and remote branches (on the origin);
+	- git add <file> 			===> the file is not being tracked (meaning the changes are tracked) before you add it by using the add command. 
+	- git add . 				===> adds all current directory;
+	- git branch 				===> shows local branches;
+	- git branch -a 			===> shows both local and remote branches (on the origin);
 	- git push <remote> <branch> 		===> pushing the changes you have made to other repositories;
-	- git rebase -i <base> 				===> launches rebase process in an interactive, non automatic mode;
+	- git rebase -i <base> 			===> launches rebase process in an interactive, non automatic mode;
 	- cat .git/refs/heads/master 		===> check to which commint the HEAD is pointing;
 
 	- is there a way to move up the GIt tree;
 	- Detaching HEAD just means attaching it to a commit instead of a branch.
 
-	- git show 36975c886ae4d54a1f1c33040552f22bf4947ffa 	===> check what was done in the commit (outputs a diff)
-	- git log 												===> you won't have a nice commit tree visualization next to your terminal, so you'll have to use git log to see commit hashes;
-	- git checkout <some_commit> 							===> detaching the HEAD (Detaching HEAD just means attaching it to a commit instead of a branch);
-	- git branch <branch_name> <commit> 					===> creating a branch from some specific commit
-	- git status 											===> shows us the repository status > It's healthy to run git status often. Sometimes things change and you don't notice it.
-	- git branch <target_branch_name> 						===> create a branch;
-	- git checkout <target_branch_name> 					===> switch to branch;
+	- git show 36975c886ae4d54a1f1 		===> check what was done in the commit (outputs a diff)
+	- git log 				===> see commit hashes;
+	- git checkout <some_commit> 		===> detaching the HEAD (Detaching HEAD just means attaching it to a commit instead of a branch);
+	- git branch <branch_name> <commit> 	===> creating a branch from some specific commit
+	- git status 				===> shows repository status > It's healthy to run git status often. Sometimes things change and you don't notice it.
+	- git branch <target_branch_name> 	===> create a branch;
+	- git checkout <target_branch_name>	===> switch to branch;
 	- git merge <brach_you_have_not_currently_checkedout> 	===> creates a special commit that has two parents (together with all of their parents). Merging is one way of combining the work;
 	- get rebase <brach_you_are_not_currently_checkedout> 	===> another way to merge changes. Rebasing essentially takes a set of commits, "copies" them, and plops them down somewhere else;
 	- git --versions
