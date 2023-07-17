@@ -7957,20 +7957,18 @@ sys_template_v9{
 			AWS: 		CCP (pract.)	SAA (assoc.)	SAP (pro.)
 		Devops: 
 			DCA (docker): https://training.mirantis.com/dca-certification-exam/
-			CKAD (kubern): https://training.linuxfoundation.org/full-catalog/?_sft_product_type=certification
-			CKA (kubern): https://training.linuxfoundation.org/full-catalog/?_sft_product_type=certification
+			CKAD (k8): https://training.linuxfoundation.org/full-catalog/?_sft_product_type=certification
+			CKA (k8): https://training.linuxfoundation.org/full-catalog/?_sft_product_type=certification
 		Networking:
 			Cisco:		CCNA 		CCNP 		CCIE		CCAr
 			Jupiter Nets: 	JNCA ... (and on)
  		Windows:		
 			MCSA Server					MCSE Server	
 			MCSA App Builder (70-483 C#, 486 ASP.NET MVC) 	MCSD App Builder (487 Azure Web Services)
- 		Vmware:			
-			VCA		VCP		VCE		VCDX	
  		Linux: 				
 			RedHat:		RHCSA		RHCSE		RHCSS	
 			Linux Found.:	LFCS 		LCFE	
- 		Programming:	
+ 		Programming languages:	
 			Python:		PCEP 		PCAP 		PCPP I, II	
 			Java		OCA (n/a @v11)	OCP (only one)			
 			C: 		CLA		CLP		CLS (available after december 2017)	
@@ -7978,18 +7976,20 @@ sys_template_v9{
 			C#: 		MCSA 		MCSE 		MCSM
 			Android: 	AAD Kotlin
  		Security: 		CEH		GIAC GPEN 	GIAC GXPN	GIAC GSE 	CISSP	
+		Software Architecture: 	TOGAF		Archimate	Zachman
 		Testing: 		CTFL 		CTAL(tech)	
 		Big Data: 		CCP:DS		AWS (deprecated)
 		ML: 			Coursera ML 	Deeplearning.ai	
 		SQL (DBA): 		Oracle 		Microsoft Data	
 		PM: 			PMP	
 		General:		CompTIA A+ 	Storage+ 	Network+ 	Security+ 	Project+
-		Specific tech:
+		Specific technologies:
 			Kafka: 		CCDAK
+ 			Vmware:		VCA		VCP		VCE		VCDX	
 		
  	CCNA/P/E {	
 		- https://learningnetwork.cisco.com/community/certifications/ccna 				===> main cisco page for ccna / a guide;	
-		- http://www.cisco.com/web/partners/downloads/765/tools/quickreference/routerperformance.pdf  	===> to get this, google "cisco router performance numbers" 
+		- http://www.cisco.com/web/partners/downloads/765/tools/quickreference/routerperformance.pdf  	===> google: "cisco router performance numbers" 
 		- CCIE - written + 8 hours lab !!! - this is the prep plan: https://www.youtube.com/watch?v=XiCi9P9rJME	
 	}	
 
