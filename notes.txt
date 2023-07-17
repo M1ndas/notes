@@ -7963,10 +7963,10 @@ sys_template_v9{
 			Cisco:		CCNA 		CCNP 		CCIE		CCAr
 			Jupiter Nets: 	JNCA ... (and on)
  		Windows:		
-					MCSA Server					MCSE Server	
-					MCSA App Builder (70-483 C#, 486 ASP.NET MVC) 	MCSD App Builder (487 Azure Web Services)
+			MCSA Server					MCSE Server	
+			MCSA App Builder (70-483 C#, 486 ASP.NET MVC) 	MCSD App Builder (487 Azure Web Services)
  		Vmware:			
-					VCA		VCP		VCE		VCDX	
+			VCA		VCP		VCE		VCDX	
  		Linux: 				
 			RedHat:		RHCSA		RHCSE		RHCSS	
 			Linux Found.:	LFCS 		LCFE	
@@ -7984,6 +7984,8 @@ sys_template_v9{
 		SQL (DBA): 		Oracle 		Microsoft Data	
 		PM: 			PMP	
 		General:		CompTIA A+ 	Storage+ 	Network+ 	Security+ 	Project+
+		Specific tech:
+			Kafka: 		CCDAK
 		
  	CCNA/P/E {	
 		- https://learningnetwork.cisco.com/community/certifications/ccna 				===> main cisco page for ccna / a guide;	
