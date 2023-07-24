@@ -4407,7 +4407,7 @@ Agile {
 
 
 
-Peer programming {
+Pair programming {
 	Against {
 		- http://techcrunch.com/2012/03/03/pair-programming-considered-harmful/
 		- Despite managersâ€™ dreams of programmers as fungible units (property of a good or a commodity whose individual units are capable of mutual substitution. For example, since one ounce of gold is equivalent to any other ounce of gold, gold is fungible.), itâ€™s nearly universally accepted that a great developer is ten times as productive as a mediocre one, and/or that a small team of the software equivalent of the Special Forces can code rings around an army of hundreds of grunts. The flip side is that one cowboy coderâ€™s bad decisions can cripple you â€” maybe immediately, or maybe next year, when you suddenly discover that your organization has quietly racked up so much technical debt that it has become the software equivalent of Greece.
