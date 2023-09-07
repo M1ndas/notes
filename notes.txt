@@ -3511,25 +3511,25 @@ LINUX {
 			- d - for "delimiter" in this case ":"
 			- f - for "field that I want to retrieve" - first one in this case, meaning it will print the first field that is de limited by ":"
 		}
-		- su - ciuser -c <command> 									===> run command as another user;
-		- curl ip.kis.lt 											===> to find out your external ip addr from linux console;
-		- du -ch | grep total 										===> one line that displays the total size of current directory including all the subdirectories;
-		- sudo du -Sh 2>/dev/null | sort -rh | head -n 15 			===> find 15 biggest directories or files on your linux machine (the stderr redirect is for proc direcotries that come and go out of existence to not showup in the output);
-		- sudo find . -type f -exec du -Sh {} + 2>/dev/null | sort -rh | head -n 15 																	===> find 15 largest files on your linux machine;
+		- su - ciuser -c <command> 								===> run command as another user;
+		- curl ip.kis.lt 									===> to find out your external ip addr from linux console;
+		- du -ch | grep total 									===> one line that displays the total size of current directory including all the subdirectories;
+		- sudo du -Sh 2>/dev/null | sort -rh | head -n 15 					===> find 15 biggest directories or files on your linux machine (the stderr redirect is for proc direcotries that come and go out of existence to not showup in the output);
+		- du --exclude=relative/path/ --exclude other/path/ -Sh 2>/dev/null 			===> or just --exclude={relative/path/to/uploads,other/path/to/exclude}
+		- sudo find . -type f -exec du -Sh {} + 2>/dev/null | sort -rh | head -n 15		===> find 15 largest files on your linux machine;
 		- for i in `sudo find / -type d 2>/dev/null`; do COUNT=$(sudo ls -a $i 2>/dev/null | wc -l) && printf "$COUNT\t$i\n" ; done | sort -k1,1 -n 	===> print the count of files in each directory (with the . and .. );
 		- FILES=$(for i in `sudo find / -type d  2>/dev/null`; do COUNT=$(sudo ls -a $i 2>/dev/null | wc -l) && printf "$COUNT\t$i\n" ; done | sort -k1,1 -n) && TOTAL=$(echo "$FILES" | awk '{print $1}' | paste -sd+ | bc) && printf "$FILES\n\n$TOTAL\n"
-
-		- cat <textfile> | sed G 									===> prints the file inserting an empty ling after each line
-		- echo "abv" | sed -r -e 's/(v)/\1\1/g'						===> -r regex extended, -n do not default to printing each matched line only chars matched (like grep -o);
-		- esc + 0 													===> simulates the F10 in mac when it is not available;
-		- (($a++)) 													===> arithmetic evaluation and C-style evaluation. This is also used for a recursive call :: NaiveFibonacciNthTermGenerator $(($1 - 2))
-		- (($1)) || echo "2nd" 										===> passing anything to the script as the $1 argument other than 0 will cause <echo "2nd"> to never get executed;
-		- (($a)) && echo "2nd" 										===> "2nd" will be printed only if (($a)) returns 0;
-		- $? 														===> shell parameter,  not a variable;
-		- -eq / -ne / -le 											===> equals / not-equals / less-than;
-		- pkill -f <pattern> 										===> kill the precess by string pattern;
-		- curl -G -v "http://php2-mindaugasb.c9.io/WAF-Testing/" --data-urlencode "?a=<?php >" ===> -G for "GET", if not specified, then POST will be used. You must use -G, because othervise GET request with data in the BODY will be sent (good case to remember)!
-		- curl -G http://178.62.131.40:80/ -b "cookie=a" 			===> send a cookie with CURL;
+		- cat <textfile> | sed G 								===> prints the file inserting an empty ling after each line
+		- echo "abv" | sed -r -e 's/(v)/\1\1/g'							===> -r regex extended, -n do not default to printing each matched line only chars matched (like grep -o);
+		- esc + 0										===> simulates the F10 in mac when it is not available;
+		- (($a++)) 										===> arithmetic evaluation and C-style evaluation. This is also used for a recursive call :: NaiveFibonacciNthTermGenerator $(($1 - 2))
+		- (($1)) || echo "2nd" 									===> passing anything to the script as the $1 argument other than 0 will cause <echo "2nd"> to never get executed;
+		- (($a)) && echo "2nd" 									===> "2nd" will be printed only if (($a)) returns 0;
+		- $? 											===> shell parameter,  not a variable;
+		- -eq / -ne / -le 									===> equals / not-equals / less-than;
+		- pkill -f <pattern> 									===> kill the precess by string pattern;
+		- curl -G -v "http://php2-mindaugasb.c9.io/WAF-Testing/" --data-urlencode "?a=<?php >" 	===> -G for "GET", if not specified, then POST will be used. You must use -G, because othervise GET request with data in the BODY will be sent (good case to remember)!
+		- curl -G http://178.62.131.40:80/ -b "cookie=a" 					===> send a cookie with CURL;
 	    - cd "$(dirname "$(sudo find / -type f -name "unicorn.log" | head -1)")"
 	    - ls -alhtR | grep "\(rails-tutorial-mindaugasb.c9.io\|php2-mindaugasb.c9.io\)" 
 
