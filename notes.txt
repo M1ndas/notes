@@ -1,8 +1,8 @@
 MobaXterm {
-	- Install on Ubuntu using Wine: https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf
-	- Archived version: https://web.archive.org/web/20230315020707/https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf
-	- winecfg > drives > show dot files
-	- Immediatelly go to root, even when there is no /etc/sudoers policy: echo -e "your_password\n" | sudo -iS pwd && sudo su
+	- https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf 						===> install on Ubuntu using Wine 
+	- https://web.archive.org/web/20230315020707/https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf ===> archived version 
+	- winecfg > drives > show dot files											===> see hidden files when using apps through wine
+	- echo -e "your_password\n" | sudo -iS pwd && sudo su 									===> immediatelly go to root for effective server support (when there is no /etc/sudoers policy) 
 }
 
 Tree {
