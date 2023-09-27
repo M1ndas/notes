@@ -1,3 +1,10 @@
+MobaXterm {
+	- Install on Ubuntu using Wine: https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf
+	- Archived version: https://web.archive.org/web/20230315020707/https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf
+	- winecfg > drives > show dot files
+	- Immediatelly go to root, even when there is no /etc/sudoers policy: echo -e "your_password\n" | sudo -iS pwd && sudo su
+}
+
 Tree {
 	- tree "C:\Users\" /F /A > file.txt	===> get the directory tree of folder in regular ASCII format +filenames +redirect to a specific file. 
 							Unhide the files if hidden files are used! 
