@@ -1,3 +1,9 @@
+VPN, vpn-slice {
+	- https://github.com/dlenski/vpn-slice 											===> easy to set up a split-tunnel VPN
+	- sudo openconnect server.com -s 'vpn-slice 192.168.2.0/24' -u user_1 --authgroup SomeGroup				===> example usage
+
+}
+
 MobaXterm {
 	- https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf 						===> install on Ubuntu using Wine 
 	- https://web.archive.org/web/20230315020707/https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf ===> archived version 
