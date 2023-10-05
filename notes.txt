@@ -282,7 +282,8 @@ Docker {
 		- docker images							===>
 		- docker stop $(docker ps -aq)					===>
 		- docker stop ID ID2						===>
-		- docker exec -it <contid> bash 				===> execute bash on a runnning image
+		- docker exec -it <contid|name> /bin/bash 			===> execute bash on a runnning image
+		- docker exec -u 0 -it <contid|name> /bin/bash			===> log in as root, not as default user
 		- docker run -it <imgid> bash					===> run 
 		- docker run -it openjdk:11 bash -c "cat /etc/os-release" 	===> run a bash command to figure out the version of OS currently running
 		- docker run -d test_app					===>
