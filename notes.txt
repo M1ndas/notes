@@ -3577,16 +3577,13 @@ LINUX {
 			6. Debug: bash -x <script_name> <arg1> <arg2>
 		}
 
-		- transfering file from Linux to MAC with SCP {
-			1. tar -cvf name.tar /path/to/directory 																	===> create an archive of a directory (if it's a file, then no problem should be dowloading it directly) and place it inside the current working directory;
-			2. scp user@remote.server.fi:/path/location/file_name file_name 											===> download from remote to local {
-				- sudo scp -i ~/.ssh/priv.key -rp zulu@104.131.103.33:/usr/local/openresty/nginx/conf/ /usr/local/openresty/nginx/conf/ 	===> from 104.131.103.33 to some local (SRC ---> DST)
-			}
-			- scp file_to_copy user@remote.server.fi:/path/to/location 													===> upload from local to remote {
-				sudo scp -i /Users/Mindaugas/.ssh/private_keys/ssh-private-key /Users/Mindaugas/Google\ Drive/Darbas/zulu/MISS-requests-generator.sh zulu@178.62.131.40:/usr/local/openresty/nginx/
-				sudo scp -i /home/zulu/.ssh/authorized_keys /usr/local/openresty/nginx/conf/ zulu@178.62.131.40:/usr/local/openresty/nginx/conf/
-				sudo scp -i ~/.ssh/private_keys/ssh-private-key -r rc-node-1/nginx/conf/websites/ zulu@178.62.131.40:/usr/local/openresty/nginx/conf/ ===> upload configs to rc-node-1
-			}
+		- SCP {
+			- tar -cvf name.tar /path/to/directory 					===> create an archive of a directory and place it inside the current working directory;
+			- scp user@remote.server.fi:/path/location/file_name file_name		===> download from remote to local
+			- scp file_to_copy user@remote.server.fi:/path/to/location		===> upload from local to remote 
+			- sudo scp -i ~/.ssh/private_keys/ssh-private-key -r node-1/conf/websites/ zulu@178.62.131.40:/usr/local/openresty/conf/ 	===> upload configs to node-1
+			- scp -c aes128-ctr -C -r oxipit@10.1.72.1:/storage ./storage		===> scp with transparent compression (ussually faster than uncompressed, also does not require installing rsync on the remote when 
+													(which might be impossible if you do not have any space available))
 		}
 
 		ARCHLINUX INSTALL {
