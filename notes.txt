@@ -736,6 +736,7 @@ Go / Golang {
 
 Salt {
 	Commands {
+		- salt-run manage.status 			===> check the status of all known salt minions
 		- curl -L https://bootstrap.saltstack.com -o install-salt.sh 	===> downloads the intall script;
 		- sudo sh install-salt.sh -M -A 127.0.0.1	===> install on master: -M master, -A minions master, -I minions id;
 		- sudo sh install-salt.sh -A 192.168.1.105	===> install on minion;
