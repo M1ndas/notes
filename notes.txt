@@ -1,14 +1,38 @@
-VPN, vpn-slice {
+traditional partioning and mounting in Liux {
+	- create a new VDI in virtualbox (or any VM administration tool)
+	- lsblk -e7 				===> list all disks and partitions (-e7 to exclude loopback devices)
+	- sudo fdisk /dev/sd[X]			===> use fdisk to create a partion for /dev/sdb or /sda or whatever [X]
+		- ... n 			===> new partition
+		- ... p				===> primary partition
+		- ... <enter>			===> confirm the first sector
+		- ... +10G | <enter>		===> specify partition size 10GB
+		- ... w 			===> make the changes persistent
+	- sudo mkfs.ext4 /dev/sd[X][1]		===> install a file system for the created partition
+	- sudo mkdir /storage			===> create a directory to mount a partition on
+	- sudo mount /dev/sd[X][1] /storage	===> mount the partition on that directory
+	- sudo umount /storage			===> to reverse mounting
+	- sudo vim /ets/fstab			===> open fstab and make the mount persistent
+		- ... /dev/sd[X][1] /storage ext4 defaults 0 0
+	- remember: the disk partition can be mounted over by the other partition - data is not lost in that case and you can still remount the old one
+	
+}
+
+LVM partitioning and mounting in Linux {
+	- https://www.redhat.com/sysadmin/lvm-vs-partitioning ===> TBD
+}
+
+vpn, vpn-slice {
 	- https://github.com/dlenski/vpn-slice 											===> easy to set up a split-tunnel VPN
 	- sudo openconnect server.com -s 'vpn-slice 192.168.2.0/24' -u user_1 --authgroup SomeGroup				===> example usage
 
 }
 
 MobaXterm {
-	- https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf 						===> install on Ubuntu using Wine 
+	- https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf 	===> install on Ubuntu using Wine 
 	- https://web.archive.org/web/20230315020707/https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf ===> archived version 
-	- winecfg > drives > show dot files											===> see hidden files when using apps through wine
-	- echo -e "your_password\n" | sudo -iS pwd && sudo su 									===> immediatelly go to root for effective server support (when there is no /etc/sudoers policy) 
+	- winecfg > drives > show dot files						===> see hidden files when using apps through wine
+	- echo -e "your_password\n" | sudo -iS pwd && sudo su 				===> immediatelly go to root (when there is no /etc/sudoers policy). Not the best approach 												because it leaves the password in the process list (ps -a). It is better to actually
+												create a moba macro that enters the password for you.
 }
 
 Tree {
