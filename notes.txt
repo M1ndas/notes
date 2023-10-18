@@ -1,4 +1,4 @@
-traditional partioning and mounting in Liux {
+traditional partioning and mounting in Linux {
 	- create a new VDI in virtualbox (or any VM administration tool)
 	- lsblk -e7 				===> list all disks and partitions (-e7 to exclude loopback devices)
 	- sudo fdisk /dev/sd[X]			===> use fdisk to create a partion for /dev/sdb or /sda or whatever [X]
