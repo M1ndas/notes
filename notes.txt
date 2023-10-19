@@ -1,4 +1,4 @@
-traditional partioning and mounting in Linux {
+Traditional partioning in Linux {
 	- create a new VDI in virtualbox (or any VM administration tool)
 	- lsblk -e7 					===> list all disks and partitions (-e7 to exclude loopback devices)
 	- sudo fdisk /dev/sd[X]				===> use fdisk to create a partion for /dev/sdb or /sda or whatever [X]
@@ -18,7 +18,7 @@ traditional partioning and mounting in Linux {
 	
 }
 
-LVM partitioning and mounting in Linux {
+LVM partitioning in Linux {
 	- https://www.redhat.com/sysadmin/lvm-vs-partitioning ===> TBD
 	- lvcreate -n storage -l 100%FREE vg_oxipit
 	- mkfs.ext4 /dev/vg_oxipit/storage
