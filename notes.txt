@@ -8524,7 +8524,7 @@ sys_template_v9{
 	- ctrl+b -> d 					===> detach from tmux session	
 	- tmux attach 					===> attach to the latest tmux session	
 	- tmux attach-session -t {number|name} 		===> attach to a specific session when multiple are running	
-	- tmux list-sessions 				===> SE	
+	- tmux ls | list-sessions	
 		0: 1 windows (created Wed Mar  8 07:52:57 2017) [196x56]	
 		1: 1 windows (created Wed Mar  8 07:55:07 2017) [196x56]	
 	- CTRL+C --> CTRL+D 				===> terminates the process and the tmux session	
