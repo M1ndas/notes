@@ -771,6 +771,7 @@ Salt {
 		- sudo sh install-salt.sh -A 192.168.1.105	===> install on minion;
 		- sudo salt-key 				===> list keys;
 		- sudo salt-key -F <mažo_jono_id>		===> check the key fingerprint for specific minion on master;
+		- salt-key -d <minion-id>			===> delete the minion from list of minions known to master
 		- sudo salt-call --local key.finger 		===> check the key fingerprint on minion;
 		- sudo salt '*' test.ping 			===> check if minion is reachable;
 		----- minion targeting expressions ------
