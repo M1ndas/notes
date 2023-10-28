@@ -182,6 +182,10 @@ Logrotate {
 }
 
 Vim {
+	- i 							===> insert mode (if pressed from normal mode)
+	- v							===> visual mode (if pressed from normal mode)
+	- : 							===> control mode (if pressed from normal mode)
+	- esc 							===> go to normal mode from all other modes
 	- :w !sudo tee % > /dev/null 				===> save contents in a write protected file while not root.
 	- dd 							===> delete the whole current line;
 	- dG 							===> delete all lines in one blow;
@@ -190,8 +194,8 @@ Vim {
 	- :u 							===> undo the change;
 	- Ctrl-R 						===> redo the changes that were undone;
 	- :u1|u 						===> undo all changes remembered by vim for the current buffer;
-	- :set nu 						===> turns on line numbering in vi;
-	- :set nu! 						===> turns off the line numbering in vi;
+	- :set nu|rnu						===> turns on line numbering in vi | relative line numbering;
+	- :set nu!|rnu! 					===> turns off the line numbering in vi | relative line numbering;
 	- 42G 							===> go to line 42;
 	- :%s/foo/bar/g 					===> substitute feature: "find each occurrence of 'foo' (in all lines), and replace it with 'bar'.""
 	- :%s/db\(\d\).example.com/db\1.zozole.com/g 		===> a more involved vi/vim substitute feature w/ regex pattern and capture groups 
