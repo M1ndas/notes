@@ -1,3 +1,8 @@
+Rust {
+	- rustup -V 		===> check version managers version 
+	- rustc -V		===> check rust compiler version
+}
+
 Traditional partioning in Linux {
 	- create a new VDI in virtualbox (or any VM administration tool)
 	- lsblk -e7 					===> list all disks and partitions (-e7 to exclude loopback devices)
