@@ -1,4 +1,4 @@
-
+ps --sort=-pcpu | head
 whois -h whois.cymru.com "213.252.224.249"		===> check AS of an IP
 
 
@@ -7,31 +7,35 @@ Rust {
 	- rustc -V					===> check rust compiler version
 }
 
-Traditional partioning in Linux {
-	- create a new VDI in virtualbox (or any VM administration tool)
-	- lsblk -e7 					===> list all disks and partitions (-e7 to exclude loopback devices)
-	- sudo fdisk /dev/sd[X]				===> use fdisk to create a partion for /dev/sdb or /sda or whatever [X]
-		- ... n 				===> new partition
-		- ... p					===> primary partition
-		- ... <enter>				===> confirm the first sector
-		- ... +10G | <enter>			===> specify partition size 10GB
-		- ... w 				===> make the changes persistent
-	- sudo mkfs.ext4 /dev/sd[X][1]			===> install a file system for the created partition
-	- sudo mkdir /storage				===> create a directory to mount a partition on
-	- sudo mount /dev/sd[X][1] /storage		===> mount the partition on that directory
-	- sudo umount /storage				===> to reverse mounting
-	- sudo vim /ets/fstab				===> open fstab and make the mount persistent
-		- ... /dev/sd[X][1] /storage ext4 defaults 0 0
-	- dd if=/dev/random of=1G_file bs=1G count=1 	===> create 1G file for testing
-	- remember: the disk partition can be mounted over by the other partition - data is not lost in that case and you can still remount the old one
+Linux {
+	Traditional partioning in Linux {
+		- create a new VDI in virtualbox (or any VM administration tool)
+		- lsblk -e7 					===> list all disks and partitions (-e7 to exclude loopback devices)
+		- sudo fdisk /dev/sd[X]				===> use fdisk to create a partion for /dev/sdb or /sda or whatever [X]
+			- ... n 				===> new partition
+			- ... p					===> primary partition
+			- ... <enter>				===> confirm the first sector
+			- ... +10G | <enter>			===> specify partition size 10GB
+			- ... w 				===> make the changes persistent
+		- sudo mkfs.ext4 /dev/sd[X][1]			===> install a file system for the created partition
+		- sudo mkdir /storage				===> create a directory to mount a partition on
+		- sudo mount /dev/sd[X][1] /storage		===> mount the partition on that directory
+		- sudo umount /storage				===> to reverse mounting
+		- sudo vim /ets/fstab				===> open fstab and make the mount persistent
+			- ... /dev/sd[X][1] /storage ext4 defaults 0 0
+		- dd if=/dev/random of=1G_file bs=1G count=1 	===> create 1G file for testing
+		- remember: the disk partition can be mounted over by the other partition - data is not lost in that case and you can still remount the old one
+	}
 	
-}
+	LVM partitioning in Linux {
+		- https://www.redhat.com/sysadmin/lvm-vs-partitioning 	===> TBD
+		- lvcreate -n storage -l 100%FREE vg_oxipit		===> 
+		- mkfs.ext4 /dev/vg_oxipit/storage
+		- ... then mount and configure fstab
+		
 
-LVM partitioning in Linux {
-	- https://www.redhat.com/sysadmin/lvm-vs-partitioning ===> TBD
-	- lvcreate -n storage -l 100%FREE vg_oxipit
-	- mkfs.ext4 /dev/vg_oxipit/storage
-	- ... then mount and configure fstab
+		- lvextend -l +100%FREE -r /dev/mapper/ubuntu--vg... 	===> extend the current lv to 100% of the partition size (-r - to automatically resize the file system)
+	}
 }
 
 vpn, vpn-slice {
