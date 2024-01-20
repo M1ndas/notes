@@ -1,4 +1,4 @@
-ps --sort=-pcpu | head
+ps aux --sort=-pcpu | head
 whois -h whois.cymru.com "213.252.224.249"		===> check AS of an IP
 
 
