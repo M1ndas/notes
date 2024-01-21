@@ -315,6 +315,7 @@ Docker {
 		- command: bash -c 'php artisan migrate:fresh --seed && php artisan serve --host 0.0.0.0'
 
 	Docker:
+		- docker run --rm <name>					===> run container and remove it after it exits
 		- docker run -p 80:80 name_of_image				===> when mapping ports, the -p has to be before the name of the image, not after!
 		- docker run -v //c/.aws/cred:/root/.aws/cred:ro api:dev 	===> for [GITBASH] add additional leading slash //c
 		- docker run -v ${pwd}:root/app					===> [POWERSHELL] relative path volume mounting
