@@ -29,11 +29,17 @@ Linux {
 	
 	LVM partitioning in Linux {
 		- https://www.redhat.com/sysadmin/lvm-vs-partitioning 	===> TBD
-		- lvcreate -n storage -l 100%FREE vg_oxipit		===> 
-		- mkfs.ext4 /dev/vg_oxipit/storage
-		- ... then mount and configure fstab
-		
-
+		- pvdisplay						===> ///
+		- vgcreate vg_oxipit /dev/sda				===> designate the disk to be the physical volume and create add it to the volumen group
+		- vgremove vg_oxipit					===> reverse the creation of a volume group
+		- lvcreate -n storage -l 100%FREE vg_oxipit		===> create the logical volume
+		- lvdisplay 						===> check the logical volume
+		- lvremove -f /vg_oxipit/storage			===> reverse the LV creation
+		- mkfs.ext4 /dev/vg_oxipit/storage			===> create an ext4 file system on the logical volume
+		- sudo mkdir /storage					===> create a dir to be mounted on the LV
+		- sudo mount /dev/vg_oxipit/storage /storage		===> mount the /storage directory on the LV
+		- blkid							===> check the uuid of the LV or File system, it is ussually that the file system is mounted, but LV is possible as well
+		- /etc/fstab 						===> /dev/disk/by-uuid/3342a48a-fc68-4d90-a059-73e2b9f99e9c /storage ext4 defaults 0 0
 		- lvextend -l +100%FREE -r /dev/mapper/ubuntu--vg... 	===> extend the current lv to 100% of the partition size (-r - to automatically resize the file system)
 	}
 }
