@@ -42,6 +42,9 @@ Linux {
 		- /etc/fstab 						===> /dev/disk/by-uuid/3342a48a-fc68-4d90-a059-73e2b9f99e9c /storage ext4 defaults 0 0
 		- lvextend -l +100%FREE -r /dev/mapper/ubuntu--vg... 	===> extend the current lv to 100% of the partition size (-r - to automatically resize the file system)
 	}
+	Netplan {
+		- https://askubuntu.com/a/1466387 			===> configure static ip with netplan
+	}
 }
 
 vpn, vpn-slice {
