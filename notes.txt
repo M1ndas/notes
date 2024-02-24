@@ -3090,8 +3090,9 @@ LINUX {
 			- sudo route del -net 192.168.0.0/24 gw 0.0.0.0 dev eth0 				===> to delete a route.
 			- ip route get 192.168.88.77 													===> get the route that will be used or a packet destined to a specific ip
 
-			CURL {
-				- curl -sI -H "User-Agent;" --trace-ascii - http://www.opera.com/ | grep "User-Agent:" 				===> to send empty request header with curl you need to terminate it with a semi;
+			curl {
+				- curl -Iv http://www.aptivate.org --next http://www.aptivate.org 2>&1 | grep -i '#0'			===> test if keep-alive support 
+				- curl -sI -H "User-Agent;" --trace-ascii - http://www.opera.com/ | grep "User-Agent:" 			===> to send empty request header with curl you need to terminate it with a semi;
 				- curl -sI -L -H "User-Agent: Mindaugas" --trace-ascii - http://54.93.212.91/ -H "Host:trud.com" 	===> 
 				- you can define the -w @curl.io flag and add the formating you want in a file curl.io like this:
 
