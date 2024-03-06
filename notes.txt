@@ -3091,9 +3091,10 @@ LINUX {
 			- ip route get 192.168.88.77 													===> get the route that will be used or a packet destined to a specific ip
 
 			curl {
-				- curl -Iv http://www.aptivate.org --next http://www.aptivate.org 2>&1 | grep -i '#0'			===> test if keep-alive support 
-				- curl -sI -H "User-Agent;" --trace-ascii - http://www.opera.com/ | grep "User-Agent:" 			===> to send empty request header with curl you need to terminate it with a semi;
-				- curl -sI -L -H "User-Agent: Mindaugas" --trace-ascii - http://54.93.212.91/ -H "Host:trud.com" 	===> 
+				- curl -Iv http://www.aptivate.org --next http://www.aptivate.org 2>&1 | grep -i '#0'						===> test if keep-alive supported
+				- curl -w "Connects: %{num_connects}\n" http://localhost:9000/ -w "Connects: %{num_connects}\n" http://localhost:9000/ -sI 	===> test if keep-alive supported
+				- curl -sI -H "User-Agent;" --trace-ascii - http://www.opera.com/ | grep "User-Agent:" 						===> to send empty request header (terminate it with a semi);
+				- curl -sI -L -H "User-Agent: Mindaugas" --trace-ascii - http://54.93.212.91/ -H "Host:trud.com" 				===> 
 				- you can define the -w @curl.io flag and add the formating you want in a file curl.io like this:
 
 					\n
@@ -3116,7 +3117,7 @@ LINUX {
 				curl -s -v -u *** \
 				-XPOST 'https://es.zulu.com/_search' \
 				-d '{"query":{"filtered":{"query":{"query_string":{"query":"_type:modsec_logs AND action:DETECTION_ONLY AND index_name:2015.10.18 AND NOT webapp_domain:*.zulu.net AND webapp_domain:$domain","analyze_wildcard":true}},"filter":{"bool":{"must":[{"range":{"@timestamp":{"gte":"2015-10-17T00:00:00.001Z","lte":"2015-10-17T07:59:59.999Z"}}}],"must_not":[]}}}},"size":999999}' \
-				--trace-ascii /dev/stdout 																===> --trace-ascii prints the sent data and a lot of information. In this example you can check whether the "$domain" bash variable was substituted ... it was not.
+				--trace-ascii /dev/stdout 									===> --trace-ascii prints the sent data and a lot of information. In this example you can check whether the "$domain" bash variable was substituted ... it was not.
 
 				- curl --proxy http://172.16.1.26:8080  http://getcomposer.org/installer | php 			===> using CURL together with our proxy;
 				- curl -s -w \
