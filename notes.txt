@@ -1,5 +1,7 @@
 ps aux --sort=-pcpu | head
 whois -h whois.cymru.com "213.252.224.249"					===> check AS of an IP
+sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn	===> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
+sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection	===> 
 
 Rust {
 	- rustup -V 								===> check version managers version 
@@ -1316,9 +1318,10 @@ DNS {
 	}
 
 	USEFULL TOOLS {
-		- nm-tool | grep DNS 		===> what is the DNS server used by your machine (mine is 192.168.1.1);
-		- cat /etc/resolv.conf 		===> resolver configuration file;
-		- search wimax 				===> a prefix prepended by the NS system when resolving a name. Example, you would type: http://somesite/path it would prepend http://somesite.wimax/path, which it BS because HTTP 1.1 with it's virtual hosting will not work for http://somesite (DNS answer does not rewrite the URL, it just brings back the IP);
+		- resolvectl status 				===> check DNS server used per interface
+		- nm-tool | grep DNS 				===> what is the DNS server used by your machine (mine is 192.168.1.1);
+		- cat /etc/resolv.conf 				===> resolver configuration file;
+		- search wimax 					===> a prefix prepended by the NS system when resolving a name. Example, you would type: http://somesite/path it would prepend http://somesite.wimax/path, which it BS because HTTP 1.1 with it's virtual hosting will not work for http://somesite (DNS answer does not rewrite the URL, it just brings back the IP);
 		- dig @8.8.8.8 whypeopledance.com -t NS +short 	===> dig adress for whypeopledance domain specifying the type (-t) of the query (NS) and a short answer. @global server "global d-opts and servers (before host name) affect all queries." If it were dig whypeopledance.com -t NS +short @8.8.8.8 - it would affect only current query;
 	}
 }
@@ -1893,29 +1896,27 @@ RoR {
 
 	Dojo & Node Agent {
 		- dojo/config/environments/shared.rb 									===> log level can be specified;
-		- config.logger = ActiveSupport::BufferedLogger.new( 					===> defined a custom log file in dojo/config/environments/shared.rb
-									File.join(ENV['SOME_ENVIRONMENT_VAR'], 
-									"var/output/logs/rails.log"))
+		- config.logger = ActiveSupport::BufferedLogger.new(File.join(ENV['SOME_ENVIRONMENT_VAR'], "var/output/logs/rails.log"))  ===> defined a custom log file in dojo/config/environments/shared.rb
 		- /home/zulu/nodeAgent/releases/<>/app/models/task.rb \
 				  def perform
 				    in_progress!
 				    sleep(1000)
 				    instant = false				
-    																			===> getting tasks stuck in "in progress" state, adding sleep method in the appropriate place;
-		- suspend sidekiq														===> getting tasks stuck in "waiting"
+    														===> getting tasks stuck in "in progress" state, adding sleep method in the appropriate place;
+		- suspend sidekiq										===> getting tasks stuck in "waiting"
 		- break the config templates in admin/templates							===> getting tasks in fail state
-		- 																		===> getting task stuck in copied state
+		- 												===> getting task stuck in copied state
 	}
 
 	Heroku{
-		- heroku login 															===> log in with your email and pass
+		- heroku login 											===> log in with your email and pass
 		- heroku keys:add
-		- heroku create 														===> creates heroku in the folder;
-		- git push heroku master 												===> push the master branch to heroku (~ something like that);
-		- rake assets:precompile 												===> precopile the static assets (some times necesassry when push to heroku does not work);
-		- heroku run rake db:migrate 											===> migrate the rake on heroku to migrate the db;
-		- heroku apps:destroy --app <app_name> 									===> delete app from heroku;
-		- heroku rename rails-tutorial-hello 									===> rename an app on heroku;
+		- heroku create 										===> creates heroku in the folder;
+		- git push heroku master 									===> push the master branch to heroku (~ something like that);
+		- rake assets:precompile 									===> precopile the static assets (some times necesassry when push to heroku does not work);
+		- heroku run rake db:migrate 									===> migrate the rake on heroku to migrate the db;
+		- heroku apps:destroy --app <app_name> 								===> delete app from heroku;
+		- heroku rename rails-tutorial-hello 								===> rename an app on heroku;
 	}
 }
 
