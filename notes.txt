@@ -7237,18 +7237,7 @@ sudo tshark -VR 'ssl.handshake.type == 1' 							===> works fine even when deseg
 		- ansible prod-nginx -m shell -a "grep keepalive /usr/local/openresty/nginx/conf/nginx.conf" ===> grep keepalive from all production nodes;
 		- ansible-playbook playbooks/build_prod_node.yml -e "region=us-west-1 hostname=test-host1 count=1 redis_ip=172.31.13.117" ===> build a node in AWS;
 }		
-
-////////// SSL certificates testing
-
-	- openssl x509 -enddate -noout -in dojo-rc.zulu.com.crt 										===> check certificate expiration date;
-	- openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 666 -nodes             ===> Generate a self signed certificate. nodes for "no pass phrase"
-	- echo | openssl s_client -connect www.family.me:443 2>/dev/null | openssl x509 -noout -dates   ===> check valid before and after dates for a domain;
-	- openssl x509 -startdate -enddate -noout -in star_family_me.crt                                ===> check valid before and after dates for a certificate from the file;
-	- openssl x509 -in www.bingovega.com.crt -text -noout                                           ===> get all information from a certificate
-																			To know whether the issuer is self signed? Compare the issuer and subject. If they are same, it is self signed 
-																				- subject= /C=LT/ST=Kaunas/L=Kaunas/O=zulu/OU=Hacking dep./CN=minis/emailAddress=minis@ze.com
-																				- issuer= /C=LT/ST=Kaunas/L=Kaunas/O=zulu/OU=Hacking dep./CN=minis/emailAddress=minis@ze.com
-
+ 
 ////////// Company deletion SQL's
 
 /* 
@@ -8400,21 +8389,36 @@ sys_template_v9{
 	- openssl s_client -servername securitycompass.com -connect 52.21.110.142:443
 	- openssl s_client -servername securitycompass.com -connect 205.147.88.100:443
 	- echo \
-	| openssl s_client -showcerts -servername mindaugas.cf -connect 185.69.52.233:443 2>/dev/null \
-	| openssl x509 -inform pem -noout -text \
-	| grep -P DNS 												===> DNS:*.mindaugas.cf, DNS:mindaugas.cf	
+		| openssl s_client -showcerts -servername mindaugas.cf -connect 185.69.52.233:443 2>/dev/null \
+		| openssl x509 -inform pem -noout -text \
+		| grep -P DNS 												===> DNS:*.mindaugas.cf, DNS:mindaugas.cf	
 	- openssl s_client -connect mail.viezo.co:993 -crlf -quiet 
-		- LOGIN mbtest@viez.co password ;; . LIST "" "*" ;; CTRL + ] ;; QUIT 				===> test imaps connectivity for an email server, see: https://inthetechpit.com/2019/07/23/telnet-to-test-connection-to-pop3-imap/
- }	
+		- LOGIN mbtest@viez.co password ;; . LIST "" "*" ;; CTRL + ] ;; QUIT 				===> test imaps conn for email server: https://inthetechpit.com/2019/07/23/telnet-to-test-connection-to-pop3-imap/
 
+	- openssl x509 -enddate -noout -in dojo-rc.zulu.com.crt						===> check certificate expiration date;
+	- openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 666 -nodes             ===> Generate a self signed certificate. nodes for "no pass phrase"
+	- echo | openssl s_client -connect www.family.me:443 2>/dev/null | openssl x509 -noout -dates   ===> check valid before and after dates for a domain;
+	- openssl x509 -startdate -enddate -noout -in star_family_me.crt                                ===> check valid before and after dates for a certificate from the file;
+	- openssl x509 -in www.bingovega.com.crt -text -noout                                           ===> get all information from a certificate
+														To know if cert is self signed compare issuer and subject. If they are same, it is self signed: 
+															- subject= /C=LT/ST=Kaunas/L=Kaunas/O=zulu/OU=Hacking dep./CN=minis/emailAddress=minis@ze.com
+															- issuer= /C=LT/ST=Kaunas/L=Kaunas/O=zulu/OU=Hacking dep./CN=minis/emailAddress=minis@ze.com
+	- openssl crl2pkcs7 -nocrl -certfile letsenc_fullchain.pem | openssl pkcs7 -print_certs -noout 	===> check the chain in let's encrypt full chain file, result:
+														- subject=CN = hospital.mindaugas.run.place
+														  issuer=C = US, O = Let's Encrypt, CN = R3
 
- Namecheap DNS {	
-	freedns1.registrar-servers.com	
-	freedns2.registrar-servers.com	
-	freedns3.registrar-servers.com 	
-	freedns4.registrar-servers.com 	
-	freedns5.registrar-servers.com	
-}	
+														- subject=C = US, O = Let's Encrypt, CN = R3
+														  issuer=C = US, O = Internet Security Research Group, CN = ISRG Root X1
+
+	- sudo ls -alht /etc/ssl/certs/ | grep -i ISR							===> check if ISRG is in the CA store on ubuntu
+														lrwxrwxrwx 1 root root   16 kov.   20 14:54 0b9bc432.0 -> ISRG_Root_X2.pem
+														lrwxrwxrwx 1 root root   16 kov.   20 14:54 4042bcee.0 -> ISRG_Root_X1.pem
+														lrwxrwxrwx 1 root root   51 kov.   20 14:54 ISRG_Root_X2.pem -> /usr/share/ca-certificates/mozilla/ISRG_Root_X2.crt
+														lrwxrwxrwx 1 root root   51 kov.   20 14:54 ISRG_Root_X1.pem -> /usr/share/ca-certificates/mozilla/ISRG_Root_X1.crt
+
+	- sudo openssl verify -verbose -CAfile /etc/letsencrypt/live/hospital.mindaugas.run.place/fullchain.pem /etc/letsencrypt/live/hospital.mindaugas.run.place/cert.pem ===> verify ssl cert from let's encrypt, 
+																						 full chain  fails the verification
+ }
 
  Nmap{	
 	nmap --script ssl-enum-ciphers -p 443 vpn.zulu.com 	> 	
