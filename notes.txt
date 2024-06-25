@@ -8050,6 +8050,7 @@ sys_template_v9{
 		Specific technologies:
 			Kafka: 		CCDAK
  			Vmware:		VCA		VCP		VCE		VCDX	
+			Fortinet:	https://www.fortinet.com/nse-training
 		
  	CCNA/P/E {	
 		- https://learningnetwork.cisco.com/community/certifications/ccna 				===> main cisco page for ccna / a guide;	
