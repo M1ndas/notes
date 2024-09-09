@@ -35,14 +35,14 @@ Linux {
 	LVM partitioning in Linux {
 		- https://www.redhat.com/sysadmin/lvm-vs-partitioning 	===> TBD
 		- pvdisplay						===> ///
-		- vgcreate vg_oxipit /dev/sda				===> designate the disk to be the physical volume and create add it to the volumen group
-		- vgremove vg_oxipit					===> reverse the creation of a volume group
-		- lvcreate -n storage -l 100%FREE vg_oxipit		===> create the logical volume
+		- vgcreate vg_moxisplit /dev/sda				===> designate the disk to be the physical volume and create add it to the volumen group
+		- vgremove vg_moxisplit					===> reverse the creation of a volume group
+		- lvcreate -n storage -l 100%FREE vg_moxisplit		===> create the logical volume
 		- lvdisplay 						===> check the logical volume
-		- lvremove -f /vg_oxipit/storage			===> reverse the LV creation
-		- mkfs.ext4 /dev/vg_oxipit/storage			===> create an ext4 file system on the logical volume
+		- lvremove -f /vg_moxisplit/storage			===> reverse the LV creation
+		- mkfs.ext4 /dev/vg_moxisplit/storage			===> create an ext4 file system on the logical volume
 		- sudo mkdir /storage					===> create a dir to be mounted on the LV
-		- sudo mount /dev/vg_oxipit/storage /storage		===> mount the /storage directory on the LV
+		- sudo mount /dev/vg_moxisplit/storage /storage		===> mount the /storage directory on the LV
 		- blkid							===> check the uuid of the LV or File system, it is ussually that the file system is mounted, but LV is possible as well
 		- /etc/fstab 						===> /dev/disk/by-uuid/3342a48a-fc68-4d90-a059-73e2b9f99e9c /storage ext4 defaults 0 0
 		- lvextend -l +100%FREE -r /dev/mapper/ubuntu--vg... 	===> extend the current lv to 100% of the partition size (-r - to automatically resize the file system)
@@ -3646,7 +3646,7 @@ LINUX {
 			- scp user@remote.server.fi:/path/location/file_name file_name		===> download from remote to local
 			- scp file_to_copy user@remote.server.fi:/path/to/location		===> upload from local to remote 
 			- sudo scp -i ~/.ssh/private_keys/ssh-private-key -r node-1/conf/websites/ zulu@178.62.131.40:/usr/local/openresty/conf/ 	===> upload configs to node-1
-			- scp -c aes128-ctr -C -r oxipit@10.1.72.1:/storage ./storage		===> scp with transparent compression (ussually faster than uncompressed, also does not require installing rsync on the remote when 
+			- scp -c aes128-ctr -C -r moxisplit@10.1.72.1:/storage ./storage		===> scp with transparent compression (ussually faster than uncompressed, also does not require installing rsync on the remote when 
 													(which might be impossible if you do not have any space available))
 		}
 
