@@ -8559,14 +8559,15 @@ sys_template_v9{
 }	
 
  tmux {	
-	- $ tmux 					===> launch a new tmux session, after which you will be able to run a process inside a newly opened shell
-	- ctrl+b -> d 					===> detach from tmux session	
+	- tmux 						===> launch a new tmux session, after which you will be able to run a process inside a newly opened shell
+	- ctrl+b --> d 					===> detach from tmux session	
 	- tmux attach 					===> attach to the latest tmux session	
 	- tmux attach-session -t {number|name} 		===> attach to a specific session when multiple are running	
-	- tmux ls | list-sessions	
-		0: 1 windows (created Wed Mar  8 07:52:57 2017) [196x56]	
-		1: 1 windows (created Wed Mar  8 07:55:07 2017) [196x56]	
-	- CTRL+C --> CTRL+D 				===> terminates the process and the tmux session	
+	- tmux ls | list-sessions			===> list sessions attached or detached, should be used when not inside tmux itself 
+	- ctrl+c --> ctrl+d 				===> terminates the process and the tmux session
+	- ctrl+b --> %					===> split the current pane vertically.
+	- ctrl+b --> " 					===> split the current pane horizontally.
+	- ctrl+b --> x					===> close the current pane.
 }	
 
  Midnight Commander {	
