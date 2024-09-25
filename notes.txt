@@ -8568,6 +8568,7 @@ sys_template_v9{
 	- ctrl+b --> %					===> split the current pane vertically.
 	- ctrl+b --> " 					===> split the current pane horizontally.
 	- ctrl+b --> x					===> close the current pane.
+	- ctrl+b --> [					===> enable scrolling (q to quit scoll mode)
 }	
 
  Midnight Commander {	
