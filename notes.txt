@@ -3591,7 +3591,7 @@ LINUX {
 		}
 		- su - ciuser -c <command> 								===> run command as another user;
 		- curl ip.kis.lt 									===> to find out your external ip addr from linux console;
-		- du --max-depth=2 -ch | grep total 									===> one line that displays the total size of current directory including all the subdirectories;
+		- du --max-depth=2 -ch | grep total 							===> one line that displays the total size of current directory including all the subdirectories;
 		- sudo du -Sh 2>/dev/null | sort -rh | head -n 15 					===> find 15 biggest directories or files on your linux machine (the stderr redirect is for proc direcotries that come and go out of existence to not showup in the output);
 		- du --exclude=relative/path/ --exclude other/path/ -Sh 2>/dev/null 			===> or just --exclude={relative/path/to/uploads,other/path/to/exclude}
 		- sudo find . -type f -exec du -Sh {} + 2>/dev/null | sort -rh | head -n 15		===> find 15 largest files on your linux machine;
