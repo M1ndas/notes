@@ -2893,49 +2893,52 @@ LINUX {
 		- which - command "mindaugas@ubuntu:~/Downloads$ which google-chrome" >> /usr/bin/google-chrome
 		- env | grep some-string - "env" is a shell command for Unix and Unix-like operating systems. It is used to either print a list of environment variables or run another utility in an altered environment without having to modify the currently existing environment. So in this case you are grepping inside the environment variables for "some-string"
 		- rm -i - remove a file or directory from the current directory, but first inquire (-i) on whether I really want to do that (Y/N). You wont be able to remove directory before deleting the files in it with only "rm"
-		- mv 					===> move command moves all the data from one file/directory to another and deletes the first one
-		- mv * .. 				===> move all files from a directory to parent directory;
-		- cat filename.txt 		===> print contents of the file to the screen
-		- "^regex$" 			===> this is how you should write regexes in Linux, IN QUOTES
-		- shift + insert 		===> paste into the command line (for example when SSH'ing with PUTTY)
-		- ctrl + insert 		===> hot key combo for "copy" text
-		- du -smh cache/* 		===> check the storage space used by all the folders in the cache folder -s for "summarize (only display the size of the top subdirectory of the directory in which the calculation is performed)" and -m (calculate in megabytes)
-		- top 					===> to see the processes running and CPU utilization;
-		- htop 					===> shows used system resources in a convenient form;
-		- htop -d 5 			===> refresh every half a second (500 ms);
-		- ps auxf - to see all running processes
-		- ps auxf | grep [n]ginx - to grep nginx from the running processes
-		- head -n10 <filename in the direcotry> - displays the specified number of FIRST lines of any text file into the standart output (screen)
-		- tail -n10 <filename in the direcotry> - displays the specified number of LAST lines of any text file into the standart output (screen)
-		- /sbin/ifconfig - to find out the ip address of the system
+		- mv 								===> move command moves all the data from one file/directory to another and deletes the first one
+		- mv * .. 							===> move all files from a directory to parent directory;
+		- cat filename.txt 						===> print contents of the file to the screen
+		- "^regex$" 							===> this is how you should write regexes in Linux, IN QUOTES
+		- shift + insert 						===> paste into the command line (for example when SSH'ing with PUTTY)
+		- ctrl + insert 						===> hot key combo for "copy" text
+		- du -smh cache/* 						===> check the storage space used by all the folders in the cache folder -s for "summarize (only display the size of the top subdirectory of the directory in which the calculation is performed)" and -m (calculate in megabytes)
+		- top 								===> to see the processes running and CPU utilization;
+		- htop 								===> shows used system resources in a convenient form;
+		- htop -d 5 							===> refresh every half a second (500 ms);
+		- ps auxf							===> to see all running processes
+		- ps auxf | grep [n]ginx 					===> to grep nginx from the running processes
+		- head -n10 <filename in the direcotry> 			===> displays the specified number of FIRST lines of any text file into the standart output (screen)
+		- tail -n10 <filename in the direcotry> 			===> displays the specified number of LAST lines of any text file into the standart output (screen)
+		- /sbin/ifconfig 						===> to find out the ip address of the system
 		- date 								===> shows the current time on a linux machine
-		- date -d "yesterday" '+%Y-%m-%d' 	===> shows yesterdays date
-		- ls -al | sort -k6,6M -k7,7n -k8,8 -r - the "k" flag indicates the column to start the the sorting from. To limit the "k" flag you just enter k[start],[finish], so the -k6,6 starts sorting from field 6 and stops at 6, not going to to the end of the line. "-r" for reverse, "n" for numeric sorting, "M" for sorting by dates
-		- ls -lah --sort=size                                                       ===> sort by size
-		- ls -lahS                                                                  ===> sort by size
-		- ps -p <PID> -o etime= 													===> shows how long the process has been running for
-		- ps -p `ps auxfww | grep nginx | grep master | awk '{print $2}'` -o etime= ===> similar to above
+		- date -d "yesterday" '+%Y-%m-%d' 				===> shows yesterdays date
+		- ls -al | sort -k6,6M -k7,7n -k8,8 -r 				===> the "k" flag indicates the column to start the the sorting from. 
+											To limit the "k" flag you just enter k[start],[finish], \
+											so the -k6,6 starts sorting from field 6 and stops at 6, \
+											not going to to the end of the line. "-r" for reverse, "n" for numeric sorting, "M" for sorting by dates
+		- ls -lah --sort=size						===> sort by size
+		- ls -lahS							===> sort by size
+		- ps -p <PID> -o etime= 					===> shows how long the process has been running for
+		- ps -p `ps auxfww | grep nginx | grep master | awk '{print $2}'` -o etime= 	===> similar to above
 		- telnet <ip> <port> - to check whether a particular port is open on a remote machine, ping utility does not provide that luxury in linux
 		- ./nginx-cache-inspector . cache/ | egrep -v 'zulu' -grep everything that does not match 'zulu' (don't do that in zulu folder though);
 		- /usr/local/openresty/nginx/sbin/nginx -V :: shows modules that the nginx was compiled with
-		- w<file_name> 																===> give your file a name before saving in vim;
-		- grep . -c 																===> count the lines returned by some command (like another grep)
-		- wc -l 																	===> count the lines returned by some command (like grep)
+		- w<file_name> 														===> give your file a name before saving in vim;
+		- grep . -c 														===> count the lines returned by some command (like another grep)
+		- wc -l 														===> count the lines returned by some command (like grep)
 		- sudo lsof -i -n -P  | grep java 											===> check opened files, ports, sockets by all systems processes : -i (list ip sockets); -n (no names of hosts); -P (list ports without resolving their names). In unix, everything is a file, ( pipes, sockets, directories, devices, etc.). So by using lsof, you can get the information about any opened files, hence any of the entities;
-		- lsof -u lakshmanan 														===> file for a specific user;
+		- lsof -u lakshmanan 													===> file for a specific user;
 		- cat <list> | sort | uniq  												===> print a unique value from a list. SORT IS REQUIRED ! 
-		- ZZ 																		===> vim, instead of wq!
-		- cat rc.zulu.com 		| perl -pne 's/(\[msg.+?\])/\n\1\n/g' | awk '/\[msg/,/"\]/' | sort | uniq | wc  -l 			===> count all [msg xx] tags in LOGS for WAF
+		- ZZ 															===> vim, instead of wq!
+		- cat rc.zulu.com 		| perl -pne 's/(\[msg.+?\])/\n\1\n/g' | awk '/\[msg/,/"\]/' | sort | uniq | wc  -l 	===> count all [msg xx] tags in LOGS for WAF
 		- cat rc.zulu.com.conf 	| perl -pne 's/(,msg:.+?,|\")/\n\n_\1"_\n\n/g' | awk '/_,msg:/,/_/' | sort | uniq | wc -l 	===> count messages in LOGS file for WAF
-		- shasum -a 256 /tmp/1.iso 													===> calculate shasums of the file
-		- md5 /tmp/1.iso 															===> calculate md5 checksum of a file
-		- cat /etc/lsb-release 														===> version of linux
+		- shasum -a 256 /tmp/1.iso 												===> calculate shasums of the file
+		- md5 /tmp/1.iso 													===> calculate md5 checksum of a file
+		- cat /etc/lsb-release 											===> version of linux
 		- sudo lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL 							===> lsit all partitions on the linux box
-		- df																		===> list all file systems
-		- sudo ioping -c 10 -A /dev/vda1 											===> check the io latency (same as ping checks the network latency);
-		- rm -- '??' 																===> remove directories and files with strange names;
-		- tail -f ../../logs/error.log | pv -l -i1  > /dev/null 					===> monitor the pipe opened with tail -f with pv tool;
-		- grep -aPo '\d{1,}' file.pcap 												===> grep from a binary file;
+		- df													===> list all file systems
+		- sudo ioping -c 10 -A /dev/vda1 									===> check the io latency (same as ping checks the network latency);
+		- rm -- '??' 												===> remove directories and files with strange names;
+		- tail -f ../../logs/error.log | pv -l -i1  > /dev/null 						===> monitor the pipe opened with tail -f with pv tool;
+		- grep -aPo '\d{1,}' file.pcap 										===> grep from a binary file;
 
 		IPTABLES {
 			- iptables -P INPUT DROP 									===> Set the default policy of the INPUT chain to DROP
@@ -3027,27 +3030,26 @@ LINUX {
 		- file <some_file>						===> see information about a file;
 		- ctrl + D or 'exit' 						===> get back to normal user privilages;
 		- export PATH=$PATH:/someNewPAth/:some/other:and/another 	===> adding a folder to the path so that the command existing in it would be called (path variable separators are ':') - SCOPE: ONLY CURENT SESSION;
-		- cp -r 													===> moving the all the files from one dir to another;
-		- diff -r <dir1> <dir2> 									===> compare contents of two directories, shows which files are only in dir1 and those only in dir2;
-		- diff -r <dir1> <dir2> | grep <dir1> 						===> shows which files are only in dir1
+		- cp -r 							===> moving the all the files from one dir to another;
+		- diff -r <dir1> <dir2> 					===> compare contents of two directories, shows which files are only in dir1 and those only in dir2;
+		- diff -r <dir1> <dir2> | grep <dir1> 				===> shows which files are only in dir1
 		- diff <(ssh zulu@95.85.46.51 -i ~/.ssh/... cat something) <(ssh zulu@95.85.46.52 -i ~/.ssh/... ls -R /a.txt)
 		- diff <(curl http://151.249.92.106/cdn.jpg -H "Host: zewaf.sslcs.cdngc.net" -D - -s -o /dev/null) <(curl http://151.249.92.112/cdn.jpg -H "Host: zewaf.sslcs.cdngc.net" -D - -s -o /dev/null)
-																	===> diff using process substitution
-		- sudo find / -name "[E|e]nhanced*" 						===> find a directory knowing only a fragment of it's name;
-		- sudo find / -name "rc.zulu.com*" -o -name "php-*" 		===> find multiple files with "or"
-		- sudo find / -type f -name 'php-mindaugasb.c9.io*' -exec rm -f {} \; 
-																	===> delete all files returned by the find command;
-		- cd ~ 														===> go to home directory;
-		- cat /proc/cpuinfo 										===> shows CPU info for the LINUX maschine;
-		- sudo service httpd restart 								===> restart apache
-		- ps aux | grep -c httpd 									===> count occurances of apache sessions (normal session count is 73 after restart)
-		- rpm -qa | grep -i zuldServer 								===> should check whether a programm exists on the machine;
-		- sudo su 													===> elevate user to superuser level (user when using pipe);
-		- which php 												===> displays path to PHP code (use when "whereis" does not work);
-		- printenv 													===> Print part or all of the environment (only for environment variables);
-		- set 														===> Set shell options (also lists both environemnt and shell variables (to exit the set use the command ":q!"));
-		- export 													===> Export environment to subsequently executed programs;
-		- alias 													===> Create an alias for a command;
+											===> diff using process substitution
+		- sudo find / -name "[E|e]nhanced*" 					===> find a directory knowing only a fragment of it's name;
+		- sudo find / -name "rc.zulu.com*" -o -name "php-*" 			===> find multiple files with "or"
+		- sudo find / -type f -name 'php-mindaugasb.c9.io*' -exec rm -f {} \; 	===> delete all files returned by the find command;
+		- cd ~ 									===> go to home directory;
+		- cat /proc/cpuinfo 							===> shows CPU info for the LINUX maschine;
+		- sudo service httpd restart 						===> restart apache
+		- ps aux | grep -c httpd 						===> count occurances of apache sessions (normal session count is 73 after restart)
+		- rpm -qa | grep -i zuldServer 						===> should check whether a programm exists on the machine;
+		- sudo su 								===> elevate user to superuser level (user when using pipe);
+		- which php 								===> displays path to PHP code (use when "whereis" does not work);
+		- printenv 								===> Print part or all of the environment (only for environment variables);
+		- set 									===> Set shell options (also lists both environemnt and shell variables (to exit the set use the command ":q!"));
+		- export 								===> Export environment to subsequently executed programs;
+		- alias 								===> Create an alias for a command;
 
 		- Check the exit status of a last run command {
 			>$ true
@@ -3074,9 +3076,9 @@ LINUX {
 		}
 
 		DIFF & PATCH tools {
-			- diff -rupN first_dir second_dir > dir.patch 			===> create a diff of two directories with and all the files in them;
-			- diff -u first second > dir.patch 						===> diff with unified context;
-			- patch -p0 < p.patch 									===> -p0 strip 0 leading slashes. Example: *.patch file contains /usr/local/p.patch with -p0 it remains, with -p1 = /usr/local/p.patch and with -p2 = local/p.patch
+			- diff -rupN first_dir second_dir > dir.patch 	===> create a diff of two directories with and all the files in them;
+			- diff -u first second > dir.patch 		===> diff with unified context;
+			- patch -p0 < p.patch 				===> -p0 strip 0 leading slashes. Example: *.patch file contains /usr/local/p.patch with -p0 it remains, with -p1 = /usr/local/p.patch and with -p2 = local/p.patch
 		}
 
 		NETWORKING {
@@ -3084,12 +3086,12 @@ LINUX {
 			- ifconfig eth0 192.168.1.11 netmask 255.255.255.0 broadcast 192.168.1.255 		===> add ip address to an interface;
 			- ifconfig eth0:0 192.168.0.2 netmask 255.255.255.0 					===> add ip alias / subinterface
 			- ifconfig eth1:1 down									===> remove subinterface;
-			- route -n 										===> list routes w/o resolving the names								===> check the routes;
+			- route -n 										===> list routes w/o resolving the names
 			- route add -host 192.168.0.159 gw 0.0.0.0 netmask 255.255.255.0 			===> add route to a host;
 			- route add -net 192.168.98.42 netmask 255.255.255.255 gw 192.168.99.1 			===> add route to a network;
 			- route add [-net|-host] <Net|IP> netmask <Mask> gw <Gateway IP> dev <Int>X 		===> general template for route addition;
 			- sudo route del -net 192.168.0.0/24 gw 0.0.0.0 dev eth0 				===> to delete a route.
-			- ip route get 192.168.88.77 													===> get the route that will be used or a packet destined to a specific ip
+			- ip route get 192.168.88.77 								===> get the route that will be used or a packet destined to a specific ip
 
 			curl {
 				- curl -Iv http://www.aptivate.org --next http://www.aptivate.org 2>&1 | grep -i '#0'						===> test if keep-alive supported
@@ -3149,12 +3151,10 @@ LINUX {
 					time_starttransfer \t%{time_starttransfer}\\n\
 					time_total \t%{time_total}\\n\
 					url_effective \t%{url_effective}\\n" \
-				-o /dev/null 104.197.33.159 															===> curl displaying various options;
-				- --trace-ascii /dev/stdout 															===> print what curl sends exactly;
-
+				-o /dev/null 104.197.33.159 										===> curl displaying various options;
+				- --trace-ascii /dev/stdout 										===> print what curl sends exactly;
 
 				- Login to dojo with CURL {
-
 					#!/bin/bash
 
 					email="demo+admin@zulu.com"
@@ -3169,22 +3169,23 @@ LINUX {
 					--compressed
 
 					curl 'https://dojo-rc.zulu.com/admin/dashboard' -vL -b cookies.txt -c cookies.txt
-
 				}
 			}
 
 			TCPDUMP {
 				- https://forum.ivorde.com/tcpdump-how-to-to-capture-only-icmp-ping-echo-requests-t15191.html
 				- https://www.wireshark.org/tools/string-cf.html
-				- sudo tcpdump -i eth0 -s 0 -nn '(src host 172.32.0.88 and dst port 9443)' or '(src host 172.32.0.43 and dst host 172.32.0.88 and src port not 80)' 	===> complex grouping example;
+
+				- sudo tcpdump -i eth0 -s 0 -nn '(src host 172.32.0.88 and dst port 9443)' \
+					or '(dst host 172.32.0.88 and src port not 80)'				===> complex grouping example;
 				- sudo tcpdump -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420' 		===> get GET headers with tcpdump;
 				- sudo tcpdump -s 0 -A '(tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x504f5354)'	===> get POST headers with tcpdump; 
-				- sudo tcpdump -D 															===> display network interfaces available for tcpdump;
-				- tcpdump -i eth0 -nn port 80 and host <ip> -A 								===> run a tcpdump eth0 interface, -no-names, only IP's, -A:Print each packet in ASCII.
-				- tcpdump -v icmp 															===> tcpdump for ICMP;
-				- tcpdump -qns 0 -A -r first.pcap 											===> read pcap.files
-				- tcpdump -nni eth0 icmp 													===> icmp packet capture;
-				- tcpdump -nni eth0 icmp[icmptype] == 8 									===> only display ip packets that have icmp payload and icmptype 8 - ICMP Echo Request.
+				- sudo tcpdump -D 								===> display network interfaces available for tcpdump;
+				- tcpdump -i eth0 -nn port 80 and host <ip> -A 					===> run a tcpdump eth0 interface, -no-names, only IP's, -A:Print each packet in ASCII.
+				- tcpdump -v icmp 								===> tcpdump for ICMP;
+				- tcpdump -qns 0 -A -r first.pcap 						===> read pcap.files
+				- tcpdump -nni eth0 icmp 							===> icmp packet capture;
+				- tcpdump -nni eth0 icmp[icmptype] == 8 					===> only display ip packets that have icmp payload and icmptype 8 - ICMP Echo Request.
 				- sudo tcpdump -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420' 		===>
 
 					15:11:00.592960 IP (tos 0x0, ttl 63, id 50396, offset 0, flags [DF], proto TCP (6), length 223)
