@@ -278,17 +278,37 @@ Docker {
 		RUN rm -rf ./dist
 	}
 	
-	Networking:
-		There are 6 types of docker networks (network drivers): bridge, host, none, overlay, ipvlan, macvlan.
-		Bridge networking serves the majority of needs 
-		None is for container that do not need any network access.
+	Networking {
+		- There are 6 types of docker networks (network drivers): bridge, host, none, overlay, ipvlan, macvlan.
+		- Bridge networking serves the majority of needs. 
+		- You can't ping container from a container over the default bridge "docker0" - you need a custome bridge.
+		- None is for container that do not need any network access.
 
 		- docker network 			===> list all the choises
 		- docker network ls 			===> list all the available networks
 		- docker network inspect <net-name> 	===> mode details on the network (you can see which "project" uses this in the labels)
 		- docker info 				===> see the docker network drivers available
-		- docker network create -d bridge --subnet 10.0.0.1/24 <net-name> 	===> create named bridge network (for single host communication)
-		- docker0 				===> the default bridge interface, docker network ls shows name name bridge here
+		- docker network create -d bridge --subnet 10.0.0.1/24 <net-name>
+							===> create named bridge network (for single host communication)
+		- docker0 				===> the default bridge interface, docker network ls shows name name bridge here	
+	}
+
+	Bridge networking demo {
+		docker network create dummynet
+		docker run --rm -d --name c1 --network dummynet alpine sleep 60
+		docker run --rm -d --name c2 --network dummynet alpine sleep 60
+		
+		docker exec c2 ping c1
+		docker exec c1 ping c2
+		docker network rm dummynet
+
+		vs. 
+
+		docker run --rm -d --name c1 alpine sleep 60
+		docker run --rm -d --name c2 alpine sleep 60
+		docker exec c2 ping c1
+		docker exec c1 ping c2
+	}
 		
 	Connecting from one container to another:
 		- First approach - use the hosts ip address to connect to it:
@@ -302,24 +322,24 @@ Docker {
 			- This does not work when --hostname is provided in the command line from an individual container
 			- Example configuration to connect PG admin that is installed as a container and Postgress DB using hostname pg_db:
 			
-				version: '3.7'
-				services:
-				  pg_admin:
-				    image: dpage/pgadmin4
-				    ports:
-				      - 5050:80
-				    environment:
-				      PGADMIN_DEFAULT_EMAIL: 'a@b.com'
-				      PGADMIN_DEFAULT_PASSWORD: 'qwertyui'
-				  pg_db:
-				    image: postgres
-				    ports:
-				      - 5432:5432
-				    environment:
-				      POSTGRES_PASSWORD: 'pass'
-				      PGDATA: '/var/lib/postgresql/data/pgdata'
-				    volumes:
-				      - ./db:/var/lib/postgresql/data
+			version: '3.7'
+			services:
+			  pg_admin:
+			    image: dpage/pgadmin4
+			    ports:
+			      - 5050:80
+			    environment:
+			      PGADMIN_DEFAULT_EMAIL: 'a@b.com'
+			      PGADMIN_DEFAULT_PASSWORD: 'qwertyui'
+			  pg_db:
+			    image: postgres
+			    ports:
+			      - 5432:5432
+			    environment:
+			      POSTGRES_PASSWORD: 'pass'
+			      PGDATA: '/var/lib/postgresql/data/pgdata'
+			    volumes:
+			      - ./db:/var/lib/postgresql/data
 				      
 		      	- Just run: docker-compose up -d after that 
 		
