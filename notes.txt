@@ -280,8 +280,8 @@ Docker {
 	
 	Networking {
 		- There are 6 types of docker networks (network drivers): bridge, host, none, overlay, ipvlan, macvlan.
-		- Bridge networking serves the majority of needs. 
-		- You can't ping container from a container over the default bridge "docker0" - you need a custome bridge.
+		- Bridge networking serves the majority of needs, however not the default bridge, but user created bridged networks are recommended.
+		- You can't ping container from a container over the default bridge "docker0" using container names - you need a custome bridge. You can do it with ip addresses.
 		- None is for container that do not need any network access.
 
 		- docker network 			===> list all the choises
