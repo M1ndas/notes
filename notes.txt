@@ -73,6 +73,7 @@ Tree {
 Pyenv {
 	- shell > local > global > system 	===> hierarchy pyenv uses to determine which version of python to use
 	- pyenv shell --unset 			===> unset shell version of python being use (shell version trumps all other versions)
+	- pyenv which python			===> check which original executable is being accessed through a shim by pyenv
 }
 
 Pipdeptree {
