@@ -751,7 +751,7 @@ PowerShell {
 		- Get-PSSnapin -Registered
 		- Get-Module -ListAvailable
 		- for ($i=0; $i -le 10; $i++){echo $i};		===> simple for loop;
-		- Get-WmiObject Win32_Service | Where-Object {$_.Name -Like '*Splunk*'} | Select-Object Name,Path,CommandLine ===> get the command line arguments passed to a service that is already running.
+		- Get-WmiObject Win32_Service | Where-Object {$_.Name -Like '*Splunk*'} | Select-Object Name,Path,CommandLine ===> get command line arguments passed to a service that is already running.
 	}
 
 	Dojo {
@@ -830,7 +830,8 @@ Salt {
 		- sudo salt-key -F <mažo_jono_id>		===> check the key fingerprint for specific minion on master;
 		- salt-key -d <minion-id>			===> delete the minion from list of minions known to master
 		- sudo salt-call --local key.finger 		===> check the key fingerprint on minion;
-		- sudo salt '*' test.ping 			===> check if minion is reachable;
+		- sudo salt <minion> test.ping 			===> check if minion is reachable;
+		- sudo salt <minion> pillar.items		===> get the pillar items from the minion
 		----- minion targeting expressions ------
 		- sudo salt mast* test.ping 			===> run only on minions that start with mast;
 		- sudo salt mast? test.ping 			===> similar, but exactly one char;
