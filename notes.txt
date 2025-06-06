@@ -1,7 +1,35 @@
 ps aux --sort=-pcpu | head
 whois -h whois.cymru.com "213.252.224.249"					===> check AS of an IP
 sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn	===> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
-sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection	===> 
+sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection	===>
+
+Adguard Home {
+	docker run --name adguardhome\
+	    --restart unless-stopped\
+	    -v /my/own/workdir:/opt/adguardhome/work\
+	    -v /my/own/confdir:/opt/adguardhome/conf\
+	    -p 53:53/tcp -p 53:53/udp\
+	    -p 67:67/udp -p 68:68/udp\
+	    -p 80:80/tcp -p 443:443/tcp -p 443:443/udp -p 3000:3000/tcp\
+	    -p 853:853/tcp\
+	    -p 853:853/udp\
+	    -p 5443:5443/tcp -p 5443:5443/udp\
+	    -p 6060:6060/tcp\
+	    -d adguard/adguardhome
+
+	docker run --name adguardhome `
+	    --restart unless-stopped `
+	    -v C:\Users\Mindaugas\Desktop\AdguardHomeDocker\Work:/opt/adguardhome/work `
+	    -v C:\Users\Mindaugas\Desktop\AdguardHomeDocker\Conf:/opt/adguardhome/conf `
+	    -p 53:53/tcp -p 53:53/udp `
+	    -p 67:67/udp -p 68:68/udp `
+	    -p 80:80/tcp -p 443:443/tcp -p 443:443/udp -p 3000:3000/tcp `
+	    -p 853:853/tcp `
+	    -p 853:853/udp `
+	    -p 5443:5443/tcp -p 5443:5443/udp `
+	    -p 6060:6060/tcp `
+	    -d adguard/adguardhome
+}
 
 Bpf, bpftrace {
 	- timeout 10 sudo bpftrace -e 'tracepoint:syscalls:sys_enter_openat { print((pid, str(args->filename))); }' 2>&1 | pv -cN openat -l > /dev/null		===> measure opens per second (for 10 seconds)
