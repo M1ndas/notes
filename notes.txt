@@ -1,7 +1,9 @@
-ps aux --sort=-pcpu | head
-whois -h whois.cymru.com "213.252.224.249"					===> check AS of an IP
-sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn	===> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
-sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection	===>
+Common {
+	ps aux --sort=-pcpu | head							==> get top 10 processes that use the cpu
+	whois -h whois.cymru.com "213.252.224.249"					==> check AS of an IP
+	sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn	==> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
+	sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection	==>
+}
 
  Tmux {	
 	- tmux 					==> launch a new tmux session, after which you will be able to run a process inside a newly opened shell
