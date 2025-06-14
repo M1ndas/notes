@@ -3,6 +3,25 @@ whois -h whois.cymru.com "213.252.224.249"					===> check AS of an IP
 sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn	===> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
 sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection	===>
 
+ Tmux {	
+	- tmux 					==> launch a new tmux session, after which you will be able to run a process inside a newly opened shell
+	- ctrl+b d 				==> detach from tmux session	
+	- tmux {a|attach} 			==> attach to the latest tmux session	
+	- tmux attach-session -t {num|name} 	==> attach to a specific session when multiple are running	
+	- tmux ls | list-sessions		==> list sessions attached or detached, should be used when not inside tmux itself 
+	- ctrl+b c				==> create new window
+	- ctrl+b w {n|p}			==> window {next|prev}
+	- ctrl+b ,				==> rename window
+	- ctrl+c ctrl+d 			==> terminates the process and the tmux session
+	- ctrl+b %				==> split the current pane vertically.
+	- ctrl+b " 				==> split the current pane horizontally.
+	- ctrl+b x				==> close the current pane.
+	- ctrl+b [				==> enable scrolling (q to quit scoll mode)
+	- ctrl+b :				==> enter a named command
+
+	- more: https://gist.github.com/MohamedAlaa/2961058 
+}	
+
 Adguard Home {
 	docker run --name adguardhome\
 	    --restart unless-stopped\
@@ -8616,21 +8635,8 @@ sys_template_v9{
 
  GNUplot {	
 	- primes 1 1000 | gnuplot -persist -e "set terminal dumb 121 20; set yrange[200:400]; plot '-' with impulses title 'Ping (ms)';"	
-	- primes 0 100 | gnuplot -p -e 'set terminal dumb; plot "/dev/stdin"'	
-}	
-
- tmux {	
-	- tmux 						===> launch a new tmux session, after which you will be able to run a process inside a newly opened shell
-	- ctrl+b --> d 					===> detach from tmux session	
-	- tmux attach 					===> attach to the latest tmux session	
-	- tmux attach-session -t {number|name} 		===> attach to a specific session when multiple are running	
-	- tmux ls | list-sessions			===> list sessions attached or detached, should be used when not inside tmux itself 
-	- ctrl+c --> ctrl+d 				===> terminates the process and the tmux session
-	- ctrl+b --> %					===> split the current pane vertically.
-	- ctrl+b --> " 					===> split the current pane horizontally.
-	- ctrl+b --> x					===> close the current pane.
-	- ctrl+b --> [					===> enable scrolling (q to quit scoll mode)
-}	
+	- primes 0 100 | gnuplot -p -e 'set terminal dumb; plot "/dev/stdin"'
+}
 
  Midnight Commander {	
 	- <Tab> 					===> move to a different panel;	
