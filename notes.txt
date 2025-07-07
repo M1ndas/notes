@@ -875,24 +875,25 @@ Go / Golang {
 
 Salt {
 	Commands {
-		- ls -l /var/cache/salt/master/minions		===> list all minions without running any commands
-		- ls -l /var/cache/salt/master/gitfs/hash/base	===> where salt keeps the states when you are using GitFS for state sync
-		- salt-run manage.status 			===> check the status of all known salt minions
+		- ls -l /var/cache/salt/master/minions				===> list all minions without running any commands
+		- ls -l /var/cache/salt/master/gitfs/hash/base			===> where salt keeps the states when you are using GitFS for state sync
+		- salt-run manage.status 					===> check the status of all known salt minions
 		- curl -L https://bootstrap.saltstack.com -o install-salt.sh 	===> downloads the intall script;
-		- sudo sh install-salt.sh -M -A 127.0.0.1	===> install on master: -M master, -A minions master, -I minions id;
-		- sudo sh install-salt.sh -A 192.168.1.105	===> install on minion;
-		- sudo salt-key 				===> list keys;
-		- sudo salt-key -F <mažo_jono_id>		===> check the key fingerprint for specific minion on master;
-		- salt-key -d <minion-id>			===> delete the minion from list of minions known to master
-		- sudo salt-call --local key.finger 		===> check the key fingerprint on minion;
-		- sudo salt <minion> test.ping 			===> check if minion is reachable;
-		- sudo salt <minion> pillar.items		===> get the pillar items from the minion
+		- sh install-salt.sh -M -A 127.0.0.1				===> install on master: -M master, -A minions master, -I minions id;
+		- sh install-salt.sh -A 192.168.1.105				===> install on minion;
+		- salt-key 							===> list keys;
+		- salt-key -F <mažo_jono_id>					===> check the key fingerprint for specific minion on master;
+		- salt-key -d <minion-id>					===> delete the minion from list of minions known to master
+		- salt-call --local key.finger 					===> check the key fingerprint on minion;
+		- salt <minion> test.ping 					===> check if minion is reachable;
+		- salt <minion> pillar.items					===> get the pillar items from the minion
+		- salt '*' grains.get os					===> get the OS from the grains
 		----- minion targeting expressions ------
-		- sudo salt mast* test.ping 			===> run only on minions that start with mast;
-		- sudo salt mast? test.ping 			===> similar, but exactly one char;
-		- sudo salt -E '(master|web1)' test.ping 	===> target salt minions using regex;
-		- sudo salt -S 10.10.0.0/16 test.ping 		===> target salt minions using regex;
-		- sudo salt -C 'S@192.168.0.0/16 and E@(master|web1)' ===> combined minion targetting expression;
+		- sudo salt mast* test.ping 					===> run only on minions that start with mast;
+		- sudo salt mast? test.ping 					===> similar, but exactly one char;
+		- sudo salt -E '(master|web1)' test.ping 			===> target salt minions using regex;
+		- sudo salt -S 10.10.0.0/16 test.ping 				===> target salt minions using regex;
+		- sudo salt -C 'S@192.168.0.0/16 and E@(master|web1)' 		===> combined minion targetting expression;
 		-----------------------------------------
 	}
 	
