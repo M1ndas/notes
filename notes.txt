@@ -7198,22 +7198,30 @@ sudo tshark -VR 'ssl.handshake.type == 1' 							===> works fine even when deseg
 	    |-----B-----|
 	        	|-------C------|
 
-////////// Vagrant
-	
-	- Download aind install 64 bit version of the newest vagrant 	===> https://www.vagrantup.com/downloads.html
-	- vagrant box add ubuntu/trusty64 --provider virtualbox 		===> add vm image to your images
-	- vagrant init ubuntu/trusty64 --provider virtualbox 			===> create a vm with a user and all that
-	- vagrant up
+vagrant {
+	- vagrant box add ubuntu/trusty64 --provider virtualbox 	===> add vm image to your images
+	- vagrant init ubuntu/trusty64 --provider virtualbox 		===> create a vm 
+	- vagrant up							===> 
 	- vagrant ssh
-	- vagrant reload  												===> reload VM after modifying the vagrantFile
-	- vagrant halt 													===> shut down the machine gracefully
-	- vagrant halt -f 												===> force shutdown
-	- vagrant package 												===> create a package of the current state of your VM, share it or recreate it after you destroy it
-	- vagrant destroy first_box										===> destroy the VM
+	- vagrant reload  						===> reload VM after modifying the vagrantFile
+	- vagrant halt 							===> shut down the machine gracefully
+	- vagrant halt -f 						===> force shutdown
+	- vagrant package 						===> create a package of the current state of your VM, share it or recreate it after you destroy it
+	- vagrant destroy [first_box]					===> destroy the VM
 	- vagrant box remove ubuntu/trusty64 --box-version 20150422.0.0 ===> remove a box
 	- vagrant plugin update
 	- vagrant plugin update vagrant-parallels
 	- vagrant box update <box-name>
+	- vagrant box list						===> check all available vm images
+	- ~/.vagrant.d/boxes/						===> where are all boxes at
+	- https://portal.cloud.hashicorp.com/vagrant/discover		===> list of available boxes
+	- vagrant plugin install vagrant-vbguest			===> plugin to automatically upgrade vbguest addons (you can manage them though the ui)
+
+	interesting things {
+		- if you change Vagrantfile VMs BY DEFINING A NEW VM AND DELETING THE OLD ONE while a VM is running you kind of lose the management capabilities for that VM.
+		  .. the vagrant global-status command will show it, but vagrant [halt | suspend] will not pick up on the old machine. You can see it if you open Virtuabox UI
+		  .. so you can manage and insoect it from there.
+	}
 
 	Networking{
 		- Default routing table:
@@ -7244,7 +7252,6 @@ sudo tshark -VR 'ssl.handshake.type == 1' 							===> works fine even when deseg
 	}
 
 	To-do:
-		- where are all the images stored;
 		- how to uninstall the vm;
 		- how to run multiple vm's with the same image 
 				===> http://docs.vagrantup.com/v2/multi-machine/
