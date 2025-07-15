@@ -7220,7 +7220,7 @@ vagrant {
 	interesting things {
 		- if you change Vagrantfile VMs BY DEFINING A NEW VM AND DELETING THE OLD ONE while a VM is running you kind of lose the management capabilities for that VM.
 		  .. the vagrant global-status command will show it, but vagrant [halt | suspend] will not pick up on the old machine. You can see it if you open Virtuabox UI
-		  .. so you can manage and insoect it from there.
+		  .. so you can manage and inspect it from there. vagrant global-status --prune allows pruning vms that do not have configration associated with them.
 	}
 
 	Networking{
