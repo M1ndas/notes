@@ -18,7 +18,7 @@ Common {
 	- ctrl+c ctrl+d 			==> terminates the process and the tmux session
 	- ctrl+b %				==> split the current pane vertically.
 	- ctrl+b " 				==> split the current pane horizontally.
-	- ctrl+b + {<|>|^|v|}			==> use arrows to move to different panes
+	- ctrl+b + { < | > | ^ | v }		==> use arrows to move to different panes
 	- ctrl+b x				==> close the current pane.
 	- ctrl+b [				==> enable scrolling (q to quit scoll mode)
 	- ctrl+b :				==> enter a named command
