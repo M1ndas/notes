@@ -9,8 +9,8 @@ Common {
 	- tmux 					==> launch a new tmux session, after which you will be able to run a process inside a newly opened shell
 	- ctrl+b d 				==> detach from tmux session	
 	- tmux {a|attach} 			==> attach to the latest tmux session	
-	- tmux attach-session -t {num|name} 	==> attach to a specific session when multiple are running	
-	- tmux ls | list-sessions		==> list sessions attached or detached, should be used when not inside tmux itself 
+	- tmux {a|attach-session} -t {num|name} ==> attach to a specific session when multiple are running	
+	- tmux {ls|list-sessions}		==> list sessions attached or detached, should be used when not inside tmux itself 
 	- ctrl+b c				==> create new window
 	- ctrl+b w {n|p}			==> window {next|prev}
 	- ctrl+b ,				==> rename window
