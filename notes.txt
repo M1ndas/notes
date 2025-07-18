@@ -11,6 +11,7 @@ Common {
 	- tmux {a|attach} 			==> attach to the latest tmux session	
 	- tmux {a|attach-session} -t {num|name} ==> attach to a specific session when multiple are running	
 	- tmux {ls|list-sessions}		==> list sessions attached or detached, should be used when not inside tmux itself 
+	- tmux {kill-sess|-ion} -t {num|name}	==> kill session (no short command)
 	- ctrl+b c				==> create new window
 	- ctrl+b w {n|p}			==> window {next|prev}
 	- ctrl+b ,				==> rename window
