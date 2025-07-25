@@ -24,7 +24,12 @@ Tmux {
 	- ctrl+b :				==> enter a named command
 
 	- more: https://gist.github.com/MohamedAlaa/2961058 
-}	
+}
+
+Rename {
+	- rename 's/f/a/' *.txt			==> rename all files that have .txt file extension by changing all 'f' to 'a'.
+	- rename 's/(\d+)/$1 + 10/e' f* -v	==> /e: the evaluate modifier tells rename to treat the replacement part ($1 + 1) as Perl code, execute it, and use its result as the final replacement string.
+}
 
 Adguard Home {
 	docker run --name adguardhome\
