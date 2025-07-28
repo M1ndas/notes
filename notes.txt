@@ -8656,7 +8656,8 @@ sys_template_v9{
 	- primes 0 100 | gnuplot -p -e 'set terminal dumb; plot "/dev/stdin"'
 }
 
- Midnight Commander {	
+ Midnight Commander {
+	- esc + 0 					===> simulate f10 if that one does not work (for example it does not work using gnome terminal)
 	- <Tab> 					===> move to a different panel;	
 	- alias mc='. /usr/libexec/mc/mc-wrapper.sh' 	===> use this wrapper to navigate to the directory that you were in MC after you have exited MC;	
 	- <Insert> / <ctrl+t> 				===> select files (press again to unselect);	
