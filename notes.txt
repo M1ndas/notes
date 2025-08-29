@@ -66,8 +66,8 @@ Bpf, bpftrace {
 }
 
 Rust {
-	- rustup -V 								===> check version managers version 
-	- rustc -V								===> check rust compiler version
+	- rustup -V		===> check version managers version 
+	- rustc -V		===> check rust compiler version
 }
 
 Poetry {
@@ -78,17 +78,17 @@ Linux {
 	Traditional partioning in Linux {
 		- create a new VDI in virtualbox (or any VM administration tool)
 		- lsblk -e7 						===> list all disks and partitions (-e7 to exclude loopback devices)
-		- sudo fdisk /dev/sd[X]					===> use fdisk to create a partion for /dev/sdb or /sda or whatever [X]
-			- ... n 					===> new partition
-			- ... p						===> primary partition
+		- sudo fdisk /dev/sd[X]				===> use fdisk to create a partion for /dev/sdb or /sda or whatever [X]
+			- ... n 						===> new partition
+			- ... p							===> primary partition
 			- ... <enter>					===> confirm the first sector
-			- ... +10G | <enter>				===> specify partition size 10GB
-			- ... w 					===> make the changes persistent
-		- sudo mkfs.ext4 /dev/sd[X][1]				===> install a file system for the created partition
-		- sudo mkdir /storage					===> create a directory to mount a partition on
-		- sudo mount /dev/sd[X][1] /storage			===> mount the partition on that directory
-		- sudo umount /storage					===> to reverse mounting
-		- sudo vim /ets/fstab					===> open fstab and make the mount persistent
+			- ... +10G | <enter>			===> specify partition size 10GB
+			- ... w 						===> make the changes persistent
+		- sudo mkfs.ext4 /dev/sd[X][1]		===> install a file system for the created partition
+		- sudo mkdir /storage				===> create a directory to mount a partition on
+		- sudo mount /dev/sd[X][1] /storage	===> mount the partition on that directory
+		- sudo umount /storage				===> to reverse mounting
+		- sudo vim /ets/fstab				===> open fstab and make the mount persistent
 			- ... /dev/sd[X][1] /storage ext4 defaults 0 0
 		- dd if=/dev/random of=1G_file bs=1G count=1 		===> create 1G file for testing
 		- remember: the disk partition can be mounted over by the other partition - data is not lost in that case and you can still remount the old one
@@ -96,21 +96,21 @@ Linux {
 	
 	LVM partitioning in Linux {
 		- https://www.redhat.com/sysadmin/lvm-vs-partitioning 	===> TBD
-		- pvdisplay						===> ///
-		- vgcreate vg_moxisplit /dev/sda			===> designate the disk to be the physical volume and create add it to the volumen group
-		- vgremove vg_moxisplit					===> reverse the creation of a volume group
-		- lvcreate -n storage -l 100%FREE vg_moxisplit		===> create the logical volume
-		- lvdisplay 						===> check the logical volume
-		- lvremove -f /vg_moxisplit/storage			===> reverse the LV creation
-		- mkfs.ext4 /dev/vg_moxisplit/storage			===> create an ext4 file system on the logical volume
-		- sudo mkdir /storage					===> create a dir to be mounted on the LV
-		- sudo mount /dev/vg_moxisplit/storage /storage		===> mount the /storage directory on the LV
-		- blkid							===> check the uuid of the LV or File system, it is ussually that the file system is mounted, but LV is possible as well
-		- /etc/fstab 						===> /dev/disk/by-uuid/3342a48a-fc68-4d90-a059-73e2b9f99e9c /storage ext4 defaults 0 0
+		- pvdisplay												===> ///
+		- vgcreate vg_moxisplit /dev/sda						===> designate the disk to be the physical volume and create add it to the volumen group
+		- vgremove vg_moxisplit									===> reverse the creation of a volume group
+		- lvcreate -n storage -l 100%FREE vg_moxisplit			===> create the logical volume
+		- lvdisplay 											===> check the logical volume
+		- lvremove -f /vg_moxisplit/storage						===> reverse the LV creation
+		- mkfs.ext4 /dev/vg_moxisplit/storage					===> create an ext4 file system on the logical volume
+		- sudo mkdir /storage									===> create a dir to be mounted on the LV
+		- sudo mount /dev/vg_moxisplit/storage /storage			===> mount the /storage directory on the LV
+		- blkid													===> check the uuid of the LV or File system, it is ussually that the file system is mounted, but LV is possible as well
+		- /etc/fstab 											===> /dev/disk/by-uuid/3342a48a-fc68-4d90-a059-73e2b9f99e9c /storage ext4 defaults 0 0
 		- lvextend -l +100%FREE -r /dev/mapper/ubuntu--vg... 	===> extend the current lv to 100% of the partition size (-r - to automatically resize the file system)
 	}
 	Netplan {
-		- https://askubuntu.com/a/1466387 			===> configure static ip with netplan
+		- https://askubuntu.com/a/1466387 						===> configure static ip with netplan
 	}
 }
 
@@ -123,25 +123,26 @@ vpn, vpn-slice {
 MobaXterm {
 	- https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf 	===> install on Ubuntu using Wine 
 	- https://web.archive.org/web/20230315020707/https://dev.to/selllami/how-to-run-mobaxterm-on-ubuntu-linux-with-wine-ohf ===> archived version 
-	- winecfg > drives > show dot files						===> see hidden files when using apps through wine
-	- echo -e "your_password\n" | sudo -iS pwd && sudo su 				===> immediatelly go to root (when there is no /etc/sudoers policy). Not the best approach 															because it leaves the password in the process list (ps -a). It is better to actually
-												create a moba macro that enters the password for you.
+	- winecfg > drives > show dot files												===> see hidden files when using apps through wine
+	- echo -e "your_password\n" | sudo -iS pwd && sudo su 							===> immediatelly go to root (when there is no /etc/sudoers policy). 
+																						Not the best approach because it leaves the password in the process list (ps -a). 
+																						It is better to actually create a moba macro that enters the password for you.
 }
 
 Tree {
-	- tree "C:\Users\" /F /A > file.txt	===> get the directory tree of folder in regular ASCII format +filenames +redirect to a specific file. Unhide the files if hidden files are used! 
+	- tree "C:\Users\" /F /A > file.txt		===> get the directory tree of folder in regular ASCII format +filenames +redirect to a specific file. Unhide the files if hidden files are used! 
 }
 
 Pyenv {
-	- shell > local > global > system 	===> hierarchy pyenv uses to determine which version of python to use
-	- pyenv shell --unset 			===> unset shell version of python being use (shell version trumps all other versions)
-	- pyenv which python			===> check which original executable is being accessed through a shim by pyenv
+	- shell > local > global > system 		===> hierarchy pyenv uses to determine which version of python to use
+	- pyenv shell --unset 					===> unset shell version of python being use (shell version trumps all other versions)
+	- pyenv which python					===> check which original executable is being accessed through a shim by pyenv
 }
 
 Pipdeptree {
-	- pipdeptree				===> get all transitive dependencies for all top level libraries
-	- pipdeptree -p pytest			===> "pytest requires", get all transitive dependencies for only pytest
-	- pipdeptree -p tomli -r		===> "tomli is required by", get all top level dependencies that require tomli
+	- pipdeptree							===> get all transitive dependencies for all top level libraries
+	- pipdeptree -p pytest					===> "pytest requires", get all transitive dependencies for only pytest
+	- pipdeptree -p tomli -r				===> "tomli is required by", get all top level dependencies that require tomli
 }
 
 Cron {
