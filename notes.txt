@@ -1,6 +1,8 @@
 Common {
 	- ps aux --sort=-pcpu | head														==> get top 10 processes that use the cpu
 	- whois -h whois.cymru.com "213.252.224.249"										==> check AS of an IP
+	- traceroute -Tnp 443 cnn.com | awk '/^[ 0-9]+ / {for(i=2;i<=NF;i++) {print $i; break}}' | while read -r ip; do whois -h whois.cymru.com "$ip" | awk 'NR>1{print}'; done
+																						==> TODO: need to fix this to print ip addresses like * * * *
 	- traceroute -Tnp 443 cnn.com | awk '/^[ 0-9]+ / {for(i=2;i<=NF;i++) if ($i ~ /^[0-9.]+$/) {print $i; break}}' | while read -r ip; do whois -h whois.cymru.com "$ip" | awk 'NR>1{print}'; done
 																						==> get the autonomous systems crossed going from the machine this command is ran on to the server specified
 	- sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn		==> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
