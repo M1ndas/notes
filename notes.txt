@@ -7,7 +7,7 @@ Common {
 																						==> get the autonomous systems crossed going from the machine this command is ran on to the server specified
 	- sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn		==> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
 	- sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection			==>
-	- fio --name=scale --filename=./fio.test --size=1G --bs=4k --iodepth=32 --rw=randread --direct=1 --numjobs=4 --time_based --runtime=10 --group_reporting
+	- fio --name=scale --filename=./fio.test --size=1G --bs=4k --iodepth=32 --rw=randread --direct=1 --numjobs=4 --time_based --runtime=10 --group_reporting => (hetzner node) READ: bw=49.0MiB/s (51.3MB/s), 49.0MiB/s-49.0MiB/s (51.3MB/s-51.3MB/s), io=490MiB (513MB), run=10002-10002msec
 }
 
 Tmux {	
