@@ -16,7 +16,7 @@ Linux Perf Tools {
 	Ram:
 	- //
 
-	Storage: 
+	Storage (disclaimer: dd is not a real benchmarking tool): 
 	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=dsync	==> W, data sync, oflag=dsync forces each write to be committed to stable storage before returning. That adds per-write latency and limits batching.
 	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=sync 	==> W, data and metadata sync
 	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=direct 	==> W, bypass page cache but allows filesystem/device to coalesce writes in block layer & use drive’s volatile write cache (unless disabled), so tput can be higher than dsync.
