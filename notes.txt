@@ -6,8 +6,24 @@ Common {
 	- traceroute -Tnp 443 cnn.com | awk '/^[ 0-9]+ / {for(i=2;i<=NF;i++) if ($i ~ /^[0-9.]+$/) {print $i; break}}' | while read -r ip; do whois -h whois.cymru.com "$ip" | awk 'NR>1{print}'; done
 																						==> get the autonomous systems crossed going from the machine this command is ran on to the server specified
 	- sudo openvpn3 session-start --config /home/minbern/Downloads/ukmerge-vpn.ovpn		==> try to initiate openvpn session without network manager (using openvpn3 client for ubuntu)
-	- sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection			==>
-	- fio --name=scale --filename=./fio.test --size=1G --bs=4k --iodepth=32 --rw=randread --direct=1 --numjobs=4 --time_based --runtime=10 --group_reporting => (hetzner node) READ: bw=49.0MiB/s (51.3MB/s), 49.0MiB/s-49.0MiB/s (51.3MB/s-51.3MB/s), io=490MiB (513MB), run=10002-10002msec
+	- sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection			==>	
+}
+
+Linux Perf Tools {
+	Cpu:
+	- //
+
+	Ram:
+	- //
+
+	Storage: 
+	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=dsync	==> W, data sync, oflag=dsync forces each write to be committed to stable storage before returning. That adds per-write latency and limits batching.
+	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=sync 	==> W, data and metadata sync
+	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=direct 	==> W, bypasses page cache but allows filesystem/device to coalesce writes in block layer and use the drive’s volatile write cache (unless disabled), so throughput can be higher.
+	- dd if=~/dd.testfile of=/dev/null bs=1G 						==> R, cached
+	- dd if=~/dd.testfile of=/dev/null bs=1G iflag=direct 			==> R, non-cached
+	- fio --name=scale --filename=./fio.test --size=1G --bs=4k --iodepth=32 --rw=randread --direct=1 --numjobs=4 --time_based --runtime=10 --group_reporting 
+		=> (hetzner node) READ: bw=49.0MiB/s (51.3MB/s), 49.0MiB/s-49.0MiB/s (51.3MB/s-51.3MB/s), io=490MiB (513MB), run=10002-10002msec
 }
 
 Tmux {	
