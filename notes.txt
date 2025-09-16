@@ -19,7 +19,7 @@ Linux Perf Tools {
 	Storage: 
 	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=dsync	==> W, data sync, oflag=dsync forces each write to be committed to stable storage before returning. That adds per-write latency and limits batching.
 	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=sync 	==> W, data and metadata sync
-	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=direct 	==> W, bypasses page cache but allows filesystem/device to coalesce writes in block layer and use the drive’s volatile write cache (unless disabled), so throughput can be higher.
+	- dd if=/dev/zero of=~/dd.testfile bs=1G count=1 oflag=direct 	==> W, bypass page cache but allows filesystem/device to coalesce writes in block layer & use drive’s volatile write cache (unless disabled), so tput can be higher than dsync.
 	- dd if=~/dd.testfile of=/dev/null bs=1G 						==> R, cached
 	- dd if=~/dd.testfile of=/dev/null bs=1G iflag=direct 			==> R, non-cached
 	- fio --name=scale --filename=./fio.test --size=1G --bs=4k --iodepth=32 --rw=randread --direct=1 --numjobs=4 --time_based --runtime=10 --group_reporting 
