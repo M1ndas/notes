@@ -52,6 +52,31 @@ Rename {
 	- rename 's/(\d+)/$1 + 10/e' f* -v	==> /e: the evaluate modifier tells rename to treat the replacement part ($1 + 1) as Perl code, execute it, and use its result as the final replacement string.
 }
 
+Visual Studio Code, VSC {
+	Hotkeys {
+		- f12 cursor on code  ===> goto definiton 
+		- ctrl + alt + -      ===> get back to the previous definition 
+		- ctrl + p            ===> open file by name
+		- ctrl + shift + p    ===> open vsc command dialog (can select python interpreter)
+		- shift + end         ===> highlight from cursor to the end of text
+		- shift + home        ===> highlight from cursor to the start of text
+		- ctrl + `            ===> focus terminal
+		- ctrl + 1            ===> focus code editor
+		- ctrl + shift + `    ===> new terminal
+		- ctrl + pgup/pgdown  ===> switch between terminals
+		- shift + pgup/pgdown ===> scroll inside terminal
+		- ctrl + g            ===> go to line number
+		- ctrl hold + click	  ===> multicursor via mouse
+		- shift + ctrl + ^/v  ===> multicursor via keyboard
+		- select smth + ctrl + d	===> find next occurence of selected and select it (usefull for multiline edits and replace)
+	}
+
+	Drills / katas {
+		- open file with 2 terminal commands, highlight line, open terminal, launch command, return focus to file, highlight another line, focus on terminal, launch 2nd command, exit terminal
+		- create a python project with a venv and two files, one has to call the function of another, go to definition, get back, delete everything
+	}
+}
+
 Adguard Home {
 	docker run --name adguardhome\
 	    --restart unless-stopped\
