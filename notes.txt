@@ -47,10 +47,21 @@ Tmux {
 	- more: https://gist.github.com/MohamedAlaa/2961058 
 }
 
+JQ, jq {
+	- echo -n '{"config": {"api": "a", "db": "b"}}' | jq . 				==> get everything i.e.: { "config": { "api": "a", "db": "b" } }
+	- echo -n '{"config": {"api": "a", "db": "b"}}' | jq .config 		==> get key config i.e.: { "api": "a", "db": "b" }
+	- echo -n '{"config": {"api": "a", "db": "b"}}' | jq keys 			==> returns all keys from first level as a list i.e.: ["config"]
+	- echo -n '{"config": {"api": "a", "db": "b"}}' | jq keys[]			==> all keys are unpacked from the list so instead of ["config"] ir would be just "config"  
+	- echo -n '{"config": {"api": "a", "db": "b"}}' | jq .[keys[0]]		==> get the value of the first key but w/o refering to the name of the key
+	- echo -n '{"config": ["A", "B", "C"]}' | jq .[][] 																==> all list values unpacked
+	- echo -n '{"config": {"api": "a"}, "some": ["x"]}' | jq '.["some"] = "q" | .config.api = "b"'					==> replace multiple values in a chained manner
+	-  echo -n '{"config": {"api": "a", "db": "b"}, "some": ["val"]}' | jq '.["some"][1] = "val2" | .another = {}'	==> insert new data into various levels
+}
+
 Rename {
 	- rename 's/f/a/' *.txt			==> rename all files that have .txt file extension by changing all 'f' to 'a'.
 	- rename 's/(\d+)/$1 + 10/e' f* -v	==> /e: the evaluate modifier tells rename to treat the replacement part ($1 + 1) as Perl code, execute it, and use its result as the final replacement string.
-}
+} 
 
 Visual Studio Code, VSC {
 	Hotkeys {
