@@ -8181,26 +8181,26 @@ sys_template_v9{
 			CKAD (k8): https://training.linuxfoundation.org/full-catalog/?_sft_product_type=certification
 			CKA (k8): https://training.linuxfoundation.org/full-catalog/?_sft_product_type=certification
 		Networking:
-			Cisco:		CCNA 		CCNP 		CCIE		CCAr
-			Jupiter Nets: 	JNCA ... (and on)
+			Cisco:		CCNA 	CCNP 	CCIE	CCAr
+			Jupiter: 	JNCA ... (and on)
  		Windows:		
 			MCSA Server					MCSE Server	
 			MCSA App Builder (70-483 C#, 486 ASP.NET MVC) 	MCSD App Builder (487 Azure Web Services)
  		Linux: 				
-			RedHat:		RHCSA		RHCSE		RHCSS	
+			RedHat:			RHCSA		RHCSE		RHCSS	
 			Linux Found.:	LFCS 		LCFE	
  		Programming languages:	
 			Python:		PCEP 		PCAP 		PCPP I, II	
-			Java		OCA (n/a @v11)	OCP (only one)			
-			C: 		CLA		CLP		CLS (available after december 2017)	
-			Cpp:		CPA		CPP		CPS (available after december 2017)	
+			Java		OCA			OCP (only one)			
+			C: 			CLA			CLP			CLS (available after december 2017)	
+			Cpp:		CPA			CPP			CPS (available after december 2017)	
 			C#: 		MCSA 		MCSE 		MCSM
 			Android: 	AAD Kotlin
- 		Security: 		CEH		GIAC GPEN 	GIAC GXPN	GIAC GSE 	CISSP	
-		Software Architecture: 	TOGAF		Archimate	Zachman
+ 		Security: 		CEH			GIAC GPEN 	GIAC GXPN	GIAC GSE 	CISSP	
+		Software Arch.: TOGAF		Archimate	Zachman
 		Testing: 		CTFL 		CTAL(tech)	
 		Big Data: 		CCP:DS		AWS (deprecated)
-		ML: 			Coursera ML 	Deeplearning.ai	
+		ML: 			Coursera ML Deeplearning.ai	
 		SQL (DBA): 		Oracle 		Microsoft Data	
 		PM: 			PMP	
 		General:		CompTIA A+ 	Storage+ 	Network+ 	Security+ 	Project+
@@ -8211,7 +8211,7 @@ sys_template_v9{
 			Docker: 	DCA (https://training.mirantis.com/certification/dca-certification-exam/)
 		
  	CCNA/P/E {	
-		- https://learningnetwork.cisco.com/community/certifications/ccna 				===> main cisco page for ccna / a guide;	
+		- https://learningnetwork.cisco.com/community/certifications/ccna 								===> main cisco page for ccna / a guide;	
 		- http://www.cisco.com/web/partners/downloads/765/tools/quickreference/routerperformance.pdf  	===> google: "cisco router performance numbers" 
 		- CCIE - written + 8 hours lab !!! - this is the prep plan: https://www.youtube.com/watch?v=XiCi9P9rJME	
 	}	
