@@ -8327,10 +8327,11 @@ sys_template_v9{
 	sysctl -p 					===> read values from file	
 }	
 
- RSYNC {	
-	- RSYNC has the advantage of preserving permissions, ownership, and ensuring data integrity.	
-	- rsync is faster than scp (secure copy) because it only transfers the diff. It consumes less bandwidth because it has the ability to do compression and decompression on both ends.	
-	- rsync options src dst 			===> general usage of rsync	
+rsync {	
+	- rsync has the advantage of preserving permissions, ownership, and ensuring data integrity.	
+	- rsync is faster than scp (secure copy) because it only transfers the diff. It consumes less bandwidth because it has the ability to do compression and decompression on both ends.
+	- TODO:: delete a dir by syncing empty dir with rsync w/ progress bar: https://www.youtube.com/shorts/9qIbQNjghts 
+	- rsync options src dst 						===> general usage of rsync	
 	- rsync -avzh root@192.168.0.100:/home /tmp 	===> remote to local;	
 	- rsync -avzh /tmp root@192.168.0.100:/home 	===> local to remote;	
 	- rsync -Pav -e 'ssh -i /path/to/id_rsa -C -c blowfish' user@remote:/remote/dir/ /local/dir/	
@@ -8342,17 +8343,10 @@ sys_template_v9{
 		--exclude={access_rules,block_page,captcha,js_challenge,threat,waf,websites} 					===> exclude multiple patterns;	
 		--exclude-from='/home/ben/exclude_me.txt' 														===> specify the excudes in a file;	
 
- sudo rsync -Lavz -e "ssh -i /home/vagrant/.ssh/prod_priv.key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \	
---exclude={logs,cache,*_temp,runav.pl,sbin} \	
---progress zulu@172.31.64.149:/usr/local/openresty/ /usr/local/openresty/	
-
- sudo mkdir -p /usr/local/openresty/nginx/cache/temp	
-
- sudo rsync -Lavz -e "ssh -i /home/vagrant/.ssh/prod_priv.key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress zulu@172.31.64.149:/etc/zulu.yml /etc/zulu.yml	
-
-
- 	- rsync --help | grep -P "(-P\W|-r\W|-a\W)" 	===> using grep on the --help flag to figure out what is going on in these statments;	
-} rsync	
+		 sudo rsync -Lavz -e "ssh -i /home/vagrant/.ssh/prod_priv.key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --exclude={logs,cache,*_temp,runav.pl,sbin} --progress zulu@172.31.64.149:/usr/local/openresty/ /usr/local/openresty/	
+		 sudo mkdir -p /usr/local/openresty/nginx/cache/temp
+		 sudo rsync -Lavz -e "ssh -i /home/vagrant/.ssh/prod_priv.key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress zulu@172.31.64.149:/etc/zulu.yml /etc/zulu.yml	
+}
 
  BASH SCRIPTS {
  		############################################################# - check host icmp reachability in a /28 subnet
