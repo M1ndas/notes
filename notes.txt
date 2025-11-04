@@ -55,7 +55,7 @@ JQ, jq {
 	- echo -n '{"config": {"api": "a", "db": "b"}}' | jq .[keys[0]]		==> get the value of the first key but w/o refering to the name of the key
 	- echo -n '{"config": ["A", "B", "C"]}' | jq .[][] 																==> all list values unpacked
 	- echo -n '{"config": {"api": "a"}, "some": ["x"]}' | jq '.["some"] = "q" | .config.api = "b"'					==> replace multiple values in a chained manner
-	-  echo -n '{"config": {"api": "a", "db": "b"}, "some": ["val"]}' | jq '.["some"][1] = "val2" | .another = {}'	==> insert new data into various levels
+	- echo -n '{"config": {"api": "a", "db": "b"}, "some": ["val"]}' | jq '.["some"][1] = "val2" | .another = {}'	==> insert new data into various levels
 }
 
 Rename {
