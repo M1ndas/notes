@@ -9,6 +9,45 @@ Common {
 	- sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection			==>	
 }
 
+Salt {
+	Targeting {
+		- salt mast* test.ping 								===> globing, run only on minions that start with mast;
+		- salt mast? test.ping 								===> globing, similar, but exactly one char;
+		- salt -E '(master|web1)' test.ping 				===> regex match;
+		- salt -S 10.10.0.0/16 test.ping 					===> ip matching;
+		- salt -C 'S@192.168.0.0/16 and E@(master|web1)' 	===> compound match;
+		- salt -L 's1a,s1b' test.ping						===> list match
+		- salt -I 'roles:meddream' test.ping				===> targetting via pillar/pillar targetting using a role 
+	}
+
+	Commands {
+		- ls -l /var/cache/salt/master/minions				===> list all minions without running any commands
+		- ls -l /var/cache/salt/master/gitfs/hash/base		===> where salt keeps the states when you are using GitFS for state sync
+		- salt-run manage.status 							===> check the status of all known salt minions
+		- curl -L https://... 								===> downloads the intall script;
+		- sh install-salt.sh -M -A 127.0.0.1				===> install on master: -M master, -A minions master, -I minions id;
+		- sh install-salt.sh -A 192.168.1.105				===> install on minion;
+		- salt-key 											===> list keys;
+		- salt-key -F <mažo_jono_id>						===> check the key fingerprint for specific minion on master;
+		- salt-key -d <minion-id>							===> delete the minion from list of minions known to master
+		- salt-call --local key.finger 						===> check the key fingerprint on minion;
+		- salt <minion> test.ping 							===> check if minion is reachable;
+		- salt <minion> pillar.items						===> get the pillar items from the minion
+		- salt '*' grains.get os							===> get the OS from the grains
+	}
+	
+	Concepts {
+		- Default minion ports: 4505, 4506;
+		- Default communication protocol: TCP;
+		- ZeroMQ is the underlying queue mechanism - 4096 bit keys are used;
+		- cmd.run - cmd execution module executes the command with root account!
+	}
+	
+	Katas {
+		- tail -f streaming from 2 hosts;
+	}
+}
+
 Linux Perf Tools {
 	Cpu:
 	- //
@@ -59,7 +98,7 @@ JQ, jq {
 }
 
 Rename {
-	- rename 's/f/a/' *.txt			==> rename all files that have .txt file extension by changing all 'f' to 'a'.
+	- rename 's/f/a/' *.txt				==> rename all files that have .txt file extension by changing all 'f' to 'a'.
 	- rename 's/(\d+)/$1 + 10/e' f* -v	==> /e: the evaluate modifier tells rename to treat the replacement part ($1 + 1) as Perl code, execute it, and use its result as the final replacement string.
 } 
 
@@ -279,7 +318,7 @@ Cron {
 
 
 Logrotate {
-	- logrotate --force | -f 			===> will rotate file(s) even if they do not meet the specified criteria such as minsize, age, etc.
+	- logrotate --force | -f 					===> will rotate file(s) even if they do not meet the specified criteria such as minsize, age, etc.
 	- cat /var/lib/logrotate/logrotate.status	===> check logrotate status
 		logrotate state -- version 2
 		"/var/opt/rh/rh-php70/log/php-fpm/error.log" 2019-11-3-2:39:7
@@ -329,40 +368,40 @@ Logrotate {
 }
 
 Vim {
-	- i 							===> insert mode (if pressed from normal mode)
-	- v							===> visual mode (if pressed from normal mode)
-	- : 							===> control mode (if pressed from normal mode)
-	- esc 							===> go to normal mode from all other modes
-	- :w !sudo tee % > /dev/null 				===> save contents in a write protected file while not root.
-	- dd 							===> delete the whole current line;
-	- dG 							===> delete all lines in one blow;
-	- D or d$ 						===> to delete the [rest of the] line and continue in command mode;
-	- C or c$ 						===> to delete the [rest of the] line and continue in insert mode;
-	- :u 							===> undo the change;
-	- Ctrl-R 						===> redo the changes that were undone;
-	- :u1|u 						===> undo all changes remembered by vim for the current buffer;
+	- i 								===> insert mode (if pressed from normal mode)
+	- v									===> visual mode (if pressed from normal mode)
+	- : 								===> control mode (if pressed from normal mode)
+	- esc 								===> go to normal mode from all other modes
+	- :w !sudo tee % > /dev/null 		===> save contents in a write protected file while not root.
+	- dd 								===> delete the whole current line;
+	- dG 								===> delete all lines in one blow;
+	- D or d$ 							===> to delete the [rest of the] line and continue in command mode;
+	- C or c$ 							===> to delete the [rest of the] line and continue in insert mode;
+	- :u 								===> undo the change;
+	- Ctrl-R 							===> redo the changes that were undone;
+	- :u1|u 							===> undo all changes remembered by vim for the current buffer;
 	- :set nu|rnu						===> turns on line numbering in vi | relative line numbering;
 	- :set nu!|rnu! 					===> turns off the line numbering in vi | relative line numbering;
-	- 42G 							===> go to line 42;
+	- 42G 								===> go to line 42;
 	- :%s/foo/bar/g 					===> substitute feature: "find each occurrence of 'foo' (in all lines), and replace it with 'bar'.""
-	- :%s/db\(\d\).example.com/db\1.zozole.com/g 		===> a more involved vi/vim substitute feature w/ regex pattern and capture groups 
-	- :set paste 						===> paste mode, gives a nice indentation;
-	- ctrl + v; arrow down ; shift + I ; # ; esc		===> commenting all the lines;
-	- ctrl + v; arrow down ; x ; esc			===> delete first symbol from multiple lines
+	- :%s/db\(\d\).example.com/db\1.ze.com/g 		===> a more involved vi/vim substitute feature w/ regex pattern and capture groups 
+	- :set paste 									===> paste mode, gives a nice indentation;
+	- ctrl + v; arrow down ; shift + I ; # ; esc	===> commenting all the lines;
+	- ctrl + v; arrow down ; x ; esc				===> delete first symbol from multiple lines
 	- :g/^\s*$/d 						===> delete all lines that contain a pattern;
 	- :g!/^\s*"/d 						===> delete all lines that do not contain a pattern;
 	- :v/^\s*"/d 						===> --||--
 	- shift + g 						===> jump to EOF;
-	- 1G 							===> jump to the first line;
-	- gg 							===> --||--
-	- VG 							===> visual select to the end of the file
-	- :%y+ 							===> yank the lines from a file to a clipboard, will not work in ZU for some reason;
-	- :r some_test_file 					===> read in some text file and adds its contents starting at the current cursor possition;
+	- 1G 								===> jump to the first line;
+	- gg 								===> --||--
+	- VG 								===> visual select to the end of the file
+	- :%y+ 								===> yank the lines from a file to a clipboard, will not work in ZU for some reason;
+	- :r some_test_file 				===> read in some text file and adds its contents starting at the current cursor possition;
 
 	searching {
-		- /<search_patern> + enter 			===> jump to the following occurance;
-		- /<search_patern> + enter + n 			===> jump to the next occurance;
-		- /<search_patern> + enter + N 			===> jump to the previous occurance;
+		- /<search_patern> + enter 		===> jump to the following occurance;
+		- /<search_patern> + enter + n 	===> jump to the next occurance;
+		- /<search_patern> + enter + N 	===> jump to the previous occurance;
 	}
 
 	~/.vimrc or /etc/vim/vimrc {
@@ -937,44 +976,6 @@ Go / Golang {
 }
 
 - Making windows7 go to sleep after 10minutes 	===> timeout /T 360 & rundll32.exe powrprof.dll,SetSuspendState 0,1,0
-
-Salt {
-	Targeting {
-		- salt mast* test.ping 								===> globing, run only on minions that start with mast;
-		- salt mast? test.ping 								===> globing, similar, but exactly one char;
-		- salt -E '(master|web1)' test.ping 				===> regex match;
-		- salt -S 10.10.0.0/16 test.ping 					===> ip matching;
-		- salt -C 'S@192.168.0.0/16 and E@(master|web1)' 	===> compound match;
-		- salt -L 's1a,s1b' test.ping						===> list match
-	}
-
-	Commands {
-		- ls -l /var/cache/salt/master/minions				===> list all minions without running any commands
-		- ls -l /var/cache/salt/master/gitfs/hash/base		===> where salt keeps the states when you are using GitFS for state sync
-		- salt-run manage.status 							===> check the status of all known salt minions
-		- curl -L https://... 								===> downloads the intall script;
-		- sh install-salt.sh -M -A 127.0.0.1				===> install on master: -M master, -A minions master, -I minions id;
-		- sh install-salt.sh -A 192.168.1.105				===> install on minion;
-		- salt-key 											===> list keys;
-		- salt-key -F <mažo_jono_id>						===> check the key fingerprint for specific minion on master;
-		- salt-key -d <minion-id>							===> delete the minion from list of minions known to master
-		- salt-call --local key.finger 						===> check the key fingerprint on minion;
-		- salt <minion> test.ping 							===> check if minion is reachable;
-		- salt <minion> pillar.items						===> get the pillar items from the minion
-		- salt '*' grains.get os							===> get the OS from the grains
-	}
-	
-	Concepts {
-		- Default minion ports: 4505, 4506;
-		- Default communication protocol: TCP;
-		- ZeroMQ is the underlying queue mechanism - 4096 bit keys are used;
-		- cmd.run - cmd execution module executes the command with root account!
-	}
-	
-	Katas {
-		- tail -f streaming from 2 hosts;
-	}
-}
 
 Jenkins {
 	Pipeline sprint {
