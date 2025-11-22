@@ -9,6 +9,10 @@ Common {
 	- sudo cat /etc/NetworkManager/system-connections/ukmerge-vpn.nmconnection			==>	
 }
 
+Strace {
+	strace -p 70 -p 71  -e 'trace=!poll,epoll_wait,getsockopt,restart_syscall,fcntl' 	==> trace only for certain pids and filter out certain syscalls
+}
+
 Salt {
 	Targeting {
 		- salt mast* test.ping 								===> globing, run only on minions that start with mast;
