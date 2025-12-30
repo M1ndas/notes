@@ -21,6 +21,7 @@ Salt {
 		- salt -E '(master|web1)' test.ping 				===> regex match; 
 		- salt -S 10.10.0.0/16 test.ping 					===> ip matching;
 		- salt -C 'S@192.168.0.0/16 and E@(master|web1)' 	===> compound match;
+		- salt -C 'I@api:obfuscated:True and not *unilabs*' ===> compound match via pillar data with elimination
 		- salt -L 's1a,s1b' test.ping						===> list match
 		- salt -I 'roles:meddream' test.ping				===> targetting via pillar/pillar targetting using a role
 		- salt -I 'api:obfuscated:True' test.ping			===> targetting via pillar data (pretty much same as above just leaving this here as a reminder)
