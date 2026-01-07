@@ -3234,27 +3234,28 @@ LINUX {
 
 		DIFF & PATCH tools {
 			- diff -rupN first_dir second_dir > dir.patch 	===> create a diff of two directories with and all the files in them;
-			- diff -u first second > dir.patch 		===> diff with unified context;
-			- patch -p0 < p.patch 				===> -p0 strip 0 leading slashes. Example: *.patch file contains /usr/local/p.patch with -p0 it remains, with -p1 = /usr/local/p.patch and with -p2 = local/p.patch
+			- diff -u first second > dir.patch 				===> diff with unified context;
+			- patch -p0 < p.patch 							===> -p0 strip 0 leading slashes. Example: *.patch file contains /usr/local/p.patch with -p0 it remains, with -p1 = /usr/local/p.patch and with -p2 = local/p.patch
 		}
 
 		NETWORKING {
-			- sudo arp -s 10.0.0.2 00:0c:29:c0:94:bf 						===> add static ARP resolution;
-			- ifconfig eth0 192.168.1.11 netmask 255.255.255.0 broadcast 192.168.1.255 		===> add ip address to an interface;
-			- ifconfig eth0:0 192.168.0.2 netmask 255.255.255.0 					===> add ip alias / subinterface
-			- ifconfig eth1:1 down									===> remove subinterface;
-			- route -n 										===> list routes w/o resolving the names
+			- sudo arp -s 10.0.0.2 00:0c:29:c0:94:bf 									===> add static ARP resolution;
+			- ifconfig eth0 192.168.1.11 netmask 255.255.255.0 broadcast 192.168.1.255 	===> add ip address to an interface;
+			- ifconfig eth0:0 192.168.0.2 netmask 255.255.255.0 						===> add ip alias / subinterface
+			- ifconfig eth1:1 down														===> remove subinterface;
+			- route -n 																	===> list routes w/o resolving the names
 			- route add -host 192.168.0.159 gw 0.0.0.0 netmask 255.255.255.0 			===> add route to a host;
-			- route add -net 192.168.98.42 netmask 255.255.255.255 gw 192.168.99.1 			===> add route to a network;
-			- route add [-net|-host] <Net|IP> netmask <Mask> gw <Gateway IP> dev <Int>X 		===> general template for route addition;
-			- sudo route del -net 192.168.0.0/24 gw 0.0.0.0 dev eth0 				===> to delete a route.
-			- ip route get 192.168.88.77 								===> get the route that will be used or a packet destined to a specific ip
+			- route add -net 192.168.98.42 netmask 255.255.255.255 gw 192.168.99.1 		===> add route to a network;
+			- route add [-net|-host] <Net|IP> netmask <Mask> gw <Gateway IP> dev <Int>X ===> general template for route addition;
+			- sudo route del -net 192.168.0.0/24 gw 0.0.0.0 dev eth0 					===> to delete a route.
+			- ip route get 192.168.88.77 												===> get the route that will be used or a packet destined to a specific ip
+			- ip route show to match 10.0.5.7 											===> shows which route would match IP for some packet: default via 192.168.1.1 dev wlp2s0 proto dhcp metric 600 
 
 			curl {
-				- curl -Iv http://www.aptivate.org --next http://www.aptivate.org 2>&1 | grep -i '#0'						===> test if keep-alive supported
+				- curl -Iv http://www.aptivate.org --next http://www.aptivate.org 2>&1 | grep -i '#0'										===> test if keep-alive supported
 				- curl -w "Connects: %{num_connects}\n" http://localhost:9000/ -w "Connects: %{num_connects}\n" http://localhost:9000/ -sI 	===> test if keep-alive supported
-				- curl -sI -H "User-Agent;" --trace-ascii - http://www.opera.com/ | grep "User-Agent:" 						===> to send empty request header (terminate it with a semi);
-				- curl -sI -L -H "User-Agent: Mindaugas" --trace-ascii - http://54.93.212.91/ -H "Host:trud.com" 				===> 
+				- curl -sI -H "User-Agent;" --trace-ascii - http://www.opera.com/ | grep "User-Agent:" 										===> to send empty request header (terminate it with a semi);
+				- curl -sI -L -H "User-Agent: Mindaugas" --trace-ascii - http://54.93.212.91/ -H "Host:trud.com" 							===> 
 				- you can define the -w @curl.io flag and add the formating you want in a file curl.io like this:
 
 					\n
