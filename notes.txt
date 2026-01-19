@@ -169,8 +169,13 @@ Bpf, bpftrace {
 }
 
 Rust {
-	- rustup -V		===> check version managers version 
-	- rustc -V		===> check rust compiler version
+	- rustup -V								===> check version managers version 
+	- rustc -V								===> check rust compiler version
+	- cargo init --name hw
+	- cargo build
+	- cargo run
+	- cargo -V						
+	- C:\Users\Mindaugas\.cargo\bin\cargo 	===> cargo location on windows
 }
 
 Poetry {
