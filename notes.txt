@@ -137,7 +137,7 @@ Visual Studio Code, VSC {
 	}
 
 	Drills / katas {
-		- open file with 2 terminal commands, highlight line, open terminal, launch command, return focus to file, highlight another line, focus on terminal, launch 2nd command, exit terminal
+		- open txt file with 2 terminal commands, highlight line and copy it, open terminal in vsc, launch command, return focus to file, highlight another line, focus on terminal, launch 2nd command, exit terminal
 		- create a python project with a venv and two files, one has to call the function of another, go to definition, get back, delete everything
 	}
 
