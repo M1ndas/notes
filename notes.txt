@@ -111,26 +111,38 @@ Rename {
 
 Visual Studio Code, VSC {
 	Hotkeys {
-		- f12 cursor on code  ===> goto definiton 
-		- ctrl + alt + -      ===> get back to the previous definition 
-		- ctrl + p            ===> open file by name
-		- ctrl + shift + p    ===> open vsc command dialog (can select python interpreter)
-		- shift + end         ===> highlight from cursor to the end of text
-		- shift + home        ===> highlight from cursor to the start of text
-		- ctrl + `            ===> focus terminal
-		- ctrl + 1            ===> focus code editor
-		- ctrl + shift + `    ===> new terminal
-		- ctrl + pgup/pgdown  ===> switch between terminals
-		- shift + pgup/pgdown ===> scroll inside terminal
-		- ctrl + g            ===> go to line number
-		- ctrl hold + click	  ===> multicursor via mouse
-		- shift + ctrl + ^/v  ===> multicursor via keyboard
-		- select smth + ctrl + d	===> find next occurence of selected and select it (usefull for multiline edits and replace)
+		- f12 cursor on code  		===> goto definiton 
+		- ctrl on def + left mouse  ===> goto definiton 
+		- ctrl + alt + -      		===> get back to the previous definition 
+		- ctrl + p            		===> open file by name
+		- ctrl + shift + p    		===> open vsc command dialog (can select python interpreter)
+		- shift + end         		===> highlight from cursor to the end of text
+		- shift + home        		===> highlight from cursor to the start of text
+		- ctrl + `            		===> focus terminal
+		- ctrl + 1            		===> focus code editor
+		- ctrl + shift + `    		===> new terminal
+		- ctrl + pgup/pgdown  		===> switch between terminals
+		- shift + pgup/pgdown 		===> scroll inside terminal
+		- ctrl + g            		===> go to line number
+		- "Transform to Uppercase"	===> special vsc command (from vsc command dialog) 
+		- Multicursor {
+			- ctrl hold + click	  					===> multicursor via mouse
+			- shift + ctrl + ^/v  					===> multicursor via keyboard
+			- select smth + ctrl + d				===> find next occurence of selected and select it (usefull for multiline edits and replace)
+			- cursor near smth + ctrl + d 			===> find next occurence of selected and select it (usefull for multiline edits and replace)
+			- select smth + ctrl + shift + l		===> find all mathes (even the ones not in the viewport)
+			- cursor near smth + ctrl + shift + l	===> find all mathes (even the ones not in the viewport)
+			- ctrl + k + d 							===> unselect single / skip single match when using ctrl + d (the match that is to be skipped needs to already be in the selection) 
+		}
 	}
 
 	Drills / katas {
 		- open file with 2 terminal commands, highlight line, open terminal, launch command, return focus to file, highlight another line, focus on terminal, launch 2nd command, exit terminal
 		- create a python project with a venv and two files, one has to call the function of another, go to definition, get back, delete everything
+	}
+
+	Refs {
+		- https://alexharri.com/blog/multi-cursor-code-editing-animated-introduction 	===> beautiful, animated introduction/demonstration on what multicursor editing might look like
 	}
 }
 
