@@ -70,6 +70,21 @@ Linux Perf Tools {
 	- dd if=~/dd.testfile of=/dev/null bs=1G iflag=direct 			==> R, non-cached
 	- fio --name=scale --filename=./fio.test --size=1G --bs=4k --iodepth=32 --rw=randread --direct=1 --numjobs=4 --time_based --runtime=10 --group_reporting 
 		=> (hetzner node) READ: bw=49.0MiB/s (51.3MB/s), 49.0MiB/s-49.0MiB/s (51.3MB/s-51.3MB/s), io=490MiB (513MB), run=10002-10002msec
+
+	tc | traffic control {
+		- tc qdisc add dev eth0 root netem delay 100ms 20ms			==> queueing discipline, net emulate 100ms delay ± 20ms jitter (range from 80ms to 120ms).
+		- tc qdisc show [dev eth0]									==> 
+		- tc qdisc del dev eth0 root								==> 
+		- tc qdisc add dev eth0 root netem loss 5% 					==> 
+		- tc qdisc add dev eth0 root netem delay 50ms 10ms 			==> 
+		- tc qdisc add dev eth0 root netem corrupt 1% 				==>
+		- tc qdisc add dev eth0 root netem duplicate 1% 			==> 
+		- tc qdisc add dev eth0 root netem reorder 25% 50%			==> 
+		- tc qdisc add dev eth0 root tbf rate 1mbit burst 32kbit latency 400ms ==> bandwidth throttling (TBF)
+
+		- tc primarily shapes outbound traffic - what does that imply then, is it possibe to shape inbound at all, using other tools? Ingress Policing / Shaping: tc normally only shapes outbound (egress) traffic. An advanced use case is shaping inbound traffic by redirecting it to an Intermediate Functional Block (ifb) virtual device, then applying rules to that device.
+		- root of the tree - why do we need tc trees?
+	}
 }
 
 Tmux {	
