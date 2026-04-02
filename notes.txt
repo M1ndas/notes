@@ -25,6 +25,7 @@ Salt {
 		- salt -L 's1a,s1b' test.ping						===> list match
 		- salt -I 'roles:meddream' test.ping				===> targetting via pillar/pillar targetting using a role
 		- salt -I 'api:obfuscated:True' test.ping			===> targetting via pillar data (pretty much same as above just leaving this here as a reminder)
+		- salt -I 'api:*' test.ping							===> targetting via pillar data, when "api" has any value, target the minion.
 	}
 
 	Commands {
