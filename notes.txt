@@ -137,7 +137,9 @@ Visual Studio Code, VSC {
 		- ctrl + `            		===> focus terminal
 		- ctrl + 1            		===> focus code editor
 		- ctrl + shift + `    		===> new terminal
+		- ctrl + shift + 5			===> split terminal
 		- ctrl + pgup/pgdown  		===> switch between terminals
+		- alt + arrow(s)			===> switch between tabbed terminals
 		- shift + pgup/pgdown 		===> scroll inside terminal
 		- ctrl + g            		===> go to line number
 		- "Transform to Uppercase"	===> special vsc command (from vsc command dialog) 
