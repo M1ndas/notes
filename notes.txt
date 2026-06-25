@@ -38,6 +38,7 @@ Salt {
 		- salt-key 											===> list keys;
 		- salt-key -F <mažo_jono_id>						===> check the key fingerprint for specific minion on master;
 		- salt-key -d <minion-id>							===> delete the minion from list of minions known to master
+		- salt-key -a <minion-id>							===> add the key from unaccepted to accepted keys list;
 		- salt-call --local key.finger 						===> check the key fingerprint on minion;
 		- salt <minion> test.ping 							===> check if minion is reachable;
 		- salt <minion> pillar.items						===> get the pillar items from the minion
