@@ -144,6 +144,7 @@ Visual Studio Code, VSC {
 		- shift + pgup/pgdown 		===> scroll inside terminal
 		- ctrl + g            		===> go to line number
 		- "Transform to Uppercase"	===> special vsc command (from vsc command dialog) 
+		- (ctrl + shift + P) + (ctrl + R) ===> open vsc command dialog and immediatelly the recent files dialog. Usefull to switch between projects on VSC startup.
 		- Multicursor {
 			- ctrl hold + click	  					===> multicursor via mouse
 			- shift + ctrl + ^/v  					===> multicursor via keyboard
